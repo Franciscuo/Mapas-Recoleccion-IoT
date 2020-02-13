@@ -1,0 +1,58 @@
+<div class="container">
+
+    <ol class="breadcrumb mt-5">
+        <li class="breadcrumb-item">
+            <a href="/">Inicio</a>
+        </li>
+        <li class="breadcrumb-item active">{{user.user}}</li>
+    </ol>
+    <!--/ Intro Single star /-->
+    <section class="intro-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-8">
+                    <div class="title-single-box">
+                        <h1 class="title-single" style="font-size: 24px;">@{{user.user}}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/ Intro Single End /-->
+
+    <section class="agent-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="text-center">
+                                <img class="mx-auto mb-4 rounded-circle" src="{{user.avatar}}" style="width: 200px;" alt="">
+                            </div>
+                        </div>
+                        <div class="col-md-5 section-md-t3">
+                            <div class="agent-info-box">
+                                <div class="agent-title">
+                                    <div class="title-box-d">
+                                        <h3 class="title-d">{{user.name}} {{user.lastName}} </h3>
+                                    </div>
+                                </div>
+                                <div class="agent-content mb-3">
+                                    <p class="content-d color-text-a">
+                                        {{user.description}}
+                                    </p>
+                                    <div class="info-agents color-a">
+                                        <p>
+                                            <strong>Email: </strong>
+                                            <span class="color-text-a">{{user.email}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

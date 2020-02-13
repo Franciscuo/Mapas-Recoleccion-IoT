@@ -1,0 +1,209 @@
+<!-- Custom styles for this template -->
+<link href="/css/perfiles.css" rel="stylesheet">
+
+<div class="bc-verde">
+    <!-- Page Content -->
+    <div class="container pb-4">
+
+
+        <div class="pt-5"></div>
+        <!-- Page Heading/Breadcrumbs -->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/">Inicio</a>
+            </li>
+            <li class="breadcrumb-item active">Integrantes</li>
+        </ol>
+
+        <!-- Image Header -->
+        <!-- <div class="head-item mb-5"
+        style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.7)),  url('/img/banner/banner4.jpg'); background-size: cover;">
+    </div> -->
+
+        <div class="card px-5 py-5 my-5 border-success">
+
+
+            <div class="container">
+                <h2 class="text-center mb-4">Nuestros integrantes</h2>
+                {{#if user.admin}}
+                <div class="card border-success my-4">
+                    <a href="#" class="btn btn-success" id="btn-toggle-NewComment"><i class="fa fa-plus"></i> Nuevo
+                        integrante</a>
+                    <blockquote id="post-comment">
+                        <h5 class="card-header">Perfil:</h5>
+                        <div class="card-body">
+                            <form action="/new-member" method="POST" enctype="multipart/form-data">
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <input type="text" name="name" id="name" placeholder="Nombre"
+                                                class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="lastName" id="lastName" placeholder="Apellido"
+                                                class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <input type="email" name="email" id="email" placeholder="Email"
+                                                class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="cvlac" id="cvlac" placeholder="Link CvLAC"
+                                                class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="custom-file">
+                                        <input type="file" name="image" class="custom-file-input" id="inputGroupFile"
+                                            aria-describedby="inputGroupFileAddon">
+                                        <label class="custom-file-label" for="customFile">Foto</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="undergrate" id="undergrate"
+                                        placeholder="Estudios de pregrado" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="graduate" id="graduate" placeholder="Estudios de posgrado"
+                                        class="form-control" required>
+                                </div>
+                                <button type="submit" class="btn btn-success">Agregar integrante</button>
+                            </form>
+                        </div>
+                    </blockquote>
+                </div>
+                {{/if}}
+
+
+                <div class="row ng-scope">
+                    <div class="col-md-12 col-md-pull-3">
+                        <div class="row">
+
+                            {{#each members }}
+                            <div class="col-md-6 col-sm-12" id="memberid_{{_id}}">
+                                <section class="search-result-item">
+
+
+                                    <a class="image-link"><img class="image mt-4" src="/upload/{{filename}}"
+                                            style="width: 150px; height: 200px;">
+                                    </a>
+
+
+
+                                    <div class="search-result-item-body">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <h4 class="search-result-item-heading ml-3">{{name}} {{lastName}}
+                                                    </h4>
+                                                    {{#if ../user.admin}}
+                                                    <button class="btn btn-danger btn-sm btn-delete-member ml-auto  "
+                                                        data-member="{{_id}}"> <i class="fa fa-times"></i></button>
+                                                    {{/if}}
+                                                </div>
+
+                                                <p class="description mt-2">{{graduate}}<br>{{undergrate}}<br><br><span
+                                                        class="font-weight-bold">Email: </span>
+                                                    {{email}}</p>
+                                            </div>
+                                            <a href="{{cvlac}}" target="_blank" class="btn text-danger">Hoja de vida
+                                                CvLAC
+                                            </a>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+          <!-- PAGINACION -->
+            <div class="row" style="font-size: 14px;">
+                <!-- pagination -->
+                {{#if pages}}
+                <!-- show pagination if there is pages -->
+                <nav class="mx-auto">
+                    <ul class="pagination">
+                        <!-- FIRST ITEM -->
+                        {{#notEqual current 1}}
+                        <li class="page-item">
+                            <a class="page-link" href="/integrantes/{{math current '-' 1}}">Anterior</a>
+                        </li>
+                        {{/notEqual}}
+
+                        {{#compare current '>' 2}}
+                        <li class="page-item">
+                            <a class="page-link" href="/integrantes/{{math current '-' 2}}">{{math current '-' 2}}</a>
+                        </li>
+                        {{/compare}}
+
+                         {{#compare current '>' 1}}
+                        <li class="page-item">
+                            <a class="page-link" href="/integrantes/{{math current '-' 1}}">{{math current '-' 1}}</a>
+                        </li>
+                        {{/compare}}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="/integrantes/{{current}}">{{current}}</a>
+                        </li>
+
+                        {{#compare pages '>' current }}
+                        <li class="page-item">
+                            <a class="page-link" href="/integrantes/{{math current '+' 1}}">{{math current '+' 1}}</a>
+                        </li>
+                        {{/compare}}
+
+                        {{#compare pages '>>' current }}
+                        <li class="page-item">
+                            <a class="page-link" href="/integrantes/{{math current '+' 2}}">{{math current '+' 2}}</a>
+                        </li>
+                        {{/compare}}
+
+                        <!-- LAST ITEM -->
+                        {{#notEqual current  pages}}
+                        <li class="page-item">
+                            <a class="page-link" href="/integrantes/{{math current '+' 1}}">
+                                Siguiente
+                            </a>
+                        </li>
+                        {{/notEqual}}
+                    </ul>
+                </nav>
+                {{/if}}
+            </div>
+            <!-- FIN PAGINACION -->
+    </div>
+</div>
+
+{{#if user.admin}}
+<!-- Modal -->
+<div class="modal fade" id="deleteModalMember" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Eliminar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Seguro que quieres eliminar este integrante?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" id="modalDeleteMember" class="btn btn-danger" data-member="">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}

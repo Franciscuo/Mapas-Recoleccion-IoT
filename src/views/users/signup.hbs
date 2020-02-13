@@ -1,0 +1,64 @@
+<div class="" style="background-color: #2ECA6A;">
+    <div class="container  h-100">
+        <section class="py-5 pl-sm-5">
+
+            <div class="col-lg-8 offset-lg-2">
+                
+            <div class="card border-success mt-5">
+                <div class="card-body">
+                    <h3 class="text-center color-b font-weight-bold"> Nuevo usuario</h3>
+                    <form action="/user/signup" method="POST" id="formContact">
+                        <div class="form-group">
+                            {{> errors }}
+                        </div>
+                        <div class="row">
+
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input type="name" name="user" id="user" class="form-control" placeholder="Usuario"
+                                        autocomplete="off" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="name" name="name" id="name" class="form-control" placeholder="Nombre"
+                                        autocomplete="off" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="lastName" name="lastName" id="lastName" class="form-control"
+                                        placeholder="Apellido" autocomplete="off" required>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="Email"
+                                        autocomplete="off" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" id="password" class="form-control"
+                                        placeholder="Contraseña" autocomplete="off" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="confirmPassword" id="confirmPassword"
+                                        class="form-control" placeholder="Confirmar contraseña" autocomplete="off"
+                                        required>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <input type="submit" value="Registrarme" id="btnSubmit" class="btn btn-success btn-block">
+                        </div>
+                        <div class="text-center">
+                            <a href="/login" class="color-b" style="font-size: 12px;">¿Ya estas regitrado?
+                                Iniciar sesión</a><br>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </section>
+    </div>
+</div>

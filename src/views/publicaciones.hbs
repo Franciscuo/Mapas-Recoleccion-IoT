@@ -1,0 +1,130 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.css" rel="stylesheet">
+
+
+<!-- Page Content -->
+<div class="bc-verde">
+    <div class="container pb-4">
+
+        <!-- Page Heading/Breadcrumbs -->
+        <div class="pt-5"></div>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/">Inicio</a>
+            </li>
+            <li class="breadcrumb-item active">
+                Investigación
+            </li>
+            <li class="breadcrumb-item active">Publicaciones</li>
+        </ol>
+
+
+        {{#if user.admin}}
+        <!-- Blog new Post -->
+        <div class="card border-success  mb-4">
+            <a href="#" class="btn btn-success" id="btn-toggle-NewPublication"><i class="fa fa-plus"></i> Nueva
+                publicación</a>
+            <blockquote id="post-publication">
+                <div class="card-body">
+                    <div class="mx-4 my-2">
+                        <div class="form-group">
+                            <label>Nombre:</label>
+                            <input type="text" name="title" maxlength="60" id="title" class="form-control"
+                                placeholder="Nombre" autocomplete="off">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Fecha:</label>
+                                    <input type="date" class="form-control" name="date" id="date">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Enlace:</label>
+                                    <input type="text" class="form-control" placeholder="Url" name="url" id="url">
+                                </div>
+                            </div>
+
+                        </div>
+                        <a href="#" class="btn btn-success" id="btnNewPublication">Publicar</a>
+                    </div>
+                </div>
+            </blockquote>
+        </div>
+        {{/if}}
+
+
+
+        <div class="container">
+            {{> errors }}
+            <h3 class="text-center">Publicaciones</h3>
+            <br>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="table-responsive">
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="order">Fecha</th>
+                                    <th class="order">Nombre</th>
+                                    <th>Enlace</th>
+                                    {{#if user.admin}}
+                                    <th>Eliminar</th>
+                                    {{/if}}
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {{#each publications}}
+                                <tr id="publicationId_{{_id}}">
+                                    <td>{{timeagoLong date}}</td>
+                                    <td>{{title}}</td>
+                                    <td><a href="{{link}}" target="_blank">Ver más</a></td>
+                                    {{#if ../user.admin}}
+                                    <td><a href="#" class="btn-delete-publication btn btn-danger btn-sm" data-id="{{_id}}" ><i class="fa fa-times"></i>Eliminar</a></td>
+                                    {{/if}}
+                                </tr>
+                                {{/each}}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="border-0">
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModalPublication" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Eliminar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Seguro que quieres eliminar esta publicación?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" id="btnModalDeletePublication" class="btn btn-danger" data-id="">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>

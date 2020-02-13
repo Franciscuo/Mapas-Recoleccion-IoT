@@ -1,0 +1,215 @@
+body {
+    padding-top: 100px;
+}
+
+.carousel-item {
+    height: 65vh;
+    min-height: 300px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.head-item {
+    height: 30vh;
+    min-height: 300px;
+    background: no-repeat center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.portfolio-item {
+    margin-bottom: 30px;
+}
+
+
+/* FONDO CONTACTP*/
+
+.bg-contact {
+    background-image: linear-gradient( to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/img/contacto/fondo.jpg");
+    background-size: cover;
+}
+
+.btn-reply {
+    background-color: rgb(223, 255, 218);
+}
+
+.btn-reply:hover {
+    color: #2eca6a;
+}
+
+.reply-comment {
+    display: none;
+}
+
+.textArea {
+    display: none;
+}
+
+.user-comment {
+    margin-bottom: 0.5rem;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.2;
+    font-size: 18px;
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+}
+
+
+/*------- loader -------*/
+
+.loader2 {
+    border: 5px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 5px solid #3498db;
+    width: 40px;
+    height: 40px;
+    -webkit-animation: spin 2s linear infinite;
+    /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+
+/* Safari */
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+/*------- FIN loader -------*/
+
+.bc-verde {
+    background-color: #2eca6a10;
+}
+
+.card-project {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+}
+
+.card-project {
+    border-radius: 9px;
+    cursor: pointer;
+    color: grey;
+    transition: font 1s ease-in-out;
+}
+
+.card-project:hover {
+    transform: scale(1.01);
+}
+
+
+/* TABLA PUBLICACIONES */
+
+table tr th {
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.sorting {
+    background-color: #d4d4d4;
+}
+
+.asc:after {
+    content: " ↑";
+}
+
+.desc:after {
+    content: " ↓";
+}
+
+
+/* ------- FIN TABLA PUBLICACIONES ------*/
+
+.carousel-caption {
+    background-color: #edf7e4b4;
+    text-align: justify;
+    position: absolute;
+    margin-bottom: 4rem;
+    margin-left: -6rem;
+    max-width: 600px;
+    color: black;
+    font-weight: bolder;
+}
+
+@media (min-width: 1281px) {
+    .carousel-caption {
+        font-size: 16px;
+    }
+    /* 
+      ##Device = Desktops
+      ##Screen = 1281px to higher resolution desktops
+    */
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+    /* 
+        ##Device = Laptops, Desktops
+        ##Screen = B/w 1025px to 1280px
+      */
+    .carousel-caption {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* 
+        ##Device = Tablets, Ipads (portrait)
+        ##Screen = B/w 768px to 1024px
+      */
+    .carousel-caption {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    /* 
+        ##Device = Tablets, Ipads (landscape)
+        ##Screen = B/w 768px to 1024px
+      */
+    .carousel-caption {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    /* 
+        ##Device = Low Resolution Tablets, Mobiles (Landscape)
+        ##Screen = B/w 481px to 767px
+      */
+    .carousel-caption {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+    /* 
+        ##Device = Most of the Smartphones Mobiles (Portrait)
+        ##Screen = B/w 320px to 479px
+      */
+    .carousel-caption {
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,206 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.css" rel="stylesheet">
+
+
+<!-- Page Content -->
+<div class="bc-verde">
+    <div class="container pb-4">
+
+        <!-- Page Heading/Breadcrumbs -->
+        <div class="pt-5"></div>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/">Inicio</a>
+            </li>
+            <li class="breadcrumb-item active">
+                Investigación
+            </li>
+            <li class="breadcrumb-item active">Proyectos</li>
+        </ol>
+
+
+        {{#if user.admin}}
+
+        <!-- Blog new Post -->
+        <div class="card border-success  mb-4">
+            <a href="#" class="btn btn-success" id="btn-toggle-Newproject"><i class="fa fa-plus"></i> Nuevo proyecto</a>
+            <blockquote id="post-project">
+                <div class="card-body">
+                    <div class="mx-4 my-2">
+                        <div class="form-group">
+                            <label>Titulo:</label>
+                            <input type="text" name="title-newProject" id="title-newProject" class="form-control"
+                                placeholder="Titulo" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label>Descripción:</label>
+                            <textarea class="form-control" name="descriptionProject" id="descriptionProject" rows="3"
+                                maxlength="105" placeholder="Descripción corta" style="resize: none;"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="editor"> Contenido del articulo: </label>
+                            <!-- Create the toolbar container -->
+
+                            <div id="toolbar"></div>
+                            <!-- Create the editor container -->
+                            <div id="editor"></div>
+
+                        </div>
+                        <a href="#" class="btn btn-success" id="btnNewProject">Publicar</a>
+                    </div>
+                </div>
+            </blockquote>
+        </div>
+
+        {{/if}}
+
+
+
+        <div class="border-0">
+
+
+            <!-- Features Section -->
+            <div class="row">
+
+                {{#each projects}}
+
+                <div class="col-lg-4 mb-4" id="projectId_{{_id}}">
+                    <div class="card card-project h-100">
+                        <div class="card-title mt-3 text-center">
+                            <a href="/project/id/{{_id}}">
+                                <h2 class="mt-4">{{title}}</h2>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-justify">
+                                <a href="/project/id/{{_id}}">
+                                {{description}}
+                                </a>
+                            </p>
+                            <div class="row">
+                                <a href="/project/id/{{_id}}" class="btn btn-success btn-sm ml-3"> Leer más</a>
+                                {{#if ../user.admin}}
+                                <button class="btn btn-danger btn-sm btn-delete-project ml-3" data-id="{{_id}}">
+                                    <i class="fa fa-times"></i>Borrar</button>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{/each}}
+
+            </div>
+            <!-- /.row -->
+
+           <!-- PAGINACION -->
+            <div class="row" style="font-size: 14px;">
+                <!-- pagination -->
+                {{#if pages}}
+                <!-- show pagination if there is pages -->
+                <nav class="mx-auto">
+                    <ul class="pagination">
+                        <!-- FIRST ITEM -->
+                        {{#notEqual current 1}}
+                        <li class="page-item">
+                            <a class="page-link" href="/investigacion/proyectos/{{math current '-' 1}}">Anterior</a>
+                        </li>
+                        {{/notEqual}}
+
+                        {{#compare current '>' 2}}
+                        <li class="page-item">
+                            <a class="page-link" href="/investigacion/proyectos/{{math current '-' 2}}">{{math current '-' 2}}</a>
+                        </li>
+                        {{/compare}}
+
+                         {{#compare current '>' 1}}
+                        <li class="page-item">
+                            <a class="page-link" href="/investigacion/proyectos/{{math current '-' 1}}">{{math current '-' 1}}</a>
+                        </li>
+                        {{/compare}}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="/investigacion/proyectos/{{current}}">{{current}}</a>
+                        </li>
+
+                        {{#compare pages '>' current }}
+                        <li class="page-item">
+                            <a class="page-link" href="/investigacion/proyectos/{{math current '+' 1}}">{{math current '+' 1}}</a>
+                        </li>
+                        {{/compare}}
+
+                        {{#compare pages '>>' current }}
+                        <li class="page-item">
+                            <a class="page-link" href="/investigacion/proyectos/{{math current '+' 2}}">{{math current '+' 2}}</a>
+                        </li>
+                        {{/compare}}
+
+                        <!-- LAST ITEM -->
+                        {{#notEqual current  pages}}
+                        <li class="page-item">
+                            <a class="page-link" href="/investigacion/proyectos/{{math current '+' 1}}">
+                                Siguiente
+                            </a>
+                        </li>
+                        {{/notEqual}}
+                    </ul>
+                </nav>
+                {{/if}}
+            </div>
+            <!-- FIN PAGINACION -->
+
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModalProject" data-backdrop="static" tabindex="-1" role="dialog"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Eliminar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         ¿Seguro que quieres eliminar este proyecto?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="btnModalDeleteProject" class="btn btn-danger" data-id="" >Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+    var toolbarOptions = [
+        ['bold', 'italic', 'underline', 'strike'],
+        ['blockquote', 'code-block'],
+        [{ 'color': [] }, { 'background': [] }],
+        [{ 'font': [] }],
+        [{ 'align': [] }],
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        [{ 'script': 'sub' }, { 'script': 'super' }],
+        [{ 'indent': '-1' }, { 'indent': '+1' }],
+        //[{ 'direction': 'rt1' }],
+        [{ 'size': ['small', false, 'large', 'huge'] }],
+        ['link', 'image', 'video', 'formula']
+
+    ];
+
+    var quill = new Quill('#editor', {
+        modules: {
+            toolbar: toolbarOptions
+        },
+        placeholder: 'Mi hilo',
+        theme: 'snow'
+    });
+</script>

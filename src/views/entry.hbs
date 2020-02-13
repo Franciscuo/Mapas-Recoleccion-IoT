@@ -1,0 +1,316 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.css" rel="stylesheet">
+
+<!-- Page Content -->
+<div class="bc-verde">
+  <div class="container pb-4">
+
+    <div class="pt-5"></div>
+
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="/">Inicio</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="/foro">Foro</a>
+      </li>
+      <li class="breadcrumb-item active">{{thread.title}}</li>
+    </ol>
+
+    <div class="row">
+
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
+
+
+        {{> errors }}
+        <div class="row">
+          <a href="/user/id/{{thread.user}}"><img class="d-flex mx-3 rounded-circle" src="{{thread.avatar}}" width="60"
+              alt=""></a>
+          <a href="/user/id/{{thread.user}}" class="user-comment" style="font-size: 24px;">{{thread.user}}</a>
+
+          {{#equal user.user  thread.user}}
+          <a href="#" style="font-size: 14px;" class="btn btn-danger ml-5 btn-delete-thread-inside mt-3"
+            data-id="{{thread._id}}">Eliminar</a>
+          <a href="#" style="font-size: 14px;" id="btn-edit-thread-inside" class="btn btn-primary ml-1 mt-3">Editar</a>
+          {{/equal}}
+          <section class="ml-auto mt-4 mr-3">{{timeago thread.date}}</section>
+        </div>
+
+        <hr>
+        <h2 id="dataBase-thread-title" data-id="{{thread._id}}">{{thread.title}}</h2>
+        <!-- Post Content -->
+
+        <div class="lead" id="dataBase-thread">{{{thread.text}}}</div>
+        <hr>
+        {{#equal user.user  thread.user}}
+        <div id="edit-thread">
+          <div class="form-group">
+            <input type="text" name="title" id="title" class="form-control" placeholder="Titulo" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="editor"> Contenido del hilo: </label>
+            <!-- Create the toolbar container -->
+
+            <div id="toolbar"></div>
+            <!-- Create the editor container -->
+            <div id="editor"></div>
+            <a href="#" id="btn-update-thread" class="btn btn-primary mt-3" data-id="{{thread._id}}">Actualizar hilo</a>
+
+          </div>
+        </div>
+        {{/equal}}
+
+        <!-- ......... -Comments Form ........................-->
+        <div class="card border-success my-4">
+          <a href="#" class="btn btn-success" id="btn-toggle-NewComment"><i class="fa fa-plus"></i> Nuevo comentario</a>
+          <blockquote id="post-comment">
+            <h5 class="card-header">Dejar un comentario:</h5>
+            <div class="card-body">
+              <form action="/new-comment/0/{{thread._id}}" method="POST">
+                <div class="form-group">
+                  <textarea class="form-control" name="text" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Comentar</button>
+              </form>
+            </div>
+          </blockquote>
+        </div>
+
+        {{#each thread.comments}}
+        {{#equal father 0}}
+        <div class="media mb-4" id="{{_id}}">
+
+          <div id="{{self}}">
+          <a href="/user/id/{{user}}"><img class="d-flex mr-3 rounded-circle" src="{{avatar}}" width="50" alt=""></a>
+          </div>
+
+          <div class="media-body">
+            <div class="card" style="background-color: rgb(223, 255, 218);">
+
+              <div class="row">
+                <div class="card-title mt-3 ml-3">
+                  <a href="/user/id/{{user}}" class="user-comment">{{user}}</a>
+                </div>
+                <div class="mt-3 ml-auto mr-4">
+                  {{timeago2 date}}
+                  {{#equal user  ../user.user}}
+                  <button class="btn btn-primary btn-sm btn-edit" data-comment="{{_id}}"
+                    data-thread="{{../thread._id}}">
+                    <i class="fa fa-edit"></i> Editar
+                  </button>
+                  <button class="btn btn-danger btn-sm btn-delete" data-comment="{{_id}}"
+                    data-thread="{{../thread._id}}">
+                    <i class="fa fa-times"></i> Borrar
+                  </button>
+                  {{/equal}}
+                  <a href="#{{self}}">#{{self}}</a>
+                </div>
+              </div>
+
+              <div class="card-body">
+
+                <p id="text_{{_id}}">{{text}}</p>
+                {{#equal user  ../user.user}}
+                <textarea id="textArea_{{_id}}" class="form-control mb-2 textArea" style="resize: none;"
+                  rows="2"></textarea>
+                <button class="btn btn-success btn-sm btn-updateCommnet mb-3 textArea" id="btn_{{_id}}"
+                  data-comment="{{_id}}" data-thread="{{../thread._id}}">
+                  Actualizar
+                </button>
+                {{/equal}}
+
+                <h5 class="btn-reply" style="font-size: 16px;"><i class="fa fa-reply"></i> Responder<h5>
+                    <div class="reply-comment">
+                      <form action="/new-comment/{{self}}/{{../thread._id}}" method="POST">
+                        <div class="form-group">
+                          <textarea class="form-control" name="text" id="text" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">Comentar</button>
+                      </form>
+                    </div>
+              </div>
+            </div>
+
+
+            {{#each ../thread.comments}}
+            {{#equal father  ../self}}
+            
+            <div class="media mt-4" id="{{_id}}">
+
+              <div id="{{self}}">
+              <a href="/user/id/{{user}}"><img class="d-flex mr-3 rounded-circle" src="{{avatar}}" width="50"
+                  alt=""></a>
+              </div>
+              
+              <div class="media-body">
+                <div class="card" style="background-color: rgb(223, 255, 218);">
+
+                  <div class="row">
+                    <div class="card-title mt-3 ml-3">
+                      <a href="/user/id/{{user}}" class="user-comment">{{user}}</a>
+                    </div>
+                    <div class="mt-3 ml-auto mr-4">
+                      {{timeago2 date}}
+                      {{#equal user  ../../user.user}}
+                      <button class="btn btn-primary btn-sm btn-edit" data-comment="{{_id}}"
+                        data-thread="{{../../thread._id}}">
+                        <i class="fa fa-edit"></i> Editar
+                      </button>
+
+                      <button class="btn btn-danger btn-sm btn-delete" data-comment="{{_id}}"
+                        data-thread="{{../../thread._id}}">
+                        <i class="fa fa-times"></i> Borrar
+                      </button>
+                      {{/equal}}
+                      <a href="#{{self}}">#{{self}}</a>
+                    </div>
+                  </div>
+
+                  <div class="card-body">
+
+                    <p id="text_{{_id}}">{{text}}</p>
+                    {{#equal user  ../../user.user}}
+                    <textarea id="textArea_{{_id}}" class="form-control mb-2 textArea" style="resize: none;"
+                      rows="2"></textarea>
+                    <button class="btn btn-success btn-sm btn-updateCommnet mb-3 textArea" id="btn_{{_id}}"
+                      data-comment="{{_id}}" data-thread="{{../../thread._id}}">
+                      Actualizar
+                    </button>
+                    {{/equal}}
+
+                    <h5 class="btn-reply" style="font-size: 16px;"><i class="fa fa-reply"></i> Responder<h5>
+                        <div class="reply-comment">
+                          <form action="/new-comment/{{father}}/{{../../thread._id}}" method="POST">
+                            <div class="form-group">
+                              <textarea class="form-control" name="text" id="text" rows="3" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success">Comentar</button>
+                          </form>
+                        </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+            {{/equal}}
+            {{/each}}
+
+          </div>
+        </div>
+        {{/equal}}
+        {{/each}}
+
+
+
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-4">
+
+        <!-- Side Widget -->
+        <div class="card border-success my-4">
+          <h5 class="card-header">Hilos más comentados: </h5>
+          <div class="card-body text-justify">
+
+            {{#each mostComments}}
+
+            <div class="row px-3">
+              <a href="/foro/id/{{_id}}">
+                <h5 class="mr-5">{{title}}</h5>
+                {{commentsNumber}} comentarios
+              </a>
+            </div>
+
+            <hr>
+
+            {{/each}}
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" data-backdrop="static" tabindex="-1" role="dialog"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Eliminar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ¿Seguro que quieres eliminar este comentario?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="modalDeleteComment" class="btn btn-danger" data-thread=""
+          data-comment="">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModalThreadInside" data-backdrop="static" tabindex="-1" role="dialog"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Eliminar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ¿Seguro que quieres eliminar este hilo?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="btnModalDeleteThreadInside" class="btn btn-danger" data-thread=""
+          data-comment="">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+  var toolbarOptions = [
+    ['bold', 'italic', 'underline', 'strike'],
+    ['blockquote', 'code-block'],
+    [{ 'color': [] }, { 'background': [] }],
+    [{ 'font': [] }],
+    [{ 'align': [] }],
+    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+    [{ 'script': 'sub' }, { 'script': 'super' }],
+    [{ 'indent': '-1' }, { 'indent': '+1' }],
+    //[{ 'direction': 'rt1' }],
+    [{ 'size': ['small', false, 'large', 'huge'] }],
+    ['link', 'image', 'video', 'formula']
+
+  ];
+
+  var quill = new Quill('#editor', {
+    modules: {
+      toolbar: toolbarOptions
+    },
+    placeholder: 'Mi hilo',
+    theme: 'snow'
+  });
+</script>

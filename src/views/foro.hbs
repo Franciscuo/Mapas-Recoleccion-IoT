@@ -1,0 +1,255 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.css" rel="stylesheet">
+
+<div class="bc-verde">
+  <!-- Page Content -->
+  <div class="container pb-4">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <div class="pt-5"></div>
+
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="/">Inicio</a>
+      </li>
+      <li class="breadcrumb-item active">Foro</li>
+    </ol>
+
+    {{> errors }}
+
+
+    <!-- Blog Post -->
+
+
+
+
+
+    <div class="row">
+
+      <div class="col-lg-8">
+
+
+        <!-- Blog new Post -->
+        <div class="card border-success  mb-4">
+          <a href="#" class="btn btn-success" id="btn-toggle-NewThread"><i class="fa fa-plus"></i> Nuevo hilo</a>
+          <blockquote id="post-Thread">
+            <div class="card-body">
+              <div class="mx-4 my-2">
+                <div class="form-group">
+                  <input type="text" name="title" id="title" class="form-control" placeholder="Titulo"
+                    autocomplete="off">
+                </div>
+                <div class="form-group">
+                  <label for="editor"> Contenido del hilo: </label>
+                  <!-- Create the toolbar container -->
+
+                  <div id="toolbar"></div>
+                  <!-- Create the editor container -->
+                  <div id="editor"></div>
+
+                </div>
+                <a href="#" class="btn btn-success btn-thread">Publicar</a>
+              </div>
+            </div>
+          </blockquote>
+        </div>
+
+        <!-- Blog Post -->
+        {{#each threads}}
+        <div class="card border-success  mb-4" id="threadId_{{_id}}">
+          <div class="card-body">
+            <div class="row">
+              <div class="mx-4 my-2">
+
+
+                <h2 class="card-title">{{title}}</h2>
+
+                <!-- <p class="card-text text-justify">{{text}}</p> -->
+                <a href="/foro/id/{{_id}}" class="btn btn-success">Leer más &rarr;</a>
+
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-muted">
+            {{timeago date}}
+
+            {{#equal user  ../user.user}}
+            <a href="#" style="font-size: 10px;" class="btn btn-danger ml-5 btn-delete-thread"
+              data-id="{{_id}}">Eliminar</a>
+            <a href="/foro/id/{{_id}}" style="font-size: 10px;" class="btn btn-primary ml-1">Editar</a>
+            {{/equal}}
+
+          </div>
+        </div>
+        {{/each}}
+
+
+        
+         <!-- PAGINACION -->
+            <div class="row" style="font-size: 14px;">
+                <!-- pagination -->
+                {{#if pages}}
+                <!-- show pagination if there is pages -->
+                <nav class="mx-auto">
+                    <ul class="pagination">
+                        <!-- FIRST ITEM -->
+                        {{#notEqual current 1}}
+                        <li class="page-item">
+                            <a class="page-link" href="/foro/{{math current '-' 1}}">Anterior</a>
+                        </li>
+                        {{/notEqual}}
+
+                        {{#compare current '>' 2}}
+                        <li class="page-item">
+                            <a class="page-link" href="/foro/{{math current '-' 2}}">{{math current '-' 2}}</a>
+                        </li>
+                        {{/compare}}
+
+                         {{#compare current '>' 1}}
+                        <li class="page-item">
+                            <a class="page-link" href="/foro/{{math current '-' 1}}">{{math current '-' 1}}</a>
+                        </li>
+                        {{/compare}}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="/foro/{{current}}">{{current}}</a>
+                        </li>
+
+                        {{#compare pages '>' current }}
+                        <li class="page-item">
+                            <a class="page-link" href="/foro/{{math current '+' 1}}">{{math current '+' 1}}</a>
+                        </li>
+                        {{/compare}}
+
+                        {{#compare pages '>>' current }}
+                        <li class="page-item">
+                            <a class="page-link" href="/foro/{{math current '+' 2}}">{{math current '+' 2}}</a>
+                        </li>
+                        {{/compare}}
+
+                        <!-- LAST ITEM -->
+                        {{#notEqual current  pages}}
+                        <li class="page-item">
+                            <a class="page-link" href="/foro/{{math current '+' 1}}">
+                                Siguiente
+                            </a>
+                        </li>
+                        {{/notEqual}}
+                    </ul>
+                </nav>
+                {{/if}}
+            </div>
+            <!-- FIN PAGINACION -->
+
+
+
+
+
+
+
+      </div>
+
+      <div class="col-md-4 d-none d-sm-block ">
+
+        <!-- Side Widget -->
+        <div class="card border-success mb-4">
+          <h5 class="card-header">Hilos más comentados</h5>
+          <div class="card-body text-justify">
+
+            {{#each mostComments}}
+
+            <div class="row px-3">
+              <a href="/foro/id/{{_id}}">
+                <h5 class="mr-5">{{title}}</h5>
+                {{commentsNumber}} comentarios
+              </a>
+            </div>
+
+            <hr>
+
+            {{/each}}
+
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+</div>
+
+
+
+
+<script>
+
+  var toolbarOptions = [
+    ['bold', 'italic', 'underline', 'strike'],
+    ['blockquote', 'code-block'],
+    [{ 'color': [] }, { 'background': [] }],
+    [{ 'font': [] }],
+    [{ 'align': [] }],
+    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+    [{ 'script': 'sub' }, { 'script': 'super' }],
+    [{ 'indent': '-1' }, { 'indent': '+1' }],
+    //[{ 'direction': 'rt1' }],
+    [{ 'size': ['small', false, 'large', 'huge'] }],
+    ['link', 'image', 'video', 'formula']
+
+  ];
+
+  var quill = new Quill('#editor', {
+    modules: {
+      toolbar: toolbarOptions
+    },
+    placeholder: 'Mi hilo',
+    theme: 'snow'
+  });
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="Modal-newThread" data-backdrop="static" tabindex="-1" role="dialog"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Error</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Para crear un nuevo hilo debes iniciar sesión
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btn-newThread-error" class="btn btn-danger">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModalThread" data-backdrop="static" tabindex="-1" role="dialog"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Eliminar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ¿Seguro que quieres eliminar este hilo?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="btnModalDeleteThread" class="btn btn-danger" data-id="">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>

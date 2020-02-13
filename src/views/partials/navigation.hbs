@@ -1,0 +1,85 @@
+
+<!--/ Form Search Star /-->
+
+<!--/ Nav Star /-->
+<nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
+    <div class="container">
+
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
+            aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <a class="navbar-brand text-brand text-center d-none d-sm-block mr-auto pr-3" href="/"><span
+                class="color-b" style="font-size: 48px;"> GETS</span><br></a>
+        <a class="navbar-brand text-brand text-center  d-block d-sm-none mx-auto" href="/"
+            style="font-size: 23px;"><span class="color-b" style="font-size: 30px;"> GETS</span><br></a>
+
+        <h6 class="mr-auto d-none d-sm-block">Grupo de evaluación<br> de tecnologias y <br>politicas de salud</h6>
+        <h6 class="mr-auto d-block d-sm-none" style="font-size: 12px;">Grupo de evaluación de<br> tecnologias y
+            politicas de salud</h6>
+
+        <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/integrantes">Integrantes</a>
+                </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Investigación
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/investigacion/proyectos">Proyectos</a>
+                        <a class="dropdown-item" href="/investigacion/publicaciones">Publicaciones</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/foro">Foro</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contacto">Contácto</a>
+                </li>
+
+                {{#if no_user}}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/login"><i class="fa fa-user-circle"></i> Entrar</a>
+                </li>
+
+                {{else}}
+
+                {{#if user}}
+
+
+                <li class="nav-item dropdown">
+                    <a class="btn btn-success btn-sm mt-2 dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Cuenta
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/user/id/{{user.user}}"><i class="fa fa-user-circle"></i>
+                            Perfil</a>
+                        <a class="dropdown-item" href="/user/config/{{user.user}}"><i class="fa fa-cog"></i>
+                            Configuración</a>
+                        <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out"></i> Cerrar sesión</a>
+                    </div>
+                </li>
+
+                {{else}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/login"><i class="fa fa-user-circle"></i> Entrar</a>
+                </li>
+                {{/if}}
+
+                {{/if}}
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--/ Nav End /-->

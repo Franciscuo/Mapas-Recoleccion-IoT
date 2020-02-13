@@ -1,0 +1,114 @@
+<div class="" style="background-color: #2ECA6A;">
+    <div class="container  h-100">
+        <section class="py-5 pl-sm-5">
+            <div class="col-lg-8 offset-lg-2 col-md-12">
+
+
+                <div class="card border-success mt-5">
+                    <div class="card-body">
+                        <h3 class="text-center color-b font-weight-bold"> Recuperar contraseña</h3>
+
+                        <form id="formRestorePassword-email">
+
+                            <div class="form-group">
+                                {{> errors }}
+                                <div class="alert alert-danger alert-dismissible fade show" id="errorRestorePassword"
+                                    role="alert">
+                                    <p id="errorMsg"></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p style="font-size: 14px;">Enviaremos un codigo a tu dirección de correo para
+                                    confirmar que es tu cuenta</p>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" id="email" class="form-control" placeholder="Email"
+                                    autocomplete="off" required>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="loader2 mx-auto" id="loader2"></div>
+                                <input type="submit" value="Enviar codigo" id="btnPasswordCode"
+                                    class="btn btn-success btn-block">
+                            </div>
+                            <div class="form-group" id="textLogin">
+                                <div class="text-center">
+                                    <a href="/login" class="color-b"  style="font-size: 12px;">¿Ya estas regitrado?
+                                        Iniciar sesión</a><br>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        <section id="codePin">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <p style="font-size: 14px;">Ingresa el codigo que enviamos a tu
+                                            correo</p>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <input type="number" name="pinCode" id="pinCode" class="form-control">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Recuperar contraseña" id="btnPasswordPin"
+                                    class="btn btn-success btn-block">
+                            </div>
+
+                        </section>
+
+
+                        <form id="formRestorePassword-newPassword">
+
+                            <div class="form-group">
+                                {{> errors }}
+                                <div class="alert alert-danger alert-dismissible fade show" id="errorRestorePassword2"
+                                    role="alert">
+                                    <p id="errorMsg2"></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p style="font-size: 14px;">Hemos corroborado tu identidad, ahora puedes actualizar tu
+                                    contraseña.</p>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="newPass" id="newPass" class="form-control"
+                                    placeholder="Nueva contraseña" autocomplete="off" required>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="password" name="newPassConfirm" id="newPassConfirm" class="form-control"
+                                    placeholder="Confirme nueva contraseña" autocomplete="off" required>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="loader2 mx-auto" id="loader3"></div>
+                                <input type="submit" value="Actualizar contraseña"
+                                    id="btnRestorePassword-updatePassword" class="btn btn-success btn-block">
+                            </div>
+                        </form>
+
+
+                        <section id="updatePassSuccess">
+                            <div class="form-group">
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <p>Contraseña actualizada correctamente</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <a href="/login " class="btn btn-success btn-block">Iniciar sesión</a>
+                            </div>
+                        </section>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
