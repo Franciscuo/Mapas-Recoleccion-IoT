@@ -1,4 +1,10 @@
-/*
-const mongoose = requiere('moongoose');
+const mongoose = require('mongoose');
 
-mongoose.conn*/
+mongoose.connect('mongodb://localhost/test-pastarn', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
+mongoose.connection.once('open', () => {
+    console.log('DB is connected');
+});

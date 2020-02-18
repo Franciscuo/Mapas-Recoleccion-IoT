@@ -2,7 +2,7 @@
 var express = require("express"); //cost {Router} = requiere('express');
 var router = express.Router();
 
-router.get("/", function(req, res, next) {
+router.get('/', function(req, res, next) {
     res.render('login.hbs');
 });
 
