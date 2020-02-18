@@ -9,11 +9,11 @@ var debug = require('debug')('limpo:server');
 var http = require('http');
 
 /**
- * Get port from environment and store in Express.
+ * Get port from environment and store in Express. 
  */
 
-var port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+var port = normalizePort(process.env.PORT || '3000'); // si se va a usar heroku
+app.set('port', port); //configura el puerto 
 
 /**
  * Create HTTP server.
@@ -27,7 +27,7 @@ var server = http.createServer(app);
 
 server.listen(port,function(){
   console.log('Escuchando en : '+ port);
-  //console.log(__dirname);
+  //console.log(__dirname); Wappalyzerser
 });
 
 
@@ -93,3 +93,5 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+
