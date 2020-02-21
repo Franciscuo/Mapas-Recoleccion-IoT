@@ -11,6 +11,9 @@ var usersRouter = require('./routes/users');//Crea la pagina de usuarios
 var loginRouter = require("./routes/login");//crea la variable y la vincula con el archivo
 
 var app = express();
+//const http = require('http');
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
