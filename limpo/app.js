@@ -29,7 +29,6 @@ app.set('view engine', '.hbs'); // Se selecciona motor de plantillas
 
 //--- Middlewars
 
-
 require('./sockets')(io);
 
 app.use(logger('dev'));
