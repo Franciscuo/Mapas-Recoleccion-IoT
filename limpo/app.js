@@ -13,7 +13,8 @@ var loginRouter = require("./routes/login");//crea la variable y la vincula con 
 var app = express();
 //const http = require('http');
 
-
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,6 +28,9 @@ app.set('view engine', '.hbs'); // Se selecciona motor de plantillas
 
 
 //--- Middlewars
+
+
+require('./sockets')(io);
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -58,4 +62,4 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error.hbs');
 });
-module.exports = app;
+module.exports = {app: app, server: server};
