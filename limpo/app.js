@@ -4,16 +4,16 @@ const path = require('path'); //paquete para arreglar las rutas estaticas
 const cookieParser = require('cookie-parser');
 const logger = require('morgan'); //logger es igual a morgan
 const exphbs = require('express-handlebars');
-//const db = require('./database');
 
-
+//-- Inicializacion
+const db = require('./database');
 var app = express();
-//const http = require('http');
 
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-// view engine setup
+
+//--- Settings 
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.hbs', exphbs({ // Se genera un nuevo motor de plantillas
     defaultLayout: 'main',
@@ -25,9 +25,7 @@ app.set('view engine', '.hbs'); // Se selecciona motor de plantillas
 
 
 //--- Middlewars
-
 require('./sockets')(io);
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -35,31 +33,13 @@ app.use(cookieParser());
 
 
 //-- Routes ---
-
 app.use(require('./routes/users.routes'));
 app.use(require('./routes/aplicacion.routes'));
-
-
 
 
 //---- Static Files--------
 
 app.use(express.static(path.join(__dirname, 'public'))); // Envia rutas publicas
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    next(createError(404));
-});
-
-// --------- error handler
-app.use(function(err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error.hbs');
-});
 
 module.exports = { app: app, server: server };

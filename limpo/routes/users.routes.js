@@ -7,4 +7,6 @@ router.get('/login', user.login);
 router.get('/signup', user.signup);
 router.get('/forgot', user.forgot);
 
+router.post('/api/signup', user.apiSignup);
+
 module.exports = router;
