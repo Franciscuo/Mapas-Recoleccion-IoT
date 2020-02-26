@@ -41,10 +41,15 @@ app.use(session({ // Manejo del servidor de las cookies
     resave: true,
     saveUninitialized: true,
 }));
-
-
 app.use(passport.initialize()); //Arranca passport configura cookies
 app.use(passport.session()); //Ejecuta proceso de lectura/escritura de cookie } --//
+
+//Global variables (Middleware propio)
+app.use((req, res, next) => {
+    res.locals.user = req.user || null;
+    next();
+});
+
 
 
 //-- Routes ---

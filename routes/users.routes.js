@@ -21,4 +21,5 @@ router.post('/api/login', passport.authenticate('local-signin', {
     passReqToCallback: true, //Config para pasar los datos recibidos por el formulario
 }));
 
+
 module.exports = router;
