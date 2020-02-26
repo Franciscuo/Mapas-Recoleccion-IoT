@@ -37,6 +37,25 @@ userCtrl.apiSignup = async(req, res) => {
     }
 }
 
+userCtrl.email = async(req, res) => {
+    try {
+        const email = req.body.email;
+        const user = await User.findOne({ email });
+        user ? res.json({ user: true }) : res.json({ user: false });
 
+    } catch (e) {
+        res.json({ user: false, error: e });
+    }
+}
+userCtrl.username = async(req, res) => {
+    try {
+        const username = req.body.username;
+        const user = await User.findOne({ username });
+        user ? res.json({ user: true }) : res.json({ user: false });
+
+    } catch (e) {
+        res.json({ user: false, error: e });
+    }
+}
 
 module.exports = userCtrl;

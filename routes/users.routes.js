@@ -8,5 +8,8 @@ router.get('/signup', user.signup);
 router.get('/forgot', user.forgot);
 
 router.post('/api/signup', user.apiSignup);
+router.post('/api/email', user.email);
+router.post('/api/username', user.username);
+
 
 module.exports = router;
