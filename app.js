@@ -2,13 +2,18 @@ require('dotenv').config();
 
 const express = require('express');
 const path = require('path'); //paquete para arreglar las rutas estaticas
-const cookieParser = require('cookie-parser');
+
 const logger = require('morgan'); //logger es igual a morgan
 const exphbs = require('express-handlebars');
+
+
+const passport = require('passport');
+const session = require('express-session');
 
 //-- Inicializacion
 const db = require('./database');
 var app = express();
+require('./config/passport') //Se trae el archivo con la autenticacion de usuarios (este trae modelo base de datos de usuario)
 
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -30,7 +35,16 @@ require('./sockets')(io);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+
+app.use(session({ // Manejo del servidor de las cookies
+    secret: '3gsb2os82bwsk', // string para serializar/deserializar las cookies
+    resave: true,
+    saveUninitialized: true,
+}));
+
+
+app.use(passport.initialize()); //Arranca passport configura cookies
+app.use(passport.session()); //Ejecuta proceso de lectura/escritura de cookie } --//
 
 
 //-- Routes ---
