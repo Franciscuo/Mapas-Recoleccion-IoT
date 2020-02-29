@@ -20,6 +20,9 @@
     "morgan": "~1.9.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "typescript": "^3.4.5",
+    "uglify-js": "^3.6.0",
+    "utf-8-validate": "^5.0.2",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
