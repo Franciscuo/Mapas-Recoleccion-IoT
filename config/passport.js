@@ -31,9 +31,7 @@ passport.use('local-signin', new localStrategy({
     passwordField: 'password',
     passReqToCallback: true, // permite recibir mas cosas que solo el email
 }, async(req, email, password, done) => {
-    console.log('paso por aqui');
     const user = await User.findOne({ email: email });
-    console.log(user);
     if (!user) {
         //req.flash('error_msg', 'Usuario no encontrado');
         return done(null, false); // (err, user para cookie)

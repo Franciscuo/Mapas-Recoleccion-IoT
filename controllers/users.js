@@ -6,6 +6,11 @@ userCtrl.login = (req, res) => {
     res.render('users/login.hbs')
 }
 
+userCtrl.logout = (req, res) =>{
+    req.logOut();
+    res.redirect('/')
+}
+
 userCtrl.signup = (req, res) => {
     res.render('users/signup.hbs')
 }

@@ -8,6 +8,8 @@ const user = require('../controllers/users'); //Trae los controladores de usuari
 router.get('/login', user.login);
 router.get('/signup', user.signup);
 router.get('/forgot', user.forgot);
+router.get('/logout', user.logout);
+
 
 router.post('/api/signup', user.apiSignup);
 router.post('/api/email', user.email);
