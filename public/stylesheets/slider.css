@@ -1,0 +1,15 @@
+:root{
+    --color--verde-principal:#50BC28;
+    --color-azul-principal:#253C99;
+    --color-blanco-principal:#fffffe;
+}
+
+
+.mainslider img{
+    max-height: 70vh;
+    object-fit:cover;
+}
+.mainslider h3{
+    color:white;
+    text-shadow: -1px -1px 0 #000;  
+}

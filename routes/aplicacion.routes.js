@@ -4,7 +4,9 @@ var router = express.Router();
 const appCtrl = require('../controllers/aplicacion');
 const Session = require('./Auth');
 
-router.get('/', Session.isAuthenticaded, appCtrl.index);
+router.get('/', appCtrl.index);
+
+router.get('/control', Session.isAuthenticaded, appCtrl.control);
 router.get('/addNode', Session.isAuthenticaded, appCtrl.addNode);
 router.get('/addCUstomer', Session.isAuthenticaded,appCtrl.addCustomer);
 

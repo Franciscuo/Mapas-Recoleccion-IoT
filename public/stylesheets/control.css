@@ -1,0 +1,10 @@
+body{
+    margin: 0px;
+    padding: 0px;
+  }
+#map-template {
+    height: 50vh;
+    width: inherit;
+    position: relative;
+    outline: none;
+}

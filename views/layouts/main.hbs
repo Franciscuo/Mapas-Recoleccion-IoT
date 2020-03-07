@@ -6,12 +6,17 @@
     <link rel="shortcut icon" href="images/Icon-Color-180.png">
     <title>Limpo - Unidos por el planeta</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+    {{#if user}}
+    <link rel="stylesheet" href="stylesheets/control.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css">
+    <link rel="stylesheet" href="stylesheets/sidebar.css">   
+    {{/if}}
     <link rel="stylesheet" href="stylesheets/index.css">
+    <link rel="stylesheet" href="stylesheets/slider.css">
 </head>
 <body>
-    {{>navigation}}
-
-    {{{body}}}
+    <div class="wrapper">
+        {{{body}}}
+    </div>
 </body>
 </html>

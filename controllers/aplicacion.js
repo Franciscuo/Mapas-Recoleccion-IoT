@@ -8,6 +8,10 @@ appCtrl.index = (req, res) => {
     res.render('index.hbs');
 }
 
+appCtrl.control = (req, res) =>{
+    res.render('application/control.hbs');
+}
+
 appCtrl.loriot = (req, res) => {
     if(req.body.data !=undefined){
         datos = req.body.data;
@@ -18,11 +22,11 @@ appCtrl.loriot = (req, res) => {
 
 appCtrl.addNode = async (req, res) =>{
     const customersDB = await Customer.find();
-    res.render('admin/addNode',{customersDB});
+    res.render('application/addNode',{customersDB});
 }
 
 appCtrl.addCustomer = (req, res) =>{
-    res.render('admin/addCustomer.hbs')
+    res.render('application/addCustomer.hbs')
 }
 
 appCtrl.apiAddNode = async (req, res)=>{

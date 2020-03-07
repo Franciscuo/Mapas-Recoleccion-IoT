@@ -1,9 +1,7 @@
-#map-template {
-  height: 300px;
-  margin-top: 50px;
-  position: relative;
-  outline: none;
-  }
-  body {
-    margin: 0px 10px 0px 10px;
-  }
+body{
+  margin: 0px;
+  padding: 0px;
+}
+#carouselExampleIndicators{
+  padding: 0;
+}
