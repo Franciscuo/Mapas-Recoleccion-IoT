@@ -5,14 +5,15 @@ const tileURL2 = 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png';
 
 
 // Socket Io
-//const socket = io.connect();
-var socket = io('//localhost:3000');
-
-socket.on('newUserCoordinates', (data) => {
+const socket = io.connect('http://localhost:3000',{
+    forceNew: true,
+});
+socket.on('message', (data) => {
     console.log(data);
 });
-
-
+socket.on('connected', (data) => {
+    console.log(data);
+});
 
 L.tileLayer(mapaURL, {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

@@ -25,14 +25,14 @@ $('#user').blur(function() {
         username = false;
     } else {
         $.ajax({
-            url: '/api/username',
+            url: '/user/username',
             type: 'POST',
             data: {
-                username: field.value
+                userName: field.value
             },
             dataType: 'json',
             success: function(respuesta) {
-                if (respuesta.user) {
+                if (respuesta.data) {
                     field.className = 'form-control is-invalid';
                     username = false;
                 } else {
@@ -41,7 +41,7 @@ $('#user').blur(function() {
                 }
 
             },
-            error: function() {
+            error: function(e) {
                 alert('Ups ! Algo ha salido mal' + e);
                 username = false;
             }
@@ -71,14 +71,14 @@ $('#email').blur(function() {
     } else {
         if (fieldValue.includes('@') && fieldValue.includes('.')) {
             $.ajax({
-                url: '/api/email',
+                url: '/user/email',
                 type: 'POST',
                 data: {
                     email: fieldValue,
                 },
                 dataType: 'json',
                 success: function(respuesta) {
-                    if (respuesta.user) {
+                    if (respuesta.data) {
                         field.className = 'form-control is-invalid';
                         email = false;
                     } else {
@@ -87,7 +87,7 @@ $('#email').blur(function() {
                     }
 
                 },
-                error: function() {
+                error: function(e) {
                     alert('Ups ! Algo ha salido mal' + e);
                     email = false;
                 }
@@ -139,18 +139,18 @@ $('#confirmPassword').blur(function() {
 $('#btnSubmit').click(function(e) {
     if (username && name && lastName && email && password && confirmPassword) {
         $.ajax({
-            url: '/api/signup',
+            url: '/user/',
             type: 'POST',
             data: {
-                password: document.getElementById('password').value,
-                email: document.getElementById('email').value,
-                username: document.getElementById('user').value,
+                userName: document.getElementById('user').value,
                 name: document.getElementById('name').value,
-                lastName: document.getElementById('lastName').value
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
             },
             dataType: 'json',
             success: function(respuesta) {
-                if (respuesta.saved) {
+                if (respuesta.data) {
                     alert('Guardado');
                 } else {
                     alert('Error');

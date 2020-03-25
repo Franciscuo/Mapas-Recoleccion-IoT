@@ -8,7 +8,6 @@ const User = require('../models/user'); //Se trae el modelo de usuario porque pa
 
 
 
-
 //------------- Cookies ---------------
 passport.serializeUser((user, done) => { //El servidor recibo el usuario actual y lo serializa
     done(null, user.id); //El servidor guarda el id del usuario actual en la cookie del navegador
@@ -31,17 +30,17 @@ passport.use('local-signin', new localStrategy({
     passwordField: 'password',
     passReqToCallback: true, // permite recibir mas cosas que solo el email
 }, async(req, email, password, done) => {
-    const user = await User.findOne({ email: email });
-    if (!user) {
-        //req.flash('error_msg', 'Usuario no encontrado');
-        return done(null, false); // (err, user para cookie)
-    }
-    const pass = await user.igualesPassword(password);
-    console.log(pass);
-    if (!pass) {
-        //req.flash('error_msg', 'Contraseña incorrecta');
-        return done(null, false);
-    }
-    return done(null, user);
+        const user = await User.findOne({ email: email });
+        if (!user) {
+            //req.flash('error_msg', 'Usuario no encontrado');
+            return done(null, false); // (err, user para cookie)
+        }
+        const pass = await user.igualesPassword(password);
+        console.log(pass);
+        if (!pass) {
+            //req.flash('error_msg', 'Contraseña incorrecta');
+            return done(null, false);
+        }
+        return done(null, user);
 
 }));
