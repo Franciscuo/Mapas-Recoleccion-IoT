@@ -6,7 +6,7 @@ const passport = require('passport');
 
 //----- Comprueba Paswords----
 router.post('/login', passport.authenticate('localSignIn', {
-        successReturnToOrRedirect: '/app/',
+        successReturnToOrRedirect: '/app',
         failureRedirect: '/login',
         passReqToCallback: true,
     })

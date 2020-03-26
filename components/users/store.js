@@ -1,15 +1,8 @@
 const Model = require('./model');
-const bcrypt = require('bcryptjs'); //Hash de contraseña
-
-const encryptPassword = async (password) => { //se define un metodo para el esquema que permite encriptar la contraseña
-    const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(password, salt);
-    return hash;
-};
 
 const addUser = async(newUser)=>{
-    newUser.password = await encryptPassword(newUser.password);
     const myUser = new Model(newUser)
+    myUser.password = await myUser.encryptPassword(newUser.password);
     const addUser = myUser.save() //guarda el modelo y el modelo llama al ORM Y este a la base de datos
     return addUser
 }

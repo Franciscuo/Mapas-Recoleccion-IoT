@@ -1,7 +1,7 @@
 const express = require('express');
 const user = require('../components/users/network')
 const main = require('../components/main/network')
-const appCtrl = require('../components/application/');
+const appCtrl = require('../components/application/network');
 const routes = (server)=>{
     server.use('/app',appCtrl)
     server.use('/user',user)//redirigue routas al controlador message/network
