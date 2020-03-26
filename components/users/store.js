@@ -7,10 +7,6 @@ const encryptPassword = async (password) => { //se define un metodo para el esqu
     return hash;
 };
 
-const equalPassword = async (password) => { //Se define un metodo para el esquema que permite comparar contraseña
-    return await bcrypt.compare(password, this.password);
-}
-
 const addUser = async(newUser)=>{
     newUser.password = await encryptPassword(newUser.password);
     const myUser = new Model(newUser)

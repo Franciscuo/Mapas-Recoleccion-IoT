@@ -5,11 +5,12 @@ const response = require('../../network/response')//Trae network dos carpetas ar
 const passport = require('passport');
 
 //----- Comprueba Paswords----
-router.post('/login', passport.authenticate('local-signin', {
-    successReturnToOrRedirect: '/app/',
-    failureRedirect: '/login',
-    passReqToCallback: true, //Config para pasar los datos recibidos por el formulario
-}));
+router.post('/login', passport.authenticate('localSignIn', {
+        successReturnToOrRedirect: '/app/',
+        failureRedirect: '/login',
+        passReqToCallback: true,
+    })
+);
 
 //-------Comprueba User Name
 router.post('/username', (req,res)=>{

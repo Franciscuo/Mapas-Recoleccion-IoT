@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+const bcrypt = require('bcryptjs'); //Hash de contraseña
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -14,5 +14,9 @@ const userSchema = new Schema({
 });
 
 const model = mongoose.model('User', userSchema)
+
+userSchema.methods.equalPassword = async (password) => { //Se define un metodo para el esquema que permite comparar contraseña
+    return await bcrypt.compare(password, this.password);
+}
 
 module.exports = model
