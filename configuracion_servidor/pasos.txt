@@ -1,0 +1,49 @@
+ 500  echo "Inicio despliegue"
+  501  sudo apt install nodejs npm
+  502  mkdir downloads
+  503  cd downloads/
+  504  curl -sL https://deb.nodesource.com/setup_10.x -o node_setup.sh
+  505  node -v
+  506  echo "Inciio despliegue"
+  507  sudo apt install nodejs npm
+  508  node -v
+  509  sudo adduser nodejs
+  510  cat /etc/passwd
+  511  cd /home/servidores/Mapas-Recoleccion-IoT/
+  512  npm start
+  513  sudo nano /lib/systemd/system/servidores@.service
+  514  sudo cat /lib/systemd/system/servidores@.service
+  515  cd /home/nodejs/
+  516  sudo git clone https://github.com/nickdpz/Mapas-Recoleccion-IoT
+  517  sudo systemctl start servidores@$3000
+  518  sudo systemctl status
+  519  sudo apt update
+  520  sudo apt upgrade
+  521  sudo su - nodejs
+  522  sudo systemctl start servidores@3000
+  523  sudo systemctl status servidores@3000
+  524  echo "log del servicio"
+  525  sudo journalctl -fu servidores@3000
+  526  sudo nano /lib/systemd/system/servidores@.service
+  527  sudo journalctl -fu servidores@3000
+  528  cd Ma
+  529  cd Mapas-Recoleccion-IoT/
+  530  node bin/www
+  531  npm install
+  532  sudo npm install
+  533  node bin/www
+  534  sudo nano .env
+  535  node bin/www
+  536  sudo systemctl start servidores@3000
+  537  sudo systemctl status servidores@3000
+  538  curl -I localhost:3000
+  539  sudo systemctl status nginx
+  540  sudo systemctl start nginx
+  541  sudo systemctl status nginx
+  542  sudo netstat -ltnp
+  543  cd /etc/nginx/sites-available/
+  543  sudo truncate -s0 default
+  544  sudo vim default
+  545  sudo nginx -t
+  546  sudo systemctl restart nginx
+  547  curl localhost

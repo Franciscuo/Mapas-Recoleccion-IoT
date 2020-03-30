@@ -20,7 +20,7 @@ L.tileLayer(mapaURL, {
 }).addTo(map);
 
 let iconMarker = L.icon({
-    iconUrl: 'images/marker.png',
+    iconUrl: 'static/images/marker.png',
     iconSize: [60, 60],
     iconAnchor: [30, 60]
 });

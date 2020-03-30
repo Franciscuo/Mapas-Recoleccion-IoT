@@ -1,25 +1,6 @@
 const store = require('./store');
 
-const isUserName = (userName)=>{
-    return new Promise(async(resolve,reject)=>{
-        if(!userName){
-            reject('Informacion Incorrecta')
-            return false
-        }
-        const filter={
-            userName:userName
-        }
-        store.isUserFeat(filter)
-            .then((flag)=>{
-                resolve(flag)
-            })
-            .catch(e=>{
-                reject(e)
-            })
-    })
-}
-
-const isEUI = (eui)=>{
+const isEUI = ((eui)=>{
     return new Promise(async(resolve,reject)=>{
         if(!eui){
             reject('Informacion Incorrecta')
@@ -36,7 +17,7 @@ const isEUI = (eui)=>{
                 reject(e)
             })
     })
-}
+})
 
 const addNode = (eui,model,customer_id,)=>{
     return new Promise(async(resolve, reject)=>{
@@ -49,7 +30,7 @@ const addNode = (eui,model,customer_id,)=>{
             'model':model,
             'customer_id': customer_id,
         }
-        store.add(newNode)
+        store.addNode(newNode)
             .then((NewNode)=>{
                 resolve(NewNode)
             })
@@ -61,9 +42,28 @@ const addNode = (eui,model,customer_id,)=>{
 
 const getNodes=((filter)=>{
     return new Promise(async(resolve, reject)=>{
-        store.list(filter)
-            .then((messages)=>{
-                resolve(messages)
+        store.listNode(filter)
+        .then((messages)=>{
+            resolve(messages)
+        })
+        .catch(e=>{
+            reject(e)
+        })
+    })
+})
+
+const isEmail = ((email)=>{
+    return new Promise(async(resolve,reject)=>{
+        if(!email){
+            reject('Informacion Incorrecta')
+            return false
+        }
+        const filter={
+            email:email
+        }
+        store.isCustomerFeat(filter)
+            .then((flag)=>{
+                resolve(flag)
             })
             .catch(e=>{
                 reject(e)
@@ -71,9 +71,38 @@ const getNodes=((filter)=>{
     })
 })
 
+const addCustomer = (address,latitude,longitude,phone,name,email,node)=>{
+    return new Promise(async(resolve, reject)=>{
+        if (address||!latitude||!longitude||!phone||!name||!email){
+            reject('Informacion Incorrecta') // retorna promesa
+            return false
+        }
+        const newCustomer = {
+                'address':address,
+                'latitude':latitude,
+                'longitude':longitude,
+                'phone':phone,
+                'name':name, 
+                'email':email,
+                'node':''
+        }
+        if (node)
+            newCustomer.node=node
+        store.addCustomer(newCustomer)
+            .then((NewCustomer)=>{
+                resolve(NewCustomer)
+            })
+            .catch(e=>{
+                reject(e)
+            })
+    })
+}
+
 
 module.exports={
-    isEUI,
     addNode, 
     getNodes,
+    isEUI,
+    addCustomer,
+    isEmail
 }

@@ -1,6 +1,15 @@
 const store = require('./store');
 
-const addUser = (userName,name, lastName,email,password)=>{
+const hex_to_ascii=(str1)=>{
+	var hex  = str1.toString();
+	var str = '';
+	for (var n = 0; n < hex.length; n += 2) {
+		str += String.fromCharCode(parseInt(hex.substr(n, 2), 16));
+	}
+	return str;
+}
+
+const addData = (userName,name, lastName,email,password)=>{
     return new Promise(async(resolve, reject)=>{
         if (!userName||!name||!lastName||!email||!password){
             reject('Informacion Incorrecta') // retorna promesa
@@ -26,39 +35,11 @@ const addUser = (userName,name, lastName,email,password)=>{
     })
 }
 
-const getUser=((filterUser)=>{
+const getData=((filterUser)=>{
     return new Promise(async(resolve, reject)=>{
         store.list(filterUser)
             .then((messages)=>{
                 resolve(messages)
-            })
-            .catch(e=>{
-                reject(e)
-            })
-    })
-})
-
-const updateUser = ((id,name)=>{
-    return new Promise(async(resolve,reject)=>{
-        store.update(id,name)
-            .then(()=>{
-                resolve('Actualizo Usuario')
-            })
-            .catch(e=>{
-                reject(e)
-            })
-    })
-})
-
-const deleteUser = ((id)=>{
-    return new Promise((resolve,reject)=>{
-        if(!id){
-            reject('Invalid data')
-            return false;
-        }
-        store.remove(id)
-            .then(()=>{
-                resolve()
             })
             .catch(e=>{
                 reject(e)
