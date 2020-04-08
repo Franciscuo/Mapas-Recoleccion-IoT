@@ -116,20 +116,20 @@ confirmPasswordField.addEventListener("blur",(event) => {
     feedbackClient(confirmPasswordField,confirmPassword)
 })
 
-sendBtn.addEventListener("click",(event) => {
+sendBtn.addEventListener("click",async (event) => {
     if (user && name && lastName && email && password && confirmPassword) {
-            fetch("/user", {
-            method: "POST",
-            headers:{
-                'Content-Type': 'application/json'
-                },
-            body: JSON.stringify({
-                userName: userField.value,
-                name: nameField.value,
-                lastName: lastNameField.value,
-                email: emailField.value,
-                password: passwordField.value,
-            }),
+        await fetch("/user", {
+                method: "POST",
+                headers:{
+                    'Content-Type': 'application/json'
+                    },
+                body: JSON.stringify({
+                    userName: userField.value,
+                    name: nameField.value,
+                    lastName: lastNameField.value,
+                    email: emailField.value,
+                    password: passwordField.value,
+                }),
             })
             .then(response => response.json()).then((data) => {
                 if(!data.error){
