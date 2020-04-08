@@ -48,8 +48,6 @@ const getData=((filterUser)=>{
 })
 
 module.exports={
-    addUser, 
-    getUser,
-    updateUser,
-    deleteUser,
+    addData, 
+    getData,
 }

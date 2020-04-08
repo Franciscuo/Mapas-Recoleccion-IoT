@@ -1,21 +1,27 @@
 <nav id="sidebar">
     <ul class="list-unstyled components">
         <li class="nav-item active">
-          <a class="nav-link" href="app/">Principal</a>
+          <a class="nav-link" href="/app">Principal</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="app/newCustomer">Añadir Cliente<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/app/newCustomer">Añadir Cliente<span class="sr-only">(current)</span></a>
         </li>
 
         <li class="nav-item active">
-          <a class="nav-link" href="app/newNode">Añadir Nodo<span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/app/newNode">Añadir Nodo<span class="sr-only">(current)</span></a>
         </li>
         <li>
-            <a href="#homeSubmenu" class="nav-link" data-toggle="collapse">Pages</a>
-            <ul class="collapse list-unstyled" id="homeSubmenu">
+            <a href="#homeSubMenu" class="nav-link" data-toggle="collapse">Pages</a>
+            <ul class="collapse list-unstyled" id="homeSubMenu">
                 <li><a class="nav-link" href="#">Item1 <span class="sr-only">(current)</span></a></li>
                 <li><a class="nav-link" href="#">Page <span class="sr-only">(current)</span></a></li>
             </ul>
         </li>
     </ul>
 </nav>
+<button type="button" id="sidebarCollapse" class="navbar-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+</button>
+<script defer src="/static/javascripts/app/sidebar.js"></script>

@@ -14,8 +14,8 @@ router.post('/login', passport.authenticate('localSignIn', {
 
 //-------Comprueba User Name
 router.post('/username', (req,res)=>{
-    const userName = req.body.userName
-    controller.isUserName(userName)
+    const user = req.body.user
+    controller.isUserName(user)
         .then((info)=>{
             response.success(req, res, info, 200)
         })
@@ -27,6 +27,7 @@ router.post('/username', (req,res)=>{
 //--------Comprueba Email
 router.post('/email',(req,res)=>{
     const email = req.body.email;
+    console.log(email)
     controller.isEmail(email)
         .then((info)=>{
             response.success(req, res, info, 200)
@@ -44,14 +45,18 @@ router.post('/',(req, res) => {
             response.success(req, res, info, 201)
         })
         .catch((e)=>{
-            response.error(req, res, 'Información Invalida',300,e)
+            if(e.code===11000){
+                response.error(req, res, 'Nombre de Usuario o Correo ya estan registrados',300,e)
+            }else{
+                response.error(req, res, 'Información Invalida',300,e)
+            }            
         })  
 })
 
 //-----Obtener los usuarios
 router.get('/',(req, res)=>{
     //Aplica Query
-    const filterUser = req.query.userName || null;
+    const filterUser = req.query.user || null;
     controller.getUser(filterUser)
         .then((userList)=>{
             response.success(req,res,userList,200);

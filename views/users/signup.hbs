@@ -12,15 +12,13 @@
 
                     </div>
                     <div class="row">
-
-
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <input type="name" name="user" id="user" class="form-control" placeholder="Usuario"
                                     autocomplete="off">
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" id="feedback-email">
                                     El Usuario es invalido
-                                </div>
+                                    </div>
                             </div>
                             <div class="form-group">
                                 <input type="name" name="name" id="name" class="form-control" placeholder="Nombre"
@@ -36,20 +34,20 @@
                             <div class="form-group">
                                 <input type="email" name="email" id="email" class="form-control" placeholder="Email"
                                     autocomplete="off">
-                                <div class="invalid-feedback">
+                                <div class="invalid-feedback" id="feedback-email">
                                     El correo es invalido
                                 </div>
                             </div>
                             <div class="form-group">
                                 <input type="password" name="password" id="password" class="form-control"
-                                    placeholder="Contraseña" autocomplete="off" onkeyup="passField()">
+                                    placeholder="Contraseña" autocomplete="off">
                                 <div class="invalid-feedback">
                                     La contarseña debe tener al menos 8 caracteres
                                 </div>
                             </div>
                             <div class="form-group">
                                 <input type="password" name="confirmPassword" id="confirmPassword" class="form-control"
-                                    placeholder="Confirmar contraseña" autocomplete="off" onkeyup="passConfirmField()">
+                                    placeholder="Confirmar contraseña" autocomplete="off">
                                     <div class="invalid-feedback">
                                     La contarseñas no coinciden
                                 </div>
@@ -57,10 +55,10 @@
                         </div>
 
                     </div>
-
-
                     <div class="form-group">
-                        <input  value="Registrarme" id="btnSubmit" class="btn btn-success btn-block">
+                        <button  type="submit" id="btnSend" class="btn btn-primary btn-block">
+                        Regristrame                                                    
+                        </button>
                     </div>
                     <div class="text-center">
                         <a href="/login" class="color-b" style="font-size: 12px;">¿Ya estas regitrado?
@@ -73,4 +71,4 @@
     </section>
 </div>
 {{>scripts}}
-<script src="/javascripts/signup.js"></script>
+<script src="/static/javascripts/user/signUp.js"></script>
