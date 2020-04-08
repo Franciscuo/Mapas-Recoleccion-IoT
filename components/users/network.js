@@ -67,7 +67,14 @@ router.get('/',(req, res)=>{
 })//Responde a Peticiones Get
 
 //-----Eliminar los usuarios
-router.delete('/',(req, res)=>{
+router.delete('/:id',(req, res)=>{
+    controller.deleteUser(req.params.id)
+    .then(()=>{
+        response.success(req,res,`Mensaje ${req.params.id} eliminado`,200)
+    })
+    .catch((e)=>{
+        response.error(req,res,`Error Interno`,500,e)
+    })    
 
 })
 //-----Actualizar los usuarios
