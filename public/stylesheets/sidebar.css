@@ -8,7 +8,7 @@
     min-height: 100vh;
     transition: all 0.3s;
 }
-#sidebarCollapse {
+#btnSidebar {
     width: 40px;
     height: 40px;
     background: #f5f5f5;
@@ -21,7 +21,7 @@
     z-index: 1000;
 }
 
-#sidebarCollapse span {
+#btnSidebar span {
     width: 80%;
     height: 2px;
     margin: 0 auto;
@@ -29,20 +29,20 @@
     background:var(--color-azul-principal);
     transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
 }
-#sidebarCollapse span:first-of-type {
+#btnSidebar span:first-of-type {
     /* rotate first one */
     transform: rotate(45deg) translate(2px, 2px);
 }
-#sidebarCollapse span:nth-of-type(2) {
+#btnSidebar span:nth-of-type(2) {
     /* second one is not visible */
     opacity: 0;
 }
-#sidebarCollapse span:last-of-type {
+#btnSidebar span:last-of-type {
     /* rotate third one */
     transform: rotate(-45deg) translate(1px, -1px);
 }
 
-#sidebarCollapse.active span {
+#btnSidebar.active span {
     /* no rotation */
     transform: none;
     /* all bars are visible */
@@ -89,25 +89,25 @@
        Removing the rotation from the first,
        last bars and reappear the second bar on default state, 
        and giving them a vertical margin */
-    #sidebarCollapse span:first-of-type,
-    #sidebarCollapse span:nth-of-type(2),
-    #sidebarCollapse span:last-of-type {
+    #btnSidebar span:first-of-type,
+    #btnSidebar span:nth-of-type(2),
+    #btnSidebar span:last-of-type {
         transform: none;
         opacity: 1;
         margin: 5px auto;
     }
 
     /* Removing the vertical margin and make the first and last bars rotate again when the sidebar is open, hiding the second bar */
-    #sidebarCollapse.active span {
+    #btnSidebar.active span {
         margin: 0 auto;
     }
-    #sidebarCollapse.active span:first-of-type {
+    #btnSidebar.active span:first-of-type {
         transform: rotate(45deg) translate(2px, 2px);
     }
-    #sidebarCollapse.active span:nth-of-type(2) {
+    #btnSidebar.active span:nth-of-type(2) {
         opacity: 0;
     }
-    #sidebarCollapse.active span:last-of-type {
+    #btnSidebar.active span:last-of-type {
         transform: rotate(-45deg) translate(1px, -1px);
     }
 }

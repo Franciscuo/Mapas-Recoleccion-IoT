@@ -1,8 +1,8 @@
 
-const sidebarCollapse = document.getElementById('sidebarCollapse');
+const btnSidebar = document.getElementById('btnSidebar');
 const sidebar = document.getElementById('sidebar')
-sidebarCollapse.click = () => {
-    sidebar.toggleClass('active');
-    sidebarCollapse.toggleClass('active');
-}
+btnSidebar.addEventListener('click', (event) => {
+    $('#sidebar').toggleClass('active');
+    $(this).toggleClass('active');
+})
 

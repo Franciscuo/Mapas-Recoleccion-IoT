@@ -1,6 +1,8 @@
 let email=false;
 const emailField = document.getElementById('email');
 
+
+
 const feedbackClient = (field,flag)=>{
     if (flag) {
         field.className = 'form-control is-valid';
@@ -9,8 +11,13 @@ const feedbackClient = (field,flag)=>{
     }
 } 
 
+const isEmail = (field) => {
+    return (field.value.includes('@') && field.value.includes('.'))
+
+}
+
 emailField.addEventListener("blur",async (event)=>{
-    email = isLoad(emailField);
+    email = isEmail(emailField);
     feedbackClient(emailField,email)
 })
 
