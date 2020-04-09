@@ -1,4 +1,5 @@
 const store = require('./store');
+const storeNode = require('../application/store')
 
 const isUserName = (userName)=>{
     return new Promise(async(resolve,reject)=>{
@@ -104,6 +105,27 @@ const deleteUser = ((id)=>{
     })
 })
 
+const syncNode = (user_id,eui,pass)=>{
+    return new Promise(async(user_id,eui,pass)=>{
+     if(!user_id||!eui||!pass){
+        reject('Informacion Incorrecta') // retorna promesa
+        return false
+    }   
+    const node = await storeNode.listNode({eui:eui,pass:pass})
+    if(!node){
+        reject('Datos incorrectos') // retorna promesa
+        return false
+    }
+    store.update(user_id,node._id)
+        .then((info)=>{
+            resolve(info)
+        })
+        .catch(e=>{
+            reject(e)
+        })
+    })
+}
+
 module.exports={
     isUserName,
     isEmail,
@@ -111,4 +133,5 @@ module.exports={
     getUser,
     updateUser,
     deleteUser,
+    syncNode
 }

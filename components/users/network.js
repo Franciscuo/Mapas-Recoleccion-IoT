@@ -3,6 +3,7 @@ const router = express.Router();// Igual a la función Roputer para separar por 
 const controller = require('./controller');
 const response = require('../../network/response')//Trae network dos carpetas arriba
 const passport = require('passport');
+const Session = require('../../network/auth');
 
 //----- Comprueba Paswords----
 router.post('/login', passport.authenticate('localSignIn', {
@@ -11,6 +12,19 @@ router.post('/login', passport.authenticate('localSignIn', {
         passReqToCallback: true,
     })
 );
+
+//actualiza usuario
+router.post('/syncNode',Session.isAuthenticated, (req, res) => {
+    const { eui, pass } = req.body; //Destructuring
+    user_id=req.user._id; 
+    controller.syncNode(user_id, eui, pass)
+        .then((info)=>{
+            response.success(req, res, info, 200)
+        })
+        .catch((e)=>{
+            response.error(req, res, 'Información Invalida',300,e)
+        })  
+})
 
 //-------Comprueba User Name
 router.post('/username', (req,res)=>{
@@ -23,7 +37,6 @@ router.post('/username', (req,res)=>{
             response.error(req, res, 'Error Inesperado',300,e)
         })
 })
-
 //--------Comprueba Email
 router.post('/email',(req,res)=>{
     const email = req.body.email;
@@ -36,7 +49,6 @@ router.post('/email',(req,res)=>{
             response.error(req, res, 'Error Inesperado',300,e)
         })
 })
-
 //------ Nuevo usuario
 router.post('/',(req, res) => {
     const { userName, name, lastName, email, password } = req.body; //Destructuring 
@@ -52,7 +64,6 @@ router.post('/',(req, res) => {
             }            
         })  
 })
-
 //-----Obtener los usuarios
 router.get('/',(req, res)=>{
     //Aplica Query

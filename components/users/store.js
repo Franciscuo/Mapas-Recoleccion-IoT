@@ -1,5 +1,5 @@
 const Model = require('./model');
-
+const Nodes = require('../application/modelNode')
 const addUser = async(newUser)=>{
     const myUser = new Model(newUser)
     myUser.password = await myUser.encryptPassword(newUser.password);
@@ -7,21 +7,19 @@ const addUser = async(newUser)=>{
     return addUser
 }
 //Son funciones asincronas porque tienen que esperar que retorne algo la base de datos que funciona con promesas
-const  getUsers= async (filterName)=>{
-    let filter = {}
-    if(filterName!=null){
-        filter = {userName:filterName}//crea el filtr  
-    }
-    //const messages = await Model.find()//Search all message
+const  getUsers= async (filter)=>{
     const user = await Model.find(filter)//Search message with user filterUser
     return user
 }
 
-const updateUser = async (id,name)=>{
-    const foundMessage = await Model.findOne({
+const updateUser = async (id,id_node)=>{
+    const foundUser = await Model.findOne({
         _id:id
-    });//obtiene el documento del mensaje y actualiza el campo message
-    foundUser.message=name
+    });
+    if(id_node){
+        foundUser.role = "client"
+        foundUser.nodes.push({_id:id_node})
+    }
     const newUser = await foundUser.save()
     return newUser
 }

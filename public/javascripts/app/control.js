@@ -31,5 +31,4 @@ buttonRequest.addEventListener("click",async()=> {
 })
 buttonUpdateMap.addEventListener("click", () => {
     graph.addLine()
-
 })

@@ -5,9 +5,11 @@ const router = express.Router();// Igual a la función Roputer para separar por 
 const controller = require('./controller');
 const response = require('../../network/response')//Trae network dos carpetas arriba
 
+
 router.get('/', Session.isAuthenticated, (req, res) => {
     res.render('application/control.hbs');
 })
+
 router.post('/api', Session.isAuthenticated, (req, res) => {
     const data = req.body.message;
     if(data==="data"){
@@ -26,10 +28,10 @@ router.get('/newNode', Session.isAuthenticated,  (req, res) =>{
     //const customersDB = await Customer.find();
     res.render('application/addNode');//,{customersDB}
 })
-//----- Add Node --------------------
-router.post('/addNode',Session.isAuthenticated,(req,res)=>{
-    const { eui, model, customer_id } = req.body; //Destructuring 
-    controller.addNode(eui, model, customer_id)
+//----- Add Node --------------------Session.isAuthenticated,
+router.post('/node',(req,res)=>{
+    const { eui, model} = req.body; //Destructuring 
+    controller.addNode(eui, model)
         .then((info)=>{
             response.success(req, res, info, 201)
         })
@@ -37,43 +39,25 @@ router.post('/addNode',Session.isAuthenticated,(req,res)=>{
             response.error(req, res, 'Información Invalida',300,e)
         })  
 })
-//----- Obtener Nodos ------------------
-router.get('/getNode', Session.isAuthenticated, (req, res) => {
-    const filter = req.query.EUI || null;
-    controller.getUser(filter)
-        .then((nodeList)=>{
-            res.render('application/addNode',{nodeList})
-        })
-        .catch((e)=>{
-            res.render('error.hbs')
-        })
-})
-//----- Añadir Cliente -----------------
-router.get('/newCustomer', Session.isAuthenticated,(req,res)=>{
-    res.render('application/addCustomer.hbs')
-})
-//----- Añadir Cliente --------------------
-router.post('/addCustomer',Session.isAuthenticated,(req,res)=>{
-    const {address, latitude, longitude, name, email, phone,node} = req.body; //Destructuring 
-    controller.addCustomer(address, latitude, longitude, name, email, phone,node)
+//----- Obtener Nodos ------------------Session.isAuthenticated,
+router.get('/node/',  (req, res) => {
+    const filter = req.query.eui || null;
+    controller.getNodes(filter)
         .then((info)=>{
             response.success(req, res, info, 201)
         })
         .catch((e)=>{
             response.error(req, res, 'Información Invalida',300,e)
-        })  
+        }) 
 })
-//----- Obtener Cliente ------------------
-
-router.get('/getCustomer', Session.isAuthenticated, (req, res) => {
-    const filter = req.query.EUI || null;
-    controller.getUser(filter)
-        .then((nodeList)=>{
-            res.render('application/addNode',{nodeList})
+//----- Obtener Nodos ------------------Session.isAuthenticated,
+router.delete('/node/:eui',  (req, res) => {
+    controller.deleteNode(req.params.eui)
+        .then((info)=>{
+            response.success(req, res, info, 201)
         })
         .catch((e)=>{
-            res.render('error.hbs')
-        })
+            response.error(req, res, 'Información Invalida',300,e)
+        }) 
 })
-
 module.exports = router;

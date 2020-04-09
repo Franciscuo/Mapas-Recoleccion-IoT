@@ -60,7 +60,6 @@ const freeBus = {
   ]
 };
 
-
 const mapURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' //Map for default
 //const mapURL = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw' //Map for default
 

@@ -8,9 +8,10 @@ const userSchema = new Schema({
     lastName: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    admin: {type: Boolean, default: false},
-    collector: {type: Boolean, default: false},
-    date: { type: Date, default: Date.now }
+    date: { type: Date, default: Date.now },
+    role: {type: String, default: "none",required: false},
+    nodes:[{type: Schema.ObjectId, 
+            ref: 'Node',}]
 });
 
 userSchema.methods.equalPassword = async function (password){ //Se define un metodo para el esquema que permite comparar contraseña

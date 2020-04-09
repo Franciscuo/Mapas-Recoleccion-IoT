@@ -1,5 +1,4 @@
 const Node = require('./modelNode');
-const Customer = require('./modelCustomer');
 
 const isNodeFeat = async (filter)=>{
     const node = await Model.findOne(filter);
@@ -10,16 +9,12 @@ const isNodeFeat = async (filter)=>{
 }
 
 const addNode = async(newNode)=>{
-    const myUser = new Node(newNode)
-    const addUser = myUser.save() //guarda el modelo y el modelo llama al ORM Y este a la base de datos
-    return addUser
+    const myNode = new Node(newNode)
+    const addNode = await myNode.save() //guarda el modelo y el modelo llama al ORM Y este a la base de datos
+    return addNode
 }
 
-const listNode= async (filterValue)=>{
-    let filter = {}
-    if(filterValue){
-        filter = {userName:filterValue}//crea el filtr  
-    }
+const listNode= async (filter)=>{
     const node = await Node.find(filter)//Search message with user filterUser
     return node
 }
@@ -27,24 +22,9 @@ const listNode= async (filterValue)=>{
 const updateNode = async ()=>{
 }
 
-const deleteNode = (eui)=>{
-    const removeNode = Node.deleteOne({
-        eui:eui
-    });
+const deleteNode = (filter)=>{
+    const removeNode = Node.deleteOne(filter);
     return removeNode
-}
-
-const addCustomer = async (newCustomer)=>{
-    const myCustomer = new Customer(newCustomer)
-    myCustomer.save()
-}
-
-const isCustomerFeat = async (filter)=>{
-    const node = await Model.findOne(filter);
-    if(node){
-        return true
-    }
-    return false
 }
 
 module.exports={
@@ -52,7 +32,5 @@ module.exports={
     listNode,
     updateNode,
     deleteNode,
-    isNodeFeat, 
-    addCustomer,
-    isCustomerFeat
+    isNodeFeat,
 }
