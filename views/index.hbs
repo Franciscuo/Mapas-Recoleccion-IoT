@@ -1,46 +1,41 @@
-<div id="content">
-    {{>navigation}}
-    <div class="container-fluid mainslider">
+<div class="container-fluid mainslider">
+    <div class="row">
+        <div id="carouselExampleIndicators" class="carousel slide container-fluid" data-ride="carousel" data-pause="true">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item slider1--container active">
+                    <img class="d-block w-100" src="static/images/slider1.jpg" alt="First slide">
+                    <div class="carousel-caption d-block d-md-block">
+                        <h3>Ayudanos a convervar este hermoso lugar</h3>
+                    </div>
+                </div>
+                <div class="carousel-item slider2--container">
+                    <img class="d-block w-100" src="static/images/slider2.jpg" alt="Second slide">
+                </div>
+                <div class="carousel-item slider3--container">
+                <img class="d-block w-100"  src="static/images/slider3.jpg" alt="Third slide">
+                    <div class="carousel-caption d-block d-md-block">
+                        <h5>Holi</h5>
+                        <p>Como tai</p>
+                    </div>
+                </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Anterior</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Siguiente</span>
+            </a>
+        </div>
         <div class="row">
-            <div id="carouselExampleIndicators" class="carousel slide container-fluid" data-ride="carousel" data-pause="true">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item slider1--container active">
-                        <img class="d-block w-100" src="static/images/slider1.jpg" alt="First slide">
-                        <div class="carousel-caption d-block d-md-block">
-                            <h3>Ayudanos a convervar este hermoso lugar</h3>
-                        </div>
-                    </div>
-                    <div class="carousel-item slider2--container">
-                        <img class="d-block w-100" src="static/images/slider2.jpg" alt="Second slide">
-                    </div>
-                    <div class="carousel-item slider3--container">
-                    <img class="d-block w-100"  src="static/images/slider3.jpg" alt="Third slide">
-                        <div class="carousel-caption d-block d-md-block">
-                            <h5>Holi</h5>
-                            <p>Como tai</p>
-                        </div>
-                    </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Anterior</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Siguiente</span>
-                </a>
-            </div>
-            <div class="row">
-                
-            </div>
-            </div>
+            
+        </div>
         </div>
     </div>
 </div>
-
-{{>scripts}} 
-<script src="/static/javascripts/main/index.js"></script>
+<script defer src="/static/javascripts/main/index.js"></script>

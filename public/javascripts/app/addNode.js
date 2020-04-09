@@ -1,3 +1,4 @@
+$('#itemAddNode').toggleClass('active')
 const eui = document.getElementById('eui');
 const model = document.getElementById('model');
 const btnSubmit = document.getElementById('btnSubmit');

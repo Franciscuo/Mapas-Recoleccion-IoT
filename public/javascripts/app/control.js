@@ -1,7 +1,7 @@
 import Maps from './Maps.mjs'
 
+$('#itemMain').toggleClass('active')
 const graph = new Maps([4.62805, -74.06556]);
-var nicolas=0;
 const buttonAddMarker = document.getElementById('buttonAddMarker')
 const buttonRemoveMarker = document.getElementById('buttonRemoveMarker')
 const buttonUpdateMap = document.getElementById('buttonUpdateMap')

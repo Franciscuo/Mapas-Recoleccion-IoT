@@ -56,11 +56,17 @@
     perspective: 1500px; 
 }
 
+.list-group-item.active {
+    color: #fff !important;
+    background-color: var(--color-azul-principal) !important;
+    border-color: var(--color-azul-principal) !important;
+}
+
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: var(--color-azul-principal);
-    color: #fff;
+    background: var(--color-blanco-principal);
+    color:black;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: center left; /* Set the transformed position of sidebar to center left side. */
 }

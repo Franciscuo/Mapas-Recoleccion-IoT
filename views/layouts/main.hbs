@@ -16,7 +16,14 @@
 </head>
 <body>
     <div class="wrapper">
-        {{{body}}}
+            {{#if user}}
+                {{>sidebar}}
+            {{/if}}
+        <div id="content">
+            {{>navigation}}
+            {{{body}}}
+        </div>
     </div>
+    {{>scripts}} 
 </body>
 </html>

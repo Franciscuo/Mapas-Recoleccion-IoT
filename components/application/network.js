@@ -7,7 +7,7 @@ const response = require('../../network/response') //Trae network dos carpetas a
 
 
 router.get('/', Session.isAuthenticated, (req, res) => {
-    res.render('application/control.hbs');
+    res.render('application/ctlAdmin.hbs');
 })
 
 router.post('/api', Session.isAuthenticated, (req, res) => {
