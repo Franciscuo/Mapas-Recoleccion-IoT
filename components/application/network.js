@@ -40,25 +40,33 @@ router.delete('/node/:eui', (req, res) => {
 
 // principal
 router.get('/', Session.isAuthenticated, (req, res) => {
-    res.render('application/admin/ctlAdmin.hbs');
+    if (req.user.role === "admin") {
+        res.render('application/admin/ctlAdmin.hbs');
+    } else if (req.user.role === "client") {
+        res.render('application/client/ctlClient.hbs');
+    } else if (req.user.role === "worker") {
+        res.render('application/worker/ctlWorker.hbs');
+    } else {
+        res.render('application/normal/ctlNormal.hbs');
+    }
 })
 
 // --- Redireciones Admin
 //----- New Node-------------
 router.get('/viewNewNode', Session.isAuthenticated, (req, res) => {
-    //const customersDB = await Customer.find();
-    res.render('application/admin/viewAddNode.hbs'); //,{customersDB}
-})
-//------- Vista de Rotes
+        //const customersDB = await Customer.find();
+        res.render('application/admin/viewAddNode.hbs'); //,{customersDB}
+    })
+    //------- Vista de Rotes
 router.get('/viewRoutes', Session.isAuthenticated, (req, res) => {
     res.render('application/admin/viewRoutes.hbs')
 });
 // ---- Vista Clients
 router.get('/viewClients', Session.isAuthenticated, (req, res) => {
-    //const customersDB = await Customer.find();
-    res.render('application/admin/viewClients.hbs'); //,{customersDB}
-})
-// ---- Vista Workers
+        //const customersDB = await Customer.find();
+        res.render('application/admin/viewClients.hbs'); //,{customersDB}
+    })
+    // ---- Vista Workers
 router.get('/viewWorkers', Session.isAuthenticated, (req, res) => {
     //const customersDB = await Customer.find();
     res.render('application/admin/viewWorkers.hbs'); //,{customersDB}
@@ -72,15 +80,15 @@ router.get('/routes', Session.isAuthenticated, (req, res) => {
 });
 //
 router.get('/routesMap', (req, res) => {
-    controller.getRoutes(req.query)
-        .then((info) => {
-            response.success(req, res, info, 200)
-        })
-        .catch((e) => {
-            response.error(req, res, 'Información Invalida', 300, e)
-        })
-})
-//----- Añadir rutas ------------------Session.isAuthenticated,
+        controller.getRoutes(req.query)
+            .then((info) => {
+                response.success(req, res, info, 200)
+            })
+            .catch((e) => {
+                response.error(req, res, 'Información Invalida', 300, e)
+            })
+    })
+    //----- Añadir rutas ------------------Session.isAuthenticated,
 router.post('/routesMap', (req, res) => {
     const zone = 16;
     const nodes = ["5e8e9076a7bee74bf0e1e7e3", "5e8eaac857065825342402f3"];

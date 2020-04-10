@@ -1,6 +1,4 @@
-{{>sidebar}}
 <div id="content">
-    {{>navigation}}
     <div class="container  h-100">
         <section class="py-5 pl-sm-5">
 
@@ -36,36 +34,22 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="text" name="name" id="name" class="form-control" placeholder="Nombre"
-                                            autocomplete="off">
-                                        <div class="invalid-feedback">
-                                            EL nombre es invalido
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="email" name="email" id="email" class="form-control" placeholder="Email"
-                                            autocomplete="off">
-                                        <div class="invalid-feedback">
-                                            EL email es incorrecto
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="number" name="phone" id="phone" class="form-control"
-                                            placeholder="Telefono" autocomplete="off">
-                                        <div class="invalid-feedback">
-                                            EL telefono es invalido
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
                                         <input type="number" name="eui" id="eui" class="form-control"
                                             placeholder="EUI" autocomplete="off" required="false">
                                         <div class="invalid-feedback">
                                             EUI invalido
                                         </div>
                                     </div>
+
+                                      <div class="form-group">
+                                        <input type="text" name="code" id="code" class="form-control"
+                                            placeholder="Codigo de nodo" autocomplete="off" required="false">
+                                        <div class="invalid-feedback">
+                                            El Codigo de nodo es incorrecto
+                                        </div>
+                                    </div>
+
+
                                     <div class="form-group">
                                         <button class="btn btn-success btn-block">Añadir Cliente</button>
                                     </div>
