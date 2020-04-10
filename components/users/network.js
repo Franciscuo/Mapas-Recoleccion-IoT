@@ -25,7 +25,6 @@ router.post('/syncNode',Session.isAuthenticated, (req, res) => {
             response.error(req, res, 'Información Invalida',300,e)
         })  
 })
-
 //-------Comprueba User Name
 router.post('/username', (req,res)=>{
     const user = req.body.user

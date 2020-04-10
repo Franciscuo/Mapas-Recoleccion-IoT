@@ -1,4 +1,3 @@
-$('#itemAddNode').toggleClass('active')
 const eui = document.getElementById('eui');
 const model = document.getElementById('model');
 const btnSubmit = document.getElementById('btnSubmit');
@@ -29,8 +28,6 @@ btnSubmit.addEventListener("click", async(event) => {
         alert('Faltan Campos');
     }
 })
-
-
 
 eui.addEventListener("blur", async(event) => {
     if (eui) {

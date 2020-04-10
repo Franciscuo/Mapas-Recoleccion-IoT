@@ -5,36 +5,7 @@ const router = express.Router(); // Igual a la función Roputer para separar por
 const controller = require('./controller');
 const response = require('../../network/response') //Trae network dos carpetas arriba
 
-
-router.get('/', Session.isAuthenticated, (req, res) => {
-    res.render('application/ctlAdmin.hbs');
-})
-
-router.post('/api', Session.isAuthenticated, (req, res) => {
-        const data = req.body.message;
-        if (data === "data") {
-            const info = [{
-                "type": "LineString",
-                "coordinates": [
-                    [4.62805, -74.06556],
-                    [4.633429, -74.067715]
-                ]
-            }, {
-                "type": "LineString",
-                "coordinates": [
-                    [4.633429, -74.0677152],
-                    [4.630399, -74.067818]
-                ]
-            }];
-            response.success(req, res, info, 201)
-        }
-    })
-    //----- New Node-------------
-router.get('/newNode', Session.isAuthenticated, (req, res) => {
-        //const customersDB = await Customer.find();
-        res.render('application/addNode'); //,{customersDB}
-    })
-    //----- Add Node --------------------Session.isAuthenticated,
+//----- Add Node --------------------Session.isAuthenticated,
 router.post('/node', (req, res) => {
         const { eui, model } = req.body; //Destructuring 
         controller.addNode(eui, model)
@@ -56,7 +27,7 @@ router.get('/node', (req, res) => {
                 response.error(req, res, 'Información Invalida', 300, e)
             })
     })
-    //----- Obtener Nodos ------------------Session.isAuthenticated,
+    //----- Eliminar Nodos ------------------Session.isAuthenticated,
 router.delete('/node/:eui', (req, res) => {
     controller.deleteNode(req.params.eui)
         .then((info) => {
@@ -67,15 +38,39 @@ router.delete('/node/:eui', (req, res) => {
         })
 })
 
+// principal
+router.get('/', Session.isAuthenticated, (req, res) => {
+    res.render('application/admin/ctlAdmin.hbs');
+})
+
+// --- Redireciones Admin
+//----- New Node-------------
+router.get('/viewNewNode', Session.isAuthenticated, (req, res) => {
+    //const customersDB = await Customer.find();
+    res.render('application/admin/viewAddNode.hbs'); //,{customersDB}
+})
+//------- Vista de Rotes
+router.get('/viewRoutes', Session.isAuthenticated, (req, res) => {
+    res.render('application/admin/viewRoutes.hbs')
+});
+// ---- Vista Clients
+router.get('/viewClients', Session.isAuthenticated, (req, res) => {
+    //const customersDB = await Customer.find();
+    res.render('application/admin/viewClients.hbs'); //,{customersDB}
+})
+// ---- Vista Workers
+router.get('/viewWorkers', Session.isAuthenticated, (req, res) => {
+    //const customersDB = await Customer.find();
+    res.render('application/admin/viewWorkers.hbs'); //,{customersDB}
+})
+
 
 
 //----- Obtener rutas ------------------Session.isAuthenticated,
 router.get('/routes', Session.isAuthenticated, (req, res) => {
     res.render('admin/routes.hbs')
 });
-
-
-
+//
 router.get('/routesMap', (req, res) => {
     controller.getRoutes(req.query)
         .then((info) => {
@@ -85,7 +80,6 @@ router.get('/routesMap', (req, res) => {
             response.error(req, res, 'Información Invalida', 300, e)
         })
 })
-
 //----- Añadir rutas ------------------Session.isAuthenticated,
 router.post('/routesMap', (req, res) => {
     const zone = 16;
@@ -98,4 +92,7 @@ router.post('/routesMap', (req, res) => {
             response.error(req, res, 'Información Invalida', 300, e)
         })
 })
+
+
+
 module.exports = router;
