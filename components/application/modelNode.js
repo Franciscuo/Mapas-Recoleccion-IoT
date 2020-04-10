@@ -3,9 +3,15 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const nodeSchema = new Schema({
-    eui: {type: String, required: true, unique: true},
-    model: {type: String, required: true},
-    pass: {type: String, required: true},
+    eui: { type: String, required: true, unique: true },
+    model: { type: String, required: true },
+    pass: { type: String, required: true },
+    address: { type: String },
+    zone: { type: Number },
+    coords: [{
+        latitude: { type: Number },
+        longitude: { type: Number }
+    }]
 });
 
 const model = mongoose.model('Node', nodeSchema)

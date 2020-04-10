@@ -1,13 +1,15 @@
-:root{
-    --color--verde-principal:#50BC28;
-    --color-azul-principal:#253C99;
-    --color-blanco-principal:#fffffe;
+:root {
+    --color--verde-principal: #50BC28;
+    --color-azul-principal: #25 3C99;
+    --color-blanco-principal: #fffffe;
 }
+
 #content {
     width: 100%;
     min-height: 100vh;
     transition: all 0.3s;
 }
+
 #btnSidebar {
     width: 40px;
     height: 40px;
@@ -15,9 +17,9 @@
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
     border-radius: 50px;
-    position:fixed;
+    position: fixed;
     top: 600px;
-    left:1vh;
+    left: 1vh;
     z-index: 1000;
 }
 
@@ -26,17 +28,20 @@
     height: 2px;
     margin: 0 auto;
     display: block;
-    background:var(--color-azul-principal);
+    background: var(--color-azul-principal);
     transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
 }
+
 #btnSidebar span:first-of-type {
     /* rotate first one */
     transform: rotate(45deg) translate(2px, 2px);
 }
+
 #btnSidebar span:nth-of-type(2) {
     /* second one is not visible */
     opacity: 0;
 }
+
 #btnSidebar span:last-of-type {
     /* rotate third one */
     transform: rotate(-45deg) translate(1px, -1px);
@@ -53,7 +58,7 @@
 .wrapper {
     display: flex;
     align-items: stretch;
-    perspective: 1500px; 
+    perspective: 1500px;
 }
 
 .list-group-item.active {
@@ -66,16 +71,17 @@
     min-width: 250px;
     max-width: 250px;
     background: var(--color-blanco-principal);
-    color:black;
+    color: black;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
-    transform-origin: center left; /* Set the transformed position of sidebar to center left side. */
+    transform-origin: center left;
+    /* Set the transformed position of sidebar to center left side. */
 }
 
 #sidebar.active {
     margin-left: -250px;
-    transform: rotateY(100deg); /* Rotate sidebar vertically by 100 degrees. */
+    transform: rotateY(100deg);
+    /* Rotate sidebar vertically by 100 degrees. */
 }
-
 
 @media (max-width: 768px) {
     /* Reversing the behavior of the sidebar: 
@@ -90,7 +96,6 @@
         margin-left: 0;
         transform: none;
     }
-
     /* Reversing the behavior of the bars: 
        Removing the rotation from the first,
        last bars and reappear the second bar on default state, 
@@ -102,7 +107,6 @@
         opacity: 1;
         margin: 5px auto;
     }
-
     /* Removing the vertical margin and make the first and last bars rotate again when the sidebar is open, hiding the second bar */
     #btnSidebar.active span {
         margin: 0 auto;
