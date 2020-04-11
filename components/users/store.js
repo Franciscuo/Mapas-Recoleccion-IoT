@@ -12,12 +12,12 @@ const  getUsers= async (filter)=>{
     return user
 }
 
-const updateUser = async (id,id_node)=>{
+const updateUser = async (id,id_node,role)=>{
     const foundUser = await Model.findOne({
         _id:id
     });
     if(id_node){
-        foundUser.role = "client"
+        foundUser.role = role,
         foundUser.nodes.push({_id:id_node})
     }
     const newUser = await foundUser.save()

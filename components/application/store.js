@@ -20,7 +20,15 @@ const listNode = async(filter) => {
     return node
 }
 
-const updateNode = async() => {}
+const updateNode = async (id,address,zone,coords)=>{
+    const foundNode = await Node.findOne({
+        _id:id
+    });
+    foundNode.address=address;
+    foundNode.zone=zone;
+    foundNode.coords=coords;
+    await foundNode.save()
+}
 
 const deleteNode = (filter) => {
     const removeNode = Node.deleteOne(filter);
@@ -45,7 +53,6 @@ module.exports = {
     updateNode,
     deleteNode,
     isNodeFeat,
-
     listRoutes,
-    addRoute
+    addRoute,
 }

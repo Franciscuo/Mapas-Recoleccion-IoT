@@ -14,9 +14,9 @@ router.post('/login', passport.authenticate('localSignIn', {
 
 //actualiza usuario
 router.post('/syncNode', Session.isAuthenticated, (req, res) => {
-        const { eui, pass } = req.body; //Destructuring
+        const { eui, pass, address, zone, lat, lon} = req.body; //Destructuring
         user_id = req.user._id;
-        controller.syncNode(user_id, eui, pass)
+        controller.syncNode(user_id, eui, pass, address, zone, lat, lon)
             .then((info) => {
                 response.success(req, res, info, 200)
             })

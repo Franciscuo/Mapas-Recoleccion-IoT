@@ -51,8 +51,7 @@ const addUser = (userName,name, lastName,email,password)=>{
             'lastName': lastName,
             'email': email,
             'password': password,
-            'admin':false,
-            'collector':false,
+            'role':'none',
             'date':new Date(),
         }
         store.add(newUser)
@@ -105,9 +104,9 @@ const deleteUser = ((id)=>{
     })
 })
 
-const syncNode = (user_id,eui,pass)=>{
-    return new Promise(async(user_id,eui,pass)=>{
-     if(!user_id||!eui||!pass){
+const syncNode = (user_id, eui, pass, address, zone, lat, lon)=>{
+    return new Promise(async(resolve,reject)=>{
+     if(!user_id||!eui||!pass||!address||!zone||!lat||!lon){
         reject('Informacion Incorrecta') // retorna promesa
         return false
     }   
@@ -116,7 +115,16 @@ const syncNode = (user_id,eui,pass)=>{
         reject('Datos incorrectos') // retorna promesa
         return false
     }
-    store.update(user_id,node._id)
+
+    storeNode.update(node._id,address,zone,[lat, lon])
+    .then((info)=>{
+        resolve(info)
+    })
+    .catch(e=>{
+        reject(e)
+    })
+
+    store.update(user_id,node._id,'client')
         .then((info)=>{
             resolve(info)
         })
