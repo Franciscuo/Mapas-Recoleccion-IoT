@@ -1,5 +1,4 @@
 let dir
-
 const btnSend = document.getElementById('btnSend');
 const euiField = document.getElementById('eui')
 const passField = document.getElementById('pass')
@@ -17,14 +16,13 @@ const feedbackClient = (field,flag)=>{
 } 
 
 const isComplete = (field) => {
-    return (field.value.length < 8)
+    return ((field.value.includes('C') )&& (field.value.length > 8))
 }
 
 dirField.addEventListener("blur", async (event) => {
     dir = isComplete(dirField);
     feedbackClient(dirField,dir)
 })
-
 
 btnSend.addEventListener("click", async(event) => {
     if (dir) {
@@ -45,6 +43,7 @@ btnSend.addEventListener("click", async(event) => {
             .then(response => response.json()).then((data) => {
                 if (!data.error) {
                     alert("Registro Exitoso");
+                    location.href="/app";
                 } else {
                     alert(data.error);
                 }

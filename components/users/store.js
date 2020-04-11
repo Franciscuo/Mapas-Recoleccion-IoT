@@ -20,8 +20,8 @@ const updateUser = async (id,id_node,role)=>{
         foundUser.role = role,
         foundUser.nodes.push({_id:id_node})
     }
-    const newUser = await foundUser.save()
-    return newUser
+    await foundUser.save()
+
 }
 
 const deleteUser = (id)=>{

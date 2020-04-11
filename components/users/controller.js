@@ -109,24 +109,25 @@ const syncNode = (user_id, eui, pass, address, zone, lat, lon)=>{
      if(!user_id||!eui||!pass||!address||!zone||!lat||!lon){
         reject('Informacion Incorrecta') // retorna promesa
         return false
-    }   
+    }
     const node = await storeNode.listNode({eui:eui,pass:pass})
-    if(!node){
+    if(node.length===0){
         reject('Datos incorrectos') // retorna promesa
         return false
     }
+    if(node[0].address){
+        reject('Nodo Ya Registrado') 
+        return false
+    }
 
-    storeNode.update(node._id,address,zone,[lat, lon])
-    .then((info)=>{
-        resolve(info)
-    })
-    .catch(e=>{
-        reject(e)
-    })
-
-    store.update(user_id,node._id,'client')
-        .then((info)=>{
-            resolve(info)
+    let coords = {
+        latitude: lat,
+        longitude: lon
+    }
+    Promise.all([storeNode.updateNode(node[0]._id,address,zone,coords),store.update(user_id,node[0]._id,'client')])
+        .then(()=>{
+            console.log("Sincronizado Cliente");
+            resolve("Success")
         })
         .catch(e=>{
             reject(e)

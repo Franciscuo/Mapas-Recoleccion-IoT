@@ -21,7 +21,11 @@ router.post('/syncNode', Session.isAuthenticated, (req, res) => {
                 response.success(req, res, info, 200)
             })
             .catch((e) => {
-                response.error(req, res, 'Información Invalida', 300, e)
+                if(e=='Nodo Ya Registrado'){
+                    response.error(req, res, e, 300, e)
+                }else{
+                    response.error(req, res, 'Información Invalida', 300, e)
+                }
             })
     })
     //-------Comprueba User Name
