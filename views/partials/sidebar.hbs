@@ -1,18 +1,32 @@
 <nav id="sidebar" class="border border-primary">
-    <div class="list-group" id="myMenu">
-      <a class="list-group-item list-group-item-action" id="itemMain" href="/app" >Inicio</a>
-      {{#equal role  "admin"}}
+  <ul class="list-group" id="myMenu">
+    <li>
+      <a class="list-group-item list-group-item-action" id="itemMain" href="/app">Inicio</a>
+    </li>
+    {{#equal role  "admin"}}
+    <li>
       <a class="list-group-item list-group-item-action" id="itemAddNode" href="/app/viewNewNode">Añadir Nuevo Nodo</a>
-      <a class="list-group-item list-group-item-action" id="itemRoutes" href="/app/viewRoutes">Rutas de Recolección </a>
+    </li>
+    <li>
+      <a class="list-group-item list-group-item-action" id="itemRoutes" data-toggle="collapse" href="#subRoutes" >Rutas de Recolección </a>
+      <ul id="subRoutes" class="collapse list-unstyled">
+                <li><a class="nav-link" href="/app/viewRoutes">Ver <span class="sr-only">(current)</span></a></li>
+                <li><a class="nav-link" href="/app/configRoutes">Configurar <span class="sr-only">(current)</span></a></li>
+      </ul>
+    </li>
+    <li>
       <a class="list-group-item list-group-item-action" id="itemClients" href="/app/viewClients">Clientes </a>
+    </li>
+    <li>
       <a class="list-group-item list-group-item-action" id="itemWorkers" href="/app/viewWorkers">Trabajadores </a>
-      {{/equal}}
-    </div>
+    </li>
+    {{/equal}}
+  </ul>
 </nav>
 
 <button type="button" id="btnSidebar" class="navbar-btn">
-        <span></span>
-        <span></span>
-        <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
 </button>
 <script defer src="/static/javascripts/app/sidebar.js"></script>

@@ -1,0 +1,96 @@
+<div id="content">
+    <div class="container py-5">
+        <div class="row" id="spaceRefresh">
+            <div class="col-12">
+                <h3>
+                    Ver Registro de las Últimas Rutas
+                </h3>
+                <p>
+                </p>
+            </div>
+            <div class="col-lg-4 offset-lg-4">
+                <div class="form-group">
+                    <button id="btnGetRoutes" class="btn btn-success btn-block">Obtener</button>
+                </div>
+            </div>
+            <div class="col-12">
+                <div id="spaceEntry"></div>
+            </div>
+        </div>
+        <div class="row" id="spaceUpdate">
+            <div class="col-12">
+                <h3>
+                    Editar Día de Calculo
+                </h3>
+                <p>
+                    En esta zona podras editar el dia en que se calculan las rutas y la cantidad de vehiculos que se
+                    usan.
+                </p>
+            </div>
+            <div class="col-md-2 col-lg-3">
+                Dia de la Semana
+                <div class="form-group">
+                    <select id="dayName" class="form-control" required="true">
+                        <option value="" disabled selected hidden>Dia de la Semana</option>
+                        <option value="1">Lunes</option>
+                        <option value="2">Martes</option>
+                        <option value="3">Miercoles</option>
+                        <option value="4">Jueves</option>
+                        <option value="5">Viernes</option>
+                        <option value="6">Sabado</option>
+                        <option value="7">Domingo</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2 col-lg-3">
+                Localidad
+                <div class="form-group">
+                    <select id="zone" class="form-control" required="true">
+                        <option value="" disabled selected hidden>Localidad</option>
+                        <option value="1">Usaquen</option>
+                        <option value="2">Chapinero</option>
+                        <option value="3">Santa Fe</option>
+                        <option value="4">San Cristobal</option>
+                        <option value="5">Usme</option>
+                        <option value="6">Tunjuelito</option>
+                        <option value="7">Bosa</option>
+                        <option value="8">Kennedy</option>
+                        <option value="9">Fontibón</option>
+                        <option value="10">Engativa</option>
+                        <option value="11">Suba</option>
+                        <option value="12">Barrios Unidos</option>
+                        <option value="13">Teusaquillo</option>
+                        <option value="14">Los Martires</option>
+                        <option value="15">Antonio Nariño</option>
+                        <option value="16">Puente Aranda</option>
+                        <option value="17">La Candelaria</option>
+                        <option value="18">Rafael Uribe Uribe</option>
+                        <option value="19">Ciudad Bolivar</option>
+                        <option value="20">Sumapaz</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2 col-lg-3">
+                Hora del dia Formato 24 Horas
+                <div class="form-group">
+                    <input type="number" step="1" min="0" max="23" id="hour" class="form-control" placeholder="12"
+                        autocomplete="off" required="true">
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                Cantidad de Vehiculos
+                <div class="form-group">
+                    <input type="number" step="1" min="1" max="3" id="cars" class="form-control" placeholder="1"
+                        autocomplete="off" required="true">
+                </div>
+            </div>
+            <div class="col-lg-4 offset-lg-4">
+                <div class="form-group">
+                    <button id="btnUpdateRoute" class="btn btn-success btn-block">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{>scripts}}
+<script defer src="/static/javascripts/app/admin/configRoutes.js"></script>

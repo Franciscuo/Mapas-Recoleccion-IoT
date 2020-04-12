@@ -56,16 +56,21 @@ router.get('/', Session.isAuthenticated, (req, res) => {
 router.get('/viewNewNode', Session.isAuthenticated, (req, res) => {
         //const customersDB = await Customer.find();
         res.render('application/admin/viewAddNode.hbs'); //,{customersDB}
-    })
-    //------- Vista de Rotes
+})
+//------- Vista de Rotes
 router.get('/viewRoutes', Session.isAuthenticated, (req, res) => {
     res.render('application/admin/viewRoutes.hbs')
 });
+
+router.get('/configRoutes',Session.isAuthenticated,(req,res)=>{
+    res.render('application/admin/configRoutes.hbs')
+})
+
 // ---- Vista Clients
 router.get('/viewClients', Session.isAuthenticated, (req, res) => {
         //const customersDB = await Customer.find();
         res.render('application/admin/viewClients.hbs'); //,{customersDB}
-    })
+})
     // ---- Vista Workers
 router.get('/viewWorkers', Session.isAuthenticated, (req, res) => {
     //const customersDB = await Customer.find();
