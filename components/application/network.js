@@ -83,17 +83,8 @@ router.get('/viewWorkers', Session.isAuthenticated, (req, res) => {
 router.get('/routes', Session.isAuthenticated, (req, res) => {
     res.render('admin/routes.hbs')
 });
-//
-router.get('/routesMap', (req, res) => {
-        controller.getRoutes(req.query)
-            .then((info) => {
-                response.success(req, res, info, 200)
-            })
-            .catch((e) => {
-                response.error(req, res, 'Información Invalida', 300, e)
-            })
-    })
-    //----- Añadir rutas ------------------Session.isAuthenticated,
+
+//----- Añadir rutas ------------------Session.isAuthenticated,
 router.post('/routesMap', (req, res) => {
     const zone = 16;
     const nodes = ["5e8e9076a7bee74bf0e1e7e3", "5e8eaac857065825342402f3"];

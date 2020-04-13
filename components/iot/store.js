@@ -1,61 +1,41 @@
-const Model = require('./model');
-const bcrypt = require('bcryptjs'); //Hash de contraseña
+const Routes = require('./modelRoutes');
 
-const encryptPassword = async (password) => { //se define un metodo para el esquema que permite encriptar la contraseña
-    const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(password, salt);
-    return hash;
-};
-
-const equalPassword = async (password) => { //Se define un metodo para el esquema que permite comparar contraseña
-    return await bcrypt.compare(password, this.password);
+const listRoutes = query => {
+    const routes = Routes.find(query)
+    return routes;
 }
 
-const addUser = async(newUser)=>{
-    newUser.password = await encryptPassword(newUser.password);
-    const myUser = new Model(newUser)
-    const addUser = myUser.save() //guarda el modelo y el modelo llama al ORM Y este a la base de datos
-    return addUser
-}
-//Son funciones asincronas porque tienen que esperar que retorne algo la base de datos que funciona con promesas
-const  getUsers= async (filterName)=>{
-    let filter = {}
-    if(filterName!=null){
-        filter = {userName:filterName}//crea el filtr  
-    }
-    //const messages = await Model.find()//Search all message
-    const user = await Model.find(filter)//Search message with user filterUser
-    return user
+const addRoute = async(newRoute) => {
+    const myRoute = new Routes(newRoute)
+    await myRoute.save()
 }
 
-const updateUser = async (id,name)=>{
-    const foundMessage = await Model.findOne({
-        _id:id
-    });//obtiene el documento del mensaje y actualiza el campo message
-    foundUser.message=name
-    const newUser = await foundUser.save()
-    return newUser
-}
-
-const deleteUser = (id)=>{
-    const removeUser = Model.deleteOne({
+const updateNodesOfRoute = async (id,node)=>{
+    const foundRoute = await Routes.findOne({
         _id:id
     });
-    return removeUser
+    foundRoute.nodes.push(node);
+    const newRoute = await foundRoute.save()
+    return newRoute
 }
 
-const isUserFeat = async (filter)=>{
-    const user = await Model.findOne(filter);
-    if(user){
-        return true
-    }
-    return false
+const updateRouteCalculated = async (id,info)=>{
+    const foundRoute = await Routes.findOne({
+        _id:id
+    });
+    foundRoute.nodes=info.nodes
+    foundRoute.distance=info.distance
+    foundRoute.time=info.time
+    foundRoute.status="resolved"
+    foundRoute.date=new Date()
+    await foundRoute.save()
 }
+
 
 module.exports={
-    add: addUser,
-    list: getUsers,
-    update: updateUser,
-    remove: deleteUser,
-    isUserFeat: isUserFeat 
+    listRoutes,
+    addRoute,
+    updateNodesOfRoute,
+    updateRouteCalculated
+
 }

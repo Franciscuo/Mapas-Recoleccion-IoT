@@ -1,13 +1,4 @@
 const Node = require('./modelNode');
-const Routes = require('./modelRoutes');
-
-const isNodeFeat = async(filter) => {
-    const node = await Model.findOne(filter);
-    if (node) {
-        return true
-    }
-    return false
-}
 
 const addNode = async(newNode) => {
     const myNode = new Node(newNode)
@@ -16,7 +7,7 @@ const addNode = async(newNode) => {
 }
 
 const listNode = async(filter) => {
-    const node = await Node.find(filter) //Search message with user filterUser
+    const node = await Node.find(filter) //Search message with user filter
     return node
 }
 
@@ -35,24 +26,17 @@ const deleteNode = (filter) => {
     return removeNode
 }
 
-
-const listRoutes = query => {
-    const routes = Routes.find(query)
-    return routes;
+const isNodeFeat = async(filter) => {
+    const node = await Model.findOne(filter);
+    if (node) {
+        return true
+    }
+    return false
 }
-
-const addRoute = async(newRoute) => {
-    const myRoute = new Routes(newRoute)
-    await myRoute.save()
-}
-
-
 module.exports = {
     addNode,
     listNode,
     updateNode,
     deleteNode,
     isNodeFeat,
-    listRoutes,
-    addRoute,
 }

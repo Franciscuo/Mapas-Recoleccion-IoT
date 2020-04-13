@@ -5,9 +5,11 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "routes": "node ./process/collection"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "debug": "~4.1.1",
     "dotenv": "^8.2.0",
@@ -18,6 +20,7 @@
     "mongodb": "^3.5.5",
     "mongoose": "^5.9.6",
     "morgan": "~1.10.0",
+    "node-cron": "^2.0.3",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "typescript": "^3.8.3",

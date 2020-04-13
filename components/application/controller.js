@@ -1,4 +1,5 @@
 const store = require('./store');
+const storeRoutes = require('../iot/store')
 
 const passRandom = () => {
     let str1 = '';
@@ -28,7 +29,7 @@ const isEUI = ((eui) => {
     })
 })
 
-const deleteNode = (eui) => {
+const deleteNode = ((eui) => {
     return new Promise(async(resolve, reject) => {
         if (!eui) {
             reject('Informacion Incorrecta') // retorna promesa
@@ -45,8 +46,9 @@ const deleteNode = (eui) => {
                 reject(e)
             })
     })
-}
-const addNode = (eui, model) => {
+})
+
+const addNode = ((eui, model) => {
     return new Promise(async(resolve, reject) => {
         if (!eui) {
             reject('Informacion Incorrecta') // retorna promesa
@@ -65,7 +67,8 @@ const addNode = (eui, model) => {
                 reject(e)
             })
     })
-}
+})
+
 const getNodes = ((eui, pass) => {
     return new Promise(async(resolve, reject) => {
         let filter = {}
@@ -89,11 +92,10 @@ const getNodes = ((eui, pass) => {
     })
 })
 
-
-const getRoutes = (query) => {
+const getRoutes = ((query) => {
     return new Promise(async(resolve, reject) => {
         if (!query) query = {}
-        store.listRoutes(query)
+        storeRoutes.listRoutes(query)
             .then((messages) => {
                 resolve(messages)
             })
@@ -101,28 +103,12 @@ const getRoutes = (query) => {
                 reject(e)
             })
     })
-}
+})
 
-const addRoute = (zone, nodes) => {
-    return new Promise(async(resolve, reject) => {
-        const newRoute = {
-            zone,
-            nodes: nodes
-        }
-        store.addRoute(newRoute)
-            .then((newRoute) => {
-                resolve(newRoute)
-            })
-            .catch(e => {
-                reject(e)
-            })
-    })
-}
 module.exports = {
     addNode,
     getNodes,
     deleteNode,
     isEUI,
     getRoutes,
-    addRoute
 }
