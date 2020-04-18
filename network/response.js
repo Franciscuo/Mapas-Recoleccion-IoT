@@ -1,9 +1,6 @@
 //exporta esta funcion para ser usada en otro archivo
 const success = (req, res, messages, status) => { 
     console.log(status)
-    res.header({
-        "custom-header":"Nuestro Valor"
-    })//Responde cabeceras
     res.status(status || 200).send({//si esta indefined status, responde 200
         'error':'',
         'message':messages
