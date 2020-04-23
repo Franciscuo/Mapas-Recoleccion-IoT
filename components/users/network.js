@@ -4,7 +4,15 @@ const controller = require('./controller');
 const response = require('../../network/response') //Trae network dos carpetas arriba
 const passport = require('passport');
 const Session = require('../../network/auth');
-
+// validación de datos de usuarios
+const {
+    userIdSchema,
+    createUserSchema,
+    getUserSchema
+  } = require('../../utils/schemas/user');
+  
+const validationHandler = require('../../utils/middleware/validationHandler');
+  
 //----- Comprueba Paswords----
 router.post('/login', passport.authenticate('localSignIn', {
     successReturnToOrRedirect: '/app',
@@ -12,7 +20,7 @@ router.post('/login', passport.authenticate('localSignIn', {
     passReqToCallback: true,
 }));
 
-//actualiza usuario
+//actualiza usuario a nodo
 router.post('/syncNode', Session.isAuthenticated, (req, res) => {
         const { eui, pass, address, zone, lat, lon} = req.body; //Destructuring
         user_id = req.user._id;
@@ -51,7 +59,7 @@ router.post('/email', (req, res) => {
             })
     })
     //------ Nuevo usuario
-router.post('/', (req, res) => {
+router.post('/', validationHandler(createUserSchema), (req, res) => {
         const { userName, name, lastName, email, password } = req.body; //Destructuring 
         controller.addUser(userName, name, lastName, email, password)
             .then((info) => {
@@ -66,9 +74,10 @@ router.post('/', (req, res) => {
             })
     })
     //-----Obtener los usuarios
-router.get('/', (req, res) => {
+router.get('/', validationHandler(getUserSchema, 'query'), (req, res) => {
         //Aplica Query
-        const filterUser = req.query.user || null;
+        const filterUser = req.query || null;
+        console.log(filterUser)
         controller.getUser(filterUser)
             .then((userList) => {
                 response.success(req, res, userList, 200);
@@ -79,7 +88,7 @@ router.get('/', (req, res) => {
     }) //Responde a Peticiones Get
 
 //-----Eliminar los usuarios
-router.delete('/:id', (req, res) => {
+router.delete('/:userId', validationHandler({ userId: userIdSchema }, 'params'), (req, res) => {
         controller.deleteUser(req.params.id)
             .then(() => {
                 response.success(req, res, `Mensaje ${req.params.id} eliminado`, 200)
@@ -90,7 +99,7 @@ router.delete('/:id', (req, res) => {
 
     })
     //-----Actualizar los usuarios
-router.patch('/', (req, res) => {
+router.patch('/',validationHandler(getUserSchema), (req, res) => {
 
 })
 

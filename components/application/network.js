@@ -5,6 +5,8 @@ const router = express.Router(); // Igual a la función Roputer para separar por
 const controller = require('./controller');
 const response = require('../../network/response') //Trae network dos carpetas arriba
 
+
+
 //----- Add Node --------------------Session.isAuthenticated,
 router.post('/node', (req, res) => {
         const { eui, model } = req.body; //Destructuring 

@@ -41,10 +41,6 @@ const isEmail = (email)=>{
 
 const addUser = (userName,name, lastName,email,password)=>{
     return new Promise(async(resolve, reject)=>{
-        if (!userName||!name||!lastName||!email||!password){
-            reject('Informacion Incorrecta') // retorna promesa
-            return false
-        }
         const newUser = {
             'userName': userName,
             'name': name,
@@ -90,10 +86,6 @@ const updateUser = ((id,name)=>{
 
 const deleteUser = ((id)=>{
     return new Promise((resolve,reject)=>{
-        if(!id){
-            reject('Invalid data')
-            return false;
-        }
         store.remove(id)
             .then(()=>{
                 resolve()
