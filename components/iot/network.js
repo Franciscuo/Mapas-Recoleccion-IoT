@@ -3,6 +3,11 @@ const router = express.Router();// Igual a la función Roputer para separar por 
 const controller = require('./controller');
 const response = require('../../network/response')//Trae network dos carpetas arriba
 
+
+router.get('/viewRoute', Session.isAuthenticated, (req, res) => {
+    res.render('application/admin/viewRoute.hbs');
+})
+
 //--- Guarda Datos de Nodos
 router.post('/',(req, res) => {
     if(req.body.data !=undefined){

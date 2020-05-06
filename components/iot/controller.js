@@ -150,7 +150,7 @@ const addNodeToRoute = (EUI,data)=>{
                     })
                     .catch(e=>{
                         reject(e)
-                    })    
+                    })
             }
             resolve("Ok 2")
         }
@@ -159,7 +159,9 @@ const addNodeToRoute = (EUI,data)=>{
 
 const getRoutes = (query)=>{
     return new Promise(async(resolve, reject)=>{
-        if (!query) query = {}
+        if (!query) {
+            query = {}
+        }
         storeRoutes.listRoutes(query)
             .then((messages) => {
                 resolve(messages)
