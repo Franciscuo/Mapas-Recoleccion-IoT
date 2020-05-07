@@ -4,7 +4,7 @@ const controller = require('./controller');
 const response = require('../../network/response')//Trae network dos carpetas arriba
 
 
-router.get('/viewRoute', Session.isAuthenticated, (req, res) => {
+router.get('/viewRoute', (req, res) => {
     res.render('application/admin/viewRoute.hbs');
 })
 
