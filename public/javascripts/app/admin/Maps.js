@@ -76,7 +76,7 @@ window.onload = () => {
                         respuestaNodos.message.map(node => {
                             if (ruta == node._id) {
                                 data.push([node.coords[0].longitude, node.coords[0].latitude])
-                                graph.addMarker(`${node._id}`, [node.coords[0].latitude, node.coords[0].longitude], "")
+                                graph.addMarker(`${node._id}`, [node.coords[0].latitude, node.coords[0].longitude], `${node.address}`)
                             }
                         })
                     )
