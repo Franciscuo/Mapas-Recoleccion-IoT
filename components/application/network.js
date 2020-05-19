@@ -56,15 +56,23 @@ router.get('/', Session.isAuthenticated, (req, res) => {
 // --- Redireciones Admin
 //----- New Node-------------
 router.get('/viewNewNode', Session.isAuthenticated, (req, res) => {
-        //const customersDB = await Customer.find();
-        res.render('application/admin/viewAddNode.hbs'); //,{customersDB}
+    //const customersDB = await Customer.find();
+    res.render('application/admin/viewAddNode.hbs'); //,{customersDB}
 })
+
+// ----  View Zones -----------------
+router.get('/viewZones/:zone', Session.isAuthenticated, (req, res) => {
+    zone = req.params.zone;
+    name = controller.nameZone(zone);
+    res.render('application/admin/zone.hbs', { zone, name })
+});
+
 //------- Vista de Rotes
 router.get('/viewRoutes', Session.isAuthenticated, (req, res) => {
     res.render('application/admin/viewRoutes.hbs')
 });
 
-router.get('/configRoutes',Session.isAuthenticated,(req,res)=>{
+router.get('/configRoutes', Session.isAuthenticated, (req, res) => {
     res.render('application/admin/configRoutes.hbs')
 })
 
@@ -72,7 +80,7 @@ router.get('/configRoutes',Session.isAuthenticated,(req,res)=>{
 router.get('/viewClients', Session.isAuthenticated, (req, res) => {
         //const customersDB = await Customer.find();
         res.render('application/admin/viewClients.hbs'); //,{customersDB}
-})
+    })
     // ---- Vista Workers
 router.get('/viewWorkers', Session.isAuthenticated, (req, res) => {
     //const customersDB = await Customer.find();

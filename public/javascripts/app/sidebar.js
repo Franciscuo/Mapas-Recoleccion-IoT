@@ -6,20 +6,23 @@ btnSidebar.addEventListener('click', (event) => {
     $(this).toggleClass('active');
 })
 
-switch (window.location.href.split('app/')[1]) {
-    case "viewNewNode":
+switch (window.location.href.split('app')[1]) {
+    case "/viewNewNode":
         document.getElementById('itemAddNode').classList.add('active');
         break;
-    case "viewRoutes":
+    case "":
+        document.getElementById('itemMain').classList.add('active');
+        break;
+    case "/viewRoutes":
         document.getElementById('itemRoutes').classList.add('active');
         break;
-    case "viewClients":
+    case "/viewClients":
         document.getElementById('itemClients').classList.add('active');
         break;
-    case "viewWorkers":
+    case "/viewWorkers":
         document.getElementById('itemWorkers').classList.add('active');
         break;
     default:
-        document.getElementById('itemMain').classList.add('active');
+        document.getElementById('itemRoutes').classList.add('active');
         break;
 }

@@ -105,10 +105,20 @@ const getRoutes = ((query) => {
     })
 })
 
+const nameZone = (zone) => {
+    names = ['Usaquen', 'Chapinero', 'Santa Fe', 'San Cristobal', 'Usme', 'Tunjuelito', 'Bosa',
+        'Kennedy', 'Fontibon', 'Engativa', 'Suba', 'Barrios Unidos', 'Teusaquillo',
+        'Los Martires', 'Antonio Nariño', 'Puente Aranda', 'La Candelaria', 'Rafael Uribe',
+        'Ciudad Bolivar', 'Sumapaz'
+    ]
+    return names[zone - 1];
+}
+
 module.exports = {
     addNode,
     getNodes,
     deleteNode,
     isEUI,
     getRoutes,
+    nameZone
 }

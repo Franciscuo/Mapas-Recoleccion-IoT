@@ -1,0 +1,31 @@
+<div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center">
+                <h1>Rutas de recolección</h1>
+                <h3>Localidad : {{name}}</h3>
+                </div>
+                <p>Una vez se han llenado los contenedores necesarios(3) para completar la capacidad de recolecion de los vehiculos, se genera una ruta de recoleccion</p>
+                
+                <div class="col-8" id="map-template" ></div>
+                <button id="buttonAddMarker">Add</button>
+                <button id="buttonRemoveMarker">Del</button>
+                <button id="buttonUpdateMap">Update</button>
+                <button id="buttonRequest">Update</button>
+
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 offset-2">
+            </div>
+        </div>
+</div>
+<script>
+
+    let zone = 1;
+    
+</script>
+<script defer src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+<script defer type="module" src="/static/javascripts/app/admin/Maps.js"></script>
+ 
