@@ -10,9 +10,9 @@ const {
     createUserSchema,
     getUserSchema
   } = require('../../utils/schemas/user');
-  
+
 const validationHandler = require('../../utils/middleware/validationHandler');
-  
+
 //----- Comprueba Paswords----
 router.post('/login', passport.authenticate('localSignIn', {
     successReturnToOrRedirect: '/app',
@@ -23,7 +23,7 @@ router.post('/login', passport.authenticate('localSignIn', {
 //actualiza usuario a nodo
 router.post('/syncNode', Session.isAuthenticated, (req, res) => {
         const { eui, pass, address, zone, lat, lon} = req.body; //Destructuring
-        user_id = req.user._id;
+        const user_id = req.user._id;
         controller.syncNode(user_id, eui, pass, address, zone, lat, lon)
             .then((info) => {
                 response.success(req, res, info, 200)
@@ -100,7 +100,14 @@ router.delete('/:userId', validationHandler({ userId: userIdSchema }, 'params'),
     })
     //-----Actualizar los usuarios
 router.patch('/',validationHandler(getUserSchema), (req, res) => {
-
+    const { id, name} = req.body; //Destructuring
+    controller.updateUser(id,name)
+        .then((info) => {
+            response.success(req, res, info, 201)
+        })
+        .catch((e) => {
+            response.error(req, res, 'Información Invalida', 300, e)
+        })
 })
 
 

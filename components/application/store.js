@@ -27,7 +27,7 @@ const deleteNode = (filter) => {
 }
 
 const isNodeFeat = async(filter) => {
-    const node = await Model.findOne(filter);
+    const node = await Node.findOne(filter);
     if (node) {
         return true
     }

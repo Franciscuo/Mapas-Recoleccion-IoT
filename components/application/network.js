@@ -1,5 +1,4 @@
 const express = require('express');
-const passport = require('passport')
 const Session = require('../../network/auth');
 const router = express.Router(); // Igual a la función Roputer para separar por cabeceras metodos de petición
 const controller = require('./controller');
@@ -62,12 +61,12 @@ router.get('/viewNewNode', Session.isAuthenticated, (req, res) => {
 
 // ----  View Zones -----------------
 router.get('/viewZones/:zone', Session.isAuthenticated, (req, res) => {
-    zone = req.params.zone;
-    name = controller.nameZone(zone);
+    const zone = req.params.zone;
+    const name = controller.nameZone(zone);
     res.render('application/admin/zone.hbs', { zone, name })
 });
 
-//------- Vista de Rotes
+//------- Vista de Rutas
 router.get('/viewRoutes', Session.isAuthenticated, (req, res) => {
     res.render('application/admin/viewRoutes.hbs')
 });
@@ -86,8 +85,6 @@ router.get('/viewWorkers', Session.isAuthenticated, (req, res) => {
     //const customersDB = await Customer.find();
     res.render('application/admin/viewWorkers.hbs'); //,{customersDB}
 })
-
-
 
 //----- Obtener rutas ------------------Session.isAuthenticated,
 router.get('/routes', Session.isAuthenticated, (req, res) => {

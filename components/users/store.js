@@ -1,5 +1,5 @@
 const Model = require('./model');
-const Nodes = require('../application/modelNode')
+
 const addUser = async(newUser)=>{
     const myUser = new Model(newUser)
     myUser.password = await myUser.encryptPassword(newUser.password);
@@ -44,5 +44,5 @@ module.exports={
     list: getUsers,
     update: updateUser,
     remove: deleteUser,
-    isUserFeat: isUserFeat 
+    isUserFeat: isUserFeat
 }

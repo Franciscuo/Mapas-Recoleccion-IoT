@@ -130,7 +130,7 @@ const syncNode = (user_id, eui, pass, address, zone, lat, lon)=>{
 module.exports={
     isUserName,
     isEmail,
-    addUser, 
+    addUser,
     getUser,
     updateUser,
     deleteUser,

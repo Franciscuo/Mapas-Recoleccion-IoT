@@ -21,6 +21,7 @@ router.post('/',(req, res) => {
             })
     }
 })
+
 // --- Actualiza los parametros del algoritmo--
 router.patch('/routes', (req, res) => {
     const {zone} = req.body;

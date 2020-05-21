@@ -2,15 +2,6 @@ const storeRoutes = require('./store');
 const storeNodes = require('../application/store')
 const axios = require('axios')
 
-const hex_to_ascii=(str1)=>{
-	var hex  = str1.toString();
-	var str = '';
-	for (var n = 0; n < hex.length; n += 2) {
-		str += String.fromCharCode(parseInt(hex.substr(n, 2), 16));
-	}
-	return str;
-}
-
 const objectServices=(id,longitude,latitude)=>{
     let out = {
                 "id": `${id}`,
@@ -98,16 +89,16 @@ const calculateRoute=(nodes)=>{
     })
 }
 
-const addNodeToRoute = (EUI,data)=>{
+const addNodeToRoute = (EUI)=>{
     return new Promise(async(resolve, reject)=>{
-        let node 
+        let node
         try {
             node = await storeNodes.listNode({eui:EUI})
         } catch (error) {
             reject(error)
         }
         if(node.length===0){
-            reject('Node is not registered') 
+            reject('Node is not registered')
             return false
         }
         let route;

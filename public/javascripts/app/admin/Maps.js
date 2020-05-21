@@ -114,7 +114,6 @@ window.onload = () => {
 
                                     }
                                 })
-                                // console.log(freeBus)
                         },
                         error: function(e) {
                             alert(`Error ${e}`);
@@ -134,7 +133,6 @@ window.onload = () => {
 
     });
 };
-
 
 const buttonUpdateMap = document.getElementById('buttonUpdateMap')
 buttonUpdateMap.addEventListener("click", () => {
