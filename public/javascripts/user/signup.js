@@ -20,29 +20,28 @@ const feedbackClient = (field,flag)=>{
     } else {
         field.className = 'form-control is-invalid';
     }
-} 
-
-const isLoad = (field) => {
-    return ((field.value != '') && (field.value != undefined))
 }
 
-const isComplete = (field) => {
-    return (field.value.length < 8)
+const isName = (field) => {
+    return ((/^([A-Z]{1,1}[a-záéíóú]{2,12}?){3,16}$/).test(field.value))
+}
+
+const isUserName = (field) => {
+    return ((/^[a-z]+[^A-Z\s%$@\^]{5,16}$/).test(field.value))
 }
 
 const isEmail = (field) => {
-    return (field.value.includes('@') && field.value.includes('.'))
-
+    return ((/^[\w\._]{3,25}@[\w\.\-]{3,7}\.\w{2,5}$/).test(field.value))
 }
 
 const isPass = (field) => {
-    return (field.value.length > 8)
+    return ((/^(?=\w*\d+)(?=\w*[A-Z]+)(?=\w*[a-z]+)\S{8,16}$/).test(field.value))
 }
 
 userField.addEventListener("blur",async (event)=>{
-    if(isLoad(userField)){
+    if(isUserName(userField)){
         await fetch('/user/username', {
-                method: 'POST',                
+                method: 'POST',
                 headers:{
                     'Content-Type': 'application/json'
                     },
@@ -66,19 +65,19 @@ userField.addEventListener("blur",async (event)=>{
 })
 
 nameField.addEventListener("blur", async (event) => {
-    name = isLoad(nameField);
+    name = isName(nameField);
     feedbackClient(nameField,name)
 })
 
 lastNameField.addEventListener("blur", (event) => {
-    lastName = isLoad(lastNameField);
+    lastName = isName(lastNameField);
     feedbackClient(lastNameField,lastName)
 });
 
 emailField.addEventListener("blur",async (event)=>{
     if(isEmail(emailField)){
         await fetch('/user/email', {
-                method: 'POST',                
+                method: 'POST',
                 headers:{
                     'Content-Type': 'application/json'
                     },
@@ -107,11 +106,6 @@ passwordField.addEventListener("blur", (event)=>{
 })
 
 confirmPasswordField.addEventListener("keyup",(event) => {
-    confirmPassword = (passwordField.value == confirmPasswordField.value);
-    feedbackClient(confirmPasswordField,confirmPassword)
-})
-
-confirmPasswordField.addEventListener("blur",(event) => {
     confirmPassword = (passwordField.value == confirmPasswordField.value);
     feedbackClient(confirmPasswordField,confirmPassword)
 })

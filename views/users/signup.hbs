@@ -15,17 +15,23 @@
                             <div class="form-group">
                                 <input type="name" name="user" id="user" class="form-control" placeholder="Usuario"
                                     autocomplete="off">
-                                    <div class="invalid-feedback" id="feedback-email">
-                                    El Usuario es invalido
-                                    </div>
+                                <div class="invalid-feedback" id="feedback-email">
+                                    Usuario debe ir en minuscula puede contener numeros
+                                </div>
                             </div>
                             <div class="form-group">
                                 <input type="name" name="name" id="name" class="form-control" placeholder="Nombre"
                                     autocomplete="off">
+                                <div class="invalid-feedback" id="feedback-email">
+                                    Nombre debe empezar en mayuscula seguido de minuscula
+                                </div>
                             </div>
                             <div class="form-group">
                                 <input type="lastName" name="lastName" id="lastName" class="form-control"
                                     placeholder="Apellido" autocomplete="off">
+                                <div class="invalid-feedback" id="feedback-email">
+                                    Apellido debe empezar en mayuscula seguido de minuscula
+                                </div>
                             </div>
                         </div>
 
@@ -41,13 +47,13 @@
                                 <input type="password" name="password" id="password" class="form-control"
                                     placeholder="Contraseña" autocomplete="off">
                                 <div class="invalid-feedback">
-                                    La contarseña debe tener al menos 8 caracteres
+                                    La contarseña debe tener al menos 8 caracteres numeros, mayusculas y minusculas
                                 </div>
                             </div>
                             <div class="form-group">
                                 <input type="password" name="confirmPassword" id="confirmPassword" class="form-control"
                                     placeholder="Confirmar contraseña" autocomplete="off">
-                                    <div class="invalid-feedback">
+                                <div class="invalid-feedback">
                                     La contarseñas no coinciden
                                 </div>
                             </div>
@@ -55,8 +61,8 @@
 
                     </div>
                     <div class="form-group">
-                        <button  type="submit" id="btnSend" class="btn btn-primary btn-block">
-                        Regristrame                                                    
+                        <button type="submit" id="btnSend" class="btn btn-primary btn-block">
+                            Regristrame
                         </button>
                     </div>
                     <div class="text-center">
