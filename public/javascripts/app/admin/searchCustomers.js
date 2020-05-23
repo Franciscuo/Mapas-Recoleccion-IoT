@@ -5,7 +5,7 @@ const advices = document.getElementsByClassName('list-group-item')
 const names = [];
 
 window.onload = async() => {
-    await fetch('/user/?role=client', {
+    await fetch('/user', {
             method: 'GET'
         })
         .then(response => response.json()).then((data) => {
