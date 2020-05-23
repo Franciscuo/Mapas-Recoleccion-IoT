@@ -10,8 +10,8 @@ function validationHandler(schema, check = 'body') { //get body of request and v
     return function(req, res, next) {
         const error = validate(req[check], schema); // valida si los datos que llegan estan
 
-        // error ? next(res.status(402).send({'error':'Datos Invalidos'})) : next();
-        next();
+        error ? next(res.status(402).send({ 'error': 'Datos Invalidos' })) : next();
+
     };
 }
 
