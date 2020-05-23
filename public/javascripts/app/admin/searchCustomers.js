@@ -163,6 +163,7 @@ const updateUser = async() => {
         userName.value = 'Usuario';
         lastName.value = 'Apellido';
         Text.innerHTML = `No se han encontrado datos que concuerden, ingrese otro nombre de cliente`;
+        graph.removeAllMarker();
         alert('Usuario no encontrado');
         return false;
     }
