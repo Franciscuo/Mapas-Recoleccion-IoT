@@ -1,6 +1,32 @@
-<!-- Search form -->
-<form class="form-inline d-flex justify-content-center md-form form-sm">
-  <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
-    aria-label="Search">
-  <i class="fas fa-search" aria-hidden="true"></i>
-</form>
+<style>
+  .autocomplete-items {
+    position: absolute;
+    z-index: 99;
+    top: 100%;
+    left: 0;
+    right: 0;
+  }
+</style>
+
+<div class="container">
+
+  <div class="text-center">
+    <h3>Buscador de clientes</h3>
+  </div>
+
+  <div class="col-10 offset-1">
+
+    <div class='input-group mb-3'>
+      <input id="Name" class='form-control autocomplete' placeholder='Nombre de cliente'>
+      <div class='input-group-append'>
+        <button class='btn btn-outline-secondary' id='button-addon2' type='button'>Buscar</button>
+      </div>
+      <div id="autoCompleteList" class="autocomplete-items list-group text-left">
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<script defer type="module" src="/static/javascripts/app/admin/searchCustomers.js"></script>

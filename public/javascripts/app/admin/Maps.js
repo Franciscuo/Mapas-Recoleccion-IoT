@@ -6,8 +6,8 @@ const iconMarker = L.icon({
 });
 const lineStyle = {
     "color": "#ff0000",
-    "weight": 6,
-    "opacity": 1
+    "weight": 4,
+    "opacity": 0.8
 };
 
 const mapURL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
@@ -132,9 +132,8 @@ window.onload = () => {
         }
 
     });
-};
 
-const buttonUpdateMap = document.getElementById('buttonUpdateMap')
-buttonUpdateMap.addEventListener("click", () => {
-    graph.addLine()
-})
+    setTimeout(() => {
+        graph.addLine()
+    }, 3000);
+};
