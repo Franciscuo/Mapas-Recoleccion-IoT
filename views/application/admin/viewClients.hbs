@@ -6,6 +6,10 @@
     left: 0;
     right: 0;
   }
+
+  .map-autocomplete{
+    z-index: 0;
+  }
 </style>
 
 <div class="container">
@@ -13,20 +17,65 @@
   <div class="text-center">
     <h3>Buscador de clientes</h3>
   </div>
+ 
 
   <div class="col-10 offset-1">
-
+    <p class="pt-2">Ingrese el nombre del cliente registrado para obtener su informacion</p>
     <div class='input-group mb-3'>
       <input id="Name" class='form-control autocomplete' placeholder='Nombre de cliente'>
       <div class='input-group-append'>
-        <button class='btn btn-outline-secondary' id='button-addon2' type='button'>Buscar</button>
+        <button class='btn btn-outline-secondary' id='button' type='button'>Buscar</button>
       </div>
-      <div id="autoCompleteList" class="autocomplete-items list-group text-left">
+      <div id="autoCompleteList" name="autoCompleteList" class="autocomplete-items list-group text-left">
       </div>
 
     </div>
+    
+    <p id='Text'>Ingresa el nombre de cliente para ver sus datos y la posicion de sus nodos en el mapa 😁</p>
+    <div class="col-12 map-autocomplete"  id="map-template"></div>
+
+    <form class="row">
+
+      <div class="col-6">
+
+        <div class="form-group">
+          <label class="col-form-label">Rol</label>
+          <input class="form-control" id="role" value="Rol" disabled>
+        </div>
+
+        <div class="form-group">
+          <label class="col-form-label">Usuario</label>
+          <input class="form-control" id="userName" value="Usuario" disabled>
+        </div>
+
+        <div class="form-group">
+          <label class="col-form-label">Nombre</label>
+          <input class="form-control" id="name" value="Nombre" disabled>
+        </div>
+
+      </div>
+      <div class="col-6">
+
+        <div class="form-group">
+          <label class="col-form-label">Apellido</label>
+          <input class="form-control" id="lastName" value="Apellido" disabled>
+        </div>
+
+        <div class="form-group">
+          <label class="col-form-label">Email</label>
+          <input class="form-control" id="email" value="Correo electronico" disabled>
+        </div>
+
+        <div class="form-group">
+          <label class="col-form-label">Cantidad de Nodos</label>
+          <input class="form-control" id="nodes" value="#" disabled>
+        </div>
+
+      </div>
+    </form>
 
   </div>
 
 </div>
+<script defer src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
 <script defer type="module" src="/static/javascripts/app/admin/searchCustomers.js"></script>
