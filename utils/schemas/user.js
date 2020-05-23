@@ -6,6 +6,8 @@ const userNameSchema = joi.string().max(20);
 const userLastNameSchema = joi.string().max(20);
 const userEmailSchema = joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
 const userPassSchema = joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
+const userRoleSchema = joi.string().valid('client', 'admin','worker');
+
 
 const createUserSchema = {
   userName: userSchema.required(),
@@ -17,10 +19,8 @@ const createUserSchema = {
 
 const getUserSchema = {
   userName: userSchema,
-  name: userNameSchema,
-  lastName: userLastNameSchema,
   email: userEmailSchema,
-  password: userPassSchema
+  role: userRoleSchema
 };
 
 module.exports = {

@@ -77,7 +77,6 @@ router.post('/', validationHandler(createUserSchema), (req, res) => {
 router.get('/', validationHandler(getUserSchema, 'query'), (req, res) => {
         //Aplica Query
         const filterUser = req.query || null;
-        console.log(filterUser)
         controller.getUser(filterUser)
             .then((userList) => {
                 response.success(req, res, userList, 200);
