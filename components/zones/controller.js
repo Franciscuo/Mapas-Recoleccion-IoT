@@ -5,7 +5,7 @@ const getZones = (query) => {
         if (!query) {
             query = {}
         }
-        storeZone.listZones(query)
+        await storeZone.listZones(query)
             .then((messages) => {
                 resolve(messages)
             })
@@ -24,8 +24,8 @@ const addZone = (number, name, start, end, capacity) => {
             start,
             end
         }
-        store.add(newZone)
-            .then((NewZone) => {
+        await storeZone.add(newZone)
+            .then(() => {
                 resolve("Success")
             })
             .catch(e => {

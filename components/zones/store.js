@@ -2,7 +2,7 @@ const Zones = require('./modelZone');
 
 
 const addZone = async(newUser) => {
-    const myZone = new Zone(newUser)
+    const myZone = new Zones(newUser)
     return myZone
 }
 
