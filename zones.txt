@@ -1,0 +1,24 @@
+Suba    => Salida [4.78703, -74.10246] - Llegada[4.68748, -74.05601] *
+Usaquen => Salida [4.74107, -74.03442] - Llegada[4.68748, -74.05601] *
+Chapine => Salida [4.63814, -74.05596] - Llegada[4.68748, -74.05601] *
+Barrios => Salida [4.66826, -74.08570] - Llegada[4.68748, -74.05601] *
+
+LosMart => Salida [4.61278, -74.08943] - Llegada[4.59202, -74.08782] *
+SantaFe => Salida [4.60909, -74.07005] - Llegada[4.59202, -74.08782] *
+SanCris => Salida [4.55153, -74.08903] - Llegada[4.59202, -74.08782] *
+Antonio => Salida [4.59196, -74.12315] - Llegada[4.59202, -74.08782] *
+Cande   => Salida [4.60909, -74.07005] - Llegada[4.59202, -74.08782] *
+
+Usme    => Salida [4.50218, -74.10163] - Llegada[4.54493, -74.12030] *
+Tunjuel => Salida [4.53416, -74.12264] - Llegada[4.54493, -74.12030] *
+Rafa    => Salida [4.59071, -74.12641] - Llegada[4.54493, -74.12030] *
+CiudadB => Salida [4.59257, -74.17644] - Llegada[4.54493, -74.12030] *
+
+Bosa    => Salida [4.62406, -74.19739] - Llegada[4.60089, -74.15348] *
+Kennedy => Salida [4.63136, -74.15437] - Llegada[4.60089, -74.15348] *
+
+Fontibó => Salida [4.68022, -74.16590] - Llegada[4.68900, -74.11859] *
+Engativ => Salida [4.72880, -74.12055] - Llegada[4.68900, -74.11859] *
+
+Teusaqu => Salida [4.64918, -74.06619] - Llegada[4.62635, -74.09108] *
+Puente  => Salida [4.59893, -74.12950] - Llegada[4.62635, -74.09108] *
