@@ -5,7 +5,7 @@ const userSchema = joi.string().max(20);
 const userNameSchema = joi.string().max(20);
 const userLastNameSchema = joi.string().max(20);
 const userEmailSchema = joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
-const userPassSchema = joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
+const userPassSchema = joi.string()
 const userRoleSchema = joi.string().valid('client', 'admin', 'worker');
 
 
