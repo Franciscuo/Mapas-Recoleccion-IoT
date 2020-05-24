@@ -7,10 +7,13 @@ const nodeSchema = new Schema({
     model: { type: String, required: true },
     pass: { type: String, required: true },
     address: { type: String },
-    zone: { type: Number },
     coords: [{
         latitude: { type: Number },
         longitude: { type: Number }
+    }],
+    zone: [{
+        type: Schema.ObjectId,
+        ref: 'Zone',
     }]
 });
 

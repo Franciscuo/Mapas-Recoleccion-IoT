@@ -10,29 +10,30 @@ const addRoute = async(newRoute) => {
     await myRoute.save()
 }
 
-const updateNodesOfRoute = async (id,node)=>{
+const updateNodesOfRoute = async(id, node) => { // Cuando se llena un nodo sin sobrepasar la campacidad del camión
     const foundRoute = await Routes.findOne({
-        _id:id
+        _id: id
     });
     foundRoute.nodes.push(node);
     const newRoute = await foundRoute.save()
     return newRoute
 }
 
-const updateRouteCalculated = async (id,info)=>{
+const updateRouteCalculated = async(id, info) => { // Cuando se llena un nodo se sobrepasa la campacidad del camión
     const foundRoute = await Routes.findOne({
-        _id:id
+        _id: id
     });
-    foundRoute.nodes=info.nodes
-    foundRoute.distance=info.distance
-    foundRoute.time=info.time
-    foundRoute.status="resolved"
-    foundRoute.date=new Date()
+
+    foundRoute.nodes = info.nodes
+    foundRoute.distance = info.distance
+    foundRoute.time = info.time
+    foundRoute.status = "resolved"
+    foundRoute.date = new Date()
     await foundRoute.save()
 }
 
 
-module.exports={
+module.exports = {
     listRoutes,
     addRoute,
     updateNodesOfRoute,
