@@ -4,23 +4,23 @@ const controller = require('./controller');
 const response = require('../../network/response') //Trae network dos carpetas arriba
 
 router.get('/', (req, res) => {
-    controller.getZones(req.param)
+    controller.getZones(req.query)
         .then((info) => {
             response.success(req, res, info, 200);
         })
         .catch((e) => {
-            response.error(req, res, 'Ok', 200, e);
+            response.error(req, res, 'Error', 400, e);
         })
 })
 
-router.update('/', (req, res) => {
+router.patch('/', (req, res) => {
     const { numberZone, start, end, capacity } = req.body;
     controller.updateZone(numberZone, start, end, capacity)
         .then((info) => {
             response.success(req, res, info, 200);
         })
         .catch((e) => {
-            response.error(req, res, 'Ok', 200, e);
+            response.error(req, res, 'Error', 400, e);
         })
 })
 
@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
             response.success(req, res, info, 200);
         })
         .catch((e) => {
-            response.error(req, res, 'Ok', 200, e);
+            response.error(req, res, 'Error', 400, e);
         })
 })
 

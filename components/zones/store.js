@@ -1,14 +1,15 @@
 const Zones = require('./modelZone');
 
 
-const addZone = async(newUser) => {
-    const myZone = new Zones(newUser)
-    return myZone
+const addZone = async(newZone) => {
+    const myZone = new Zones(newZone)
+    return await myZone.save();
 }
 
-const listZone = query => {
-    const Zones = Zones.find(query)
-    return Zones;
+const listZone = async(query) => {
+    console.log(query)
+    const zone = await Zones.find(query)
+    return zone;
 }
 
 const updateZone = async(number, start, end, capacity) => {
