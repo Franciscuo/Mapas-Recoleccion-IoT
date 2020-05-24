@@ -8,10 +8,11 @@
       <a class="list-group-item list-group-item-action" id="itemAddNode" href="/app/viewNewNode">Añadir Nuevo Nodo</a>
     </li>
     <li>
-      <a class="list-group-item list-group-item-action" id="itemRoutes" data-toggle="collapse" href="#subRoutes" >Rutas de Recolección </a>
+      <a class="list-group-item list-group-item-action" id="itemRoutes" data-toggle="collapse" href="#subRoutes">Rutas
+        de Recolección </a>
       <ul id="subRoutes" class="collapse list-unstyled">
-                <li><a class="nav-link" href="/app/viewRoutes">Ver <span class="sr-only">(current)</span></a></li>
-                <li><a class="nav-link" href="/app/configRoutes">Configurar <span class="sr-only">(current)</span></a></li>
+        <li><a class="nav-link" href="/app/viewRoutes">Ver <span class="sr-only">(current)</span></a></li>
+        <li><a class="nav-link" href="/app/configRoutes">Configurar <span class="sr-only">(current)</span></a></li>
       </ul>
     </li>
     <li>
@@ -21,6 +22,21 @@
       <a class="list-group-item list-group-item-action" id="itemWorkers" href="/app/viewWorkers">Trabajadores </a>
     </li>
     {{/equal}}
+    {{#equal role "client"}}
+    <li>
+      <a class="list-group-item list-group-item-action" id="itemAddNode" href="/app/viewNewNode">Añadir Nuevo Nodo</a>
+    </li>
+    <li>
+      <a class="list-group-item list-group-item-action" id="itemRoutes" href="/app/viewRoutes">Rutas de Recolección </a>
+    </li>
+    {{/equal}}
+    {{#equal role "none"}}
+    <li>
+      <a class="list-group-item list-group-item-action" id="itemAddNode" href="/app/viewNewNode">Añadir Nuevo Nodo</a>
+    </li>
+    {{/equal}}
+
+
   </ul>
 </nav>
 
