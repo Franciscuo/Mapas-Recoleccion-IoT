@@ -69,18 +69,11 @@ const addNode = ((eui, model) => {
     })
 })
 
-const getNodes = ((eui, pass) => {
+const getNodes = ((query) => {
     return new Promise(async(resolve, reject) => {
         let filter = {}
-        if (eui) {
-            if (pass) {
-                filter = {
-                    eui: eui,
-                    pass: pass
-                }
-            } else {
-                filter = { eui: eui }
-            }
+        if (query) {
+            filter=query;
         }
         store.listNode(filter)
             .then((messages) => {

@@ -19,8 +19,8 @@ router.post('/node', (req, res) => {
     })
     //----- Obtener Nodos ------------------Session.isAuthenticated,
 router.get('/node', (req, res) => {
-        const eui = req.query.eui || null;
-        controller.getNodes(eui)
+        const query = req.query || null;
+        controller.getNodes(query)
             .then((info) => {
                 response.success(req, res, info, 200)
             })

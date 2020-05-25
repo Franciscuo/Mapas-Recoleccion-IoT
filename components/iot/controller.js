@@ -26,7 +26,7 @@ const arrayNodes = (routes) => {
     return out
 }
 
-const calculateRoute = (nodes,zone) => {
+const calculateRoute = (nodes, zone) => {
     return new Promise((resolve, reject) => {
         axios.post(`${process.env.GRAPH_HOPPER_URL}${process.env.GRAPH_HOPPER_KEY}`, {
             "vehicles": [{
@@ -94,6 +94,10 @@ const addNodeToRoute = (EUI) => {
             reject('Node is not registered')
             return false
         }
+        if (node[0].__v === 0) {
+            reject('Node is not sync')
+            return false
+        }
         let route;
         try {
             route = await storeRoutes.listRoutes({ zone: node[0].zone, status: 'new' })
@@ -119,11 +123,11 @@ const addNodeToRoute = (EUI) => {
             }
             let zone
             try {
-                zone = await storeZone.listZone({_id:node[0].zone})
+                zone = await storeZone.listZone({ _id: node[0].zone })
             } catch (e) {
                 reject(e)
             }
-            if (upRoute.nodes.length > zone[0].capacity) {
+            if (upRoute.nodes.length >= zone[0].capacity) {
                 //update status of routes
                 let nodesReady = []
                 let nodeAux;
@@ -133,7 +137,7 @@ const addNodeToRoute = (EUI) => {
                     nodesReady.push(nodeAux)
                 }
 
-                await calculateRoute(nodesReady,zone[0])
+                await calculateRoute(nodesReady, zone[0])
                     .then(info => {
                         storeRoutes.updateRouteCalculated(upRoute._id, info)
                         resolve("Ok 3")
