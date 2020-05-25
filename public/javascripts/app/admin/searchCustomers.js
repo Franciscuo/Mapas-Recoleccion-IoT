@@ -142,7 +142,8 @@ const updateMap = (nodes) => {
         success: function(res) {
             res.message.map(node => {
                 if (nodes.includes(node._id)) {
-                    graph.addMarker(`${node._id}`, [node.coords[0].latitude, node.coords[0].longitude], `${node.address}`)
+                    console.log(node);
+                    graph.addMarker(`${node._id}`, [node.coords[0], node.coords[1]], `${node.address}`)
                 }
             })
         },
@@ -174,7 +175,6 @@ const updateUser = async() => {
         })
         .then(response => response.json()).then((data) => {
             const user = data.message[0];
-            console.log(data.message[0])
             role.value = user.role;
             email.value = user.email;
             nameCustomer.value = user.name;
