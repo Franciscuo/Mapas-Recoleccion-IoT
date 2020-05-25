@@ -1,6 +1,6 @@
 const input = document.getElementById("Name");
 const autoCompleteList = document.getElementById('autoCompleteList')
-const advices = document.getElementsByClassName('list-group-item')
+const advices = document.getElementsByName('data-advice')
 const button = document.getElementById('button');
 
 const role = document.getElementById('role');
@@ -100,7 +100,7 @@ input.addEventListener("input", () => {
             const index = name.toLowerCase().indexOf(palabra);
             let div = document.createElement('div');
             div.innerHTML = `
-            <div class="list-group-item list-group-item-action" name='data' data-name="${name}">
+            <div class="list-group-item list-group-item-action" name='data-advice' data-name="${name}">
             ${name.slice(0, index)}<strong>${name.slice(index, index + palabra.length)}</strong>${name.slice(index + palabra.length, name.length)}
             <input type="hidden">
             </div>
