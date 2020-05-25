@@ -54,11 +54,9 @@ class Maps {
     }
 
     removeAllMarker() {
-        let i = 0;
         while (this.markers.length > 0) {
-            this.markers[i].marker.remove();
-            this.markers.splice(i, 1); //delete marker to array
-            i++;
+            this.markers[0].marker.remove();
+            this.markers.splice(0, 1); //delete marker to array
         }
     }
 
@@ -142,7 +140,6 @@ const updateMap = (nodes) => {
         success: function(res) {
             res.message.map(node => {
                 if (nodes.includes(node._id)) {
-                    console.log(node);
                     graph.addMarker(`${node._id}`, [node.coords[0], node.coords[1]], `${node.address}`)
                 }
             })
