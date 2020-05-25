@@ -44,7 +44,7 @@ router.get('/', Session.isAuthenticated, (req, res) => {
     if (req.user.role === "admin") {
         res.render('application/admin/ctlAdmin.hbs',{
             user: req.user,
-            name: user.name,
+            name: req.user.name,
         });
     } else if (req.user.role === "client") {
         res.render('application/client/ctlClient.hbs',{

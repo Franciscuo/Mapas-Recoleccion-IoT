@@ -11,10 +11,10 @@ const routeSchema = new Schema({
         type: Schema.ObjectId,
         ref: 'Node'
     }],
-    zone: [{
+    zone: {
         type: Schema.ObjectId,
         ref: 'Zone',
-    }]
+    }
 
 });
 

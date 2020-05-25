@@ -7,14 +7,13 @@ const nodeSchema = new Schema({
     model: { type: String, required: true },
     pass: { type: String, required: true },
     address: { type: String },
-    coords: [{
-        latitude: { type: Number },
-        longitude: { type: Number }
-    }],
-    zone: [{
+    coords: [
+        { type: Number, required: true },
+    ],
+    zone: {
         type: Schema.ObjectId,
         ref: 'Zone',
-    }]
+    }
 });
 
 const model = mongoose.model('Node', nodeSchema)

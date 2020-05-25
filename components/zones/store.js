@@ -7,7 +7,6 @@ const addZone = async(newZone) => {
 }
 
 const listZone = async(query) => {
-    console.log(query)
     const zone = await Zones.find(query)
     return zone;
 }

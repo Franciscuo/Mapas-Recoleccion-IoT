@@ -3,11 +3,6 @@ const router = express.Router(); // Igual a la función Roputer para separar por
 const controller = require('./controller');
 const response = require('../../network/response') //Trae network dos carpetas arriba
 
-
-router.get('/viewRoute', (req, res) => {
-    res.render('application/admin/viewRoute.hbs');
-})
-
 //--- Guarda Datos de Nodos
 router.post('/', (req, res) => {
         if (req.body.data != undefined) {
@@ -22,7 +17,7 @@ router.post('/', (req, res) => {
         }
     })
     // --- Actualiza los parametros del algoritmo--
-router.patch('/routes', (req, res) => {
+router.patch('/', (req, res) => {
         const { zone } = req.body;
         controller.updateRoutes(zone)
             .then((info) => {
@@ -32,19 +27,9 @@ router.patch('/routes', (req, res) => {
                 response.error(req, res, 'Información Invalida', 300, e)
             })
     })
-    // --- New Ruta para Admin
-router.post('/routes', (req, res) => {
-        const { zone } = req.body;
-        controller.newRoute(zone)
-            .then((info) => {
-                response.success(req, res, info, 200)
-            })
-            .catch((e) => {
-                response.error(req, res, 'Información Invalida', 300, e)
-            })
-    })
+
     //---- Retorna una ruta a usuario
-router.get('/routes', (req, res) => {
+router.get('/', (req, res) => {
     controller.getRoutes(req.query)
         .then((info) => {
             response.success(req, res, info, 200)

@@ -1,5 +1,6 @@
 const store = require('./store');
 const storeNode = require('../application/store')
+const storeZone = require('../zones/store');
 
 const isUserName = (userName)=>{
     return new Promise(async(resolve,reject)=>{
@@ -108,15 +109,14 @@ const syncNode = (user_id, eui, pass, address, zone, lat, lon)=>{
         return false
     }
     if(node[0].address){
-        reject('Nodo Ya Registrado') 
+        reject('Nodo Ya Registrado')
         return false
     }
 
-    let coords = {
-        latitude: lat,
-        longitude: lon
-    }
-    Promise.all([storeNode.updateNode(node[0]._id,address,zone,coords),store.update(user_id,node[0]._id,'client')])
+    let coords = [lat,lon];
+    const idZone = await storeZone.listZone({number:zone});
+    console.log(idZone)
+    Promise.all([storeNode.updateNode(node[0]._id,address,idZone[0]._id,coords),store.update(user_id,node[0]._id,'client')])
         .then(()=>{
             console.log("Sincronizado Cliente");
             resolve("Success")

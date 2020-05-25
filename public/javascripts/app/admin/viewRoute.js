@@ -2,7 +2,7 @@ const zone = document.getElementById('zone');
 const btnSubmit = document.getElementById('btnSubmit');
 
 btnSubmit.addEventListener("click", async(event) => {
-        await fetch(`/iot/routes/?zone=${zone.value}`, {
+        await fetch(`/routes/?zone=${zone.value}`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json'

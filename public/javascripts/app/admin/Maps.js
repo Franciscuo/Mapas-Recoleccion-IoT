@@ -62,7 +62,7 @@ window.onload = () => {
     let path = []
 
     $.ajax({
-        url: '/iot/routes',
+        url: '/routes',
         type: 'GET',
 
         success: function(respuestaRutas) {

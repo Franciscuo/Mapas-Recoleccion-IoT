@@ -17,7 +17,7 @@ const updateNode = async (id,address,zone,coords)=>{
     });
     foundNode.address=address;
     foundNode.zone=zone;
-    foundNode.coords.push(coords);
+    foundNode.coords=coords;
     await foundNode.save()
 }
 
