@@ -58,8 +58,32 @@ const graph = new Maps([4.62805, -74.06556]);
 
 window.onload = () => {
 
+    let zone = window.location.href.split('viewZones/')[1];
     let data = [];
     let path = []
+    let zoneId = []
+
+
+
+    $.ajax({
+        url: '/zones/',
+        type: 'GET',
+        success: function(res) {
+            res.message.map(zoneMap => {
+                zoneId[zoneMap.number] = zoneMap._id;
+            })
+        },
+        error: function(e) {
+            alert(`Error 1 ${e}`);
+        }
+
+    });
+
+
+
+
+
+
 
     $.ajax({
         url: '/routes',
@@ -72,11 +96,22 @@ window.onload = () => {
 
                 success: function(respuestaNodos) {
 
-                    respuestaRutas.message[0].nodes.map(ruta =>
+                    let zoneRoutes = [];
+                    respuestaRutas.message.map(route => {
+                        if (route.zone === zoneId[zone]) {
+                            zoneRoutes.push(route)
+                        }
+                    })
+                    if (zoneRoutes.length == 0) {
+                        alert('No hay rutas');
+                        return
+                    }
+
+                    zoneRoutes[0].nodes.map(ruta =>
                         respuestaNodos.message.map(node => {
                             if (ruta == node._id) {
-                                data.push([node.coords[0].longitude, node.coords[0].latitude])
-                                graph.addMarker(`${node._id}`, [node.coords[0].latitude, node.coords[0].longitude], `${node.address}`)
+                                data.push([node.coords[1], node.coords[0]])
+                                graph.addMarker(`${node._id}`, [node.coords[0], node.coords[1]], `${node.address}`)
                             }
                         })
                     )
@@ -96,39 +131,40 @@ window.onload = () => {
                         success: function(respuesta) {
                             path = respuesta.features[0].geometry.coordinates;
                             path.map((geo, index) => {
-                                    if (index + 1 < path.length) {
-                                        freeBus.features.push({
-                                            "type": "Feature",
-                                            "geometry": {
-                                                "type": "LineString",
-                                                "coordinates": [
-                                                    [path[index][0], path[index][1]],
-                                                    [path[index + 1][0], path[index + 1][1]]
-                                                ]
-                                            },
-                                            "properties": {
-                                                "popupContent": "This is a free bus line that will take you across downtown.",
-                                                "underConstruction": true
-                                            }
-                                        })
+                                if (index + 1 < path.length) {
+                                    freeBus.features.push({
+                                        "type": "Feature",
+                                        "geometry": {
+                                            "type": "LineString",
+                                            "coordinates": [
+                                                [path[index][0], path[index][1]],
+                                                [path[index + 1][0], path[index + 1][1]]
+                                            ]
+                                        },
+                                        "properties": {
+                                            "popupContent": "This is a free bus line that will take you across downtown.",
+                                            "underConstruction": true
+                                        }
+                                    })
 
-                                    }
-                                })
+                                }
+                            })
                         },
                         error: function(e) {
-                            alert(`Error ${e}`);
+                            console.log(e)
+                            alert(`Error 1 ${e}`);
                         }
 
                     });
                 },
                 error: function(e) {
-                    alert(`Error ${e}`);
+                    alert(`Error 2 ${e}`);
                 }
 
             });
         },
         error: function(e) {
-            alert(`Error ${e}`);
+            alert(`Error 3 ${e}`);
         }
 
     });
