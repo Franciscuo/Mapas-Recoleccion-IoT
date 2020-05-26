@@ -17,7 +17,7 @@ const id = [];
 
 const idMap = 'map-template';
 const iconMarker = L.icon({
-    iconUrl: '/static/images/marker.png',
+    iconUrl: '/static/images/contenedor_limpo.svg',
     iconSize: [32, 32],
     iconAnchor: [0, 0]
 });
@@ -47,6 +47,10 @@ class Maps {
         marker.addTo(this.map)
     }
 
+    setView(lat, lon, zoom) {
+        this.map.setView([lat, lon], zoom);
+    }
+
     removeMarker(id) {
         let i = this.markers.map(function(arr) { return arr.id; }).indexOf(id);
         this.markers[i].marker.remove();
@@ -62,7 +66,8 @@ class Maps {
 
 }
 
-const graph = new Maps([4.62805, -74.06556]);
+const graph = new Maps([4.63083, -74.08515]);
+graph.setView(4.63083, -74.08515, 12); // Centra el mapa con base en la zona
 
 window.onload = async() => {
 
@@ -132,6 +137,7 @@ $("#Name").on('keyup', function(e) {
 
 
 const updateMap = (nodes) => {
+    graph.setView(4.63083, -74.08515, 12); // Centra el mapa con base en la zona
     graph.removeAllMarker();
     $.ajax({
         url: '/app/node',

@@ -1,11 +1,17 @@
 <style>
     .dot {
-  height: 25px;
-  width: 25px;
-  background-color: red;
-  border-radius: 50%;
-  display: inline-block;
-}
+        height: 25px;
+        width: 25px;
+        background-color: red;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .route-items {
+        position: relative;
+        right: 0;
+        left: 0;
+    }
 </style>
 
 <div class="container">
@@ -48,7 +54,10 @@
                         <p class="ml-md-4 ml-sm-4">Contenedor a recoger</p>
                     </div>
 
-
+                    <div class="mt-5 text-center">
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
+                            data-target="#exampleModal" style="font-size: 14px;">Ver información de ruta </button>
+                    </div>
                 </div>
 
             </div>
@@ -61,6 +70,8 @@
         </div>
     </div>
 </div>
+
+
 
 <script defer src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
