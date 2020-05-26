@@ -39,6 +39,10 @@ class Maps {
         }).addTo(this.map);
     }
 
+    setView(lat, lon, zoom) {
+        this.map.setView([lat, lon], zoom);
+    }
+
     addMarker(id, coords, message, n) {
         let iconoG
         if (n == 1) iconoG = iconContenedor;
@@ -71,7 +75,7 @@ let freeBus = {
     features: []
 };
 
-const graph = new Maps([4.62805, -74.06556]);
+
 
 window.onload = async() => {
 
@@ -81,6 +85,7 @@ window.onload = async() => {
     let zoneId = 0;
     let startZone;
     let endZone;
+    let center;
 
 
 
@@ -93,6 +98,7 @@ window.onload = async() => {
                     zoneId = zoneMap._id;
                     startZone = zoneMap.start;
                     endZone = zoneMap.end;
+                    center = zoneMap.center
                 }
             })
         },
@@ -103,6 +109,10 @@ window.onload = async() => {
     });
 
 
+
+
+    const graph = new Maps([center[0], center[1]]);
+    graph.setView(center[0], center[1], 14);
 
 
 
