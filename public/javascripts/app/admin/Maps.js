@@ -1,6 +1,18 @@
 const idMap = 'map-template';
-const iconMarker = L.icon({
-    iconUrl: '/static/images/marker.png',
+const iconContenedor = L.icon({
+    iconUrl: '/static/images/contenedor_limpo.svg',
+    iconSize: [32, 32],
+    iconAnchor: [0, 0]
+});
+
+const iconEmpresa = L.icon({
+    iconUrl: '/static/images/empresa_limpo.svg',
+    iconSize: [32, 32],
+    iconAnchor: [0, 0]
+});
+
+const iconParqueadero = L.icon({
+    iconUrl: '/static/images/parqueadero_limpo.svg',
     iconSize: [32, 32],
     iconAnchor: [0, 0]
 });
@@ -27,9 +39,14 @@ class Maps {
         }).addTo(this.map);
     }
 
-    addMarker(id, coords, message) {
+    addMarker(id, coords, message, n) {
+        let iconoG
+        if (n == 1) iconoG = iconContenedor;
+        if (n == 2) iconoG = iconEmpresa;
+        if (n == 3) iconoG = iconParqueadero;
+
         let marker = L.marker(coords, {
-            icon: iconMarker
+            icon: iconoG
         })
         this.markers.push({
             id: id,
@@ -56,21 +73,27 @@ let freeBus = {
 
 const graph = new Maps([4.62805, -74.06556]);
 
-window.onload = () => {
+window.onload = async() => {
 
     let zone = window.location.href.split('viewZones/')[1];
     let data = [];
     let path = []
-    let zoneId = []
+    let zoneId = 0;
+    let startZone;
+    let endZone;
 
 
 
-    $.ajax({
+    await $.ajax({
         url: '/zones/',
         type: 'GET',
         success: function(res) {
             res.message.map(zoneMap => {
-                zoneId[zoneMap.number] = zoneMap._id;
+                if (zoneMap.number == zone) {
+                    zoneId = zoneMap._id;
+                    startZone = zoneMap.start;
+                    endZone = zoneMap.end;
+                }
             })
         },
         error: function(e) {
@@ -98,7 +121,7 @@ window.onload = () => {
 
                     let zoneRoutes = [];
                     respuestaRutas.message.map(route => {
-                        if (route.zone === zoneId[zone]) {
+                        if (route.zone === zoneId) {
                             zoneRoutes.push(route)
                         }
                     })
@@ -111,11 +134,14 @@ window.onload = () => {
                         respuestaNodos.message.map(node => {
                             if (ruta == node._id) {
                                 data.push([node.coords[1], node.coords[0]])
-                                graph.addMarker(`${node._id}`, [node.coords[0], node.coords[1]], `${node.address}`)
+                                graph.addMarker(`${node._id}`, [node.coords[0], node.coords[1]], `${node.address}`, 1)
                             }
                         })
                     )
-
+                    data.push([endZone[1], endZone[0]]);
+                    data.splice(0, 0, [startZone[1], startZone[0]])
+                    graph.addMarker(`${zoneId}${endZone}`, [endZone[0], endZone[1]], `Recoleccion`, 2)
+                    graph.addMarker(`${zoneId}${startZone}`, [startZone[0], startZone[1]], `Parqueadero`, 3)
                     $.ajax({
                         url: 'https://api.openrouteservice.org/v2/directions/driving-car/geojson',
                         type: 'POST',
@@ -151,7 +177,6 @@ window.onload = () => {
                             })
                         },
                         error: function(e) {
-                            console.log(e)
                             alert(`Error 1 ${e}`);
                         }
 
