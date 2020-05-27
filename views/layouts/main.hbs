@@ -1,31 +1,43 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/static/images/Icon-Color-180.png">
     <title>Limpo - Unidos por el planeta</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     {{#if user}}
     <link rel="stylesheet" href="/static/stylesheets/control.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css">
-    <link rel="stylesheet" href="/static/stylesheets/sidebar.css">   
-    <link rel="stylesheet" href="/static/stylesheets/animate.min.css" >
+    <link rel="stylesheet" href="/static/stylesheets/sidebar.css">
+    <link rel="stylesheet" href="/static/stylesheets/animate.min.css">
     {{/if}}
     <link rel="stylesheet" href="/static/stylesheets/index.css">
     <link rel="stylesheet" href="/static/stylesheets/slider.css">
 </head>
+
 <body>
+    {{#if user}}
+    <div class="container-btnSidebar">
+        <button type="button" id="btnSidebar" class="navbar-btn btn-sidebar">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+    {{/if}}
     <div class="wrapper">
-            {{#if user}}
-                {{>sidebar}}
-            {{/if}}
-        <div id="content">
+        {{#if user}}
+        {{>sidebar}}
+        {{/if}}
+        <div id="content-global">
             {{>navigation}}
             {{{body}}}
         </div>
     </div>
     {{>modal}}
-    {{>scripts}} 
+    {{>scripts}}
 </body>
+
 </html>

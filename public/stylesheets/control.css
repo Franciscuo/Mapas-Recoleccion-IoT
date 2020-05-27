@@ -3,9 +3,26 @@ body {
     padding: 0px;
 }
 
+#content-global {
+    width: 100%;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
 #map-template {
+    width: 84vw;
     height: 60vh;
-    width: inherit;
+}
+.dot {
+    height: 25px;
+    width: 25px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.route-items {
     position: relative;
-    outline: none;
+    right: 0;
+    left: 0;
 }
