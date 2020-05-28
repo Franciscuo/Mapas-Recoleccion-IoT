@@ -40,16 +40,29 @@ const isEmail = (email)=>{
     })
 }
 
-const addUser = (userName,name, lastName,email,password)=>{
+const addUser = (userName, name, lastName, email, password, zone)=>{
     return new Promise(async(resolve, reject)=>{
-        const newUser = {
-            'userName': userName,
-            'name': name,
-            'lastName': lastName,
-            'email': email,
-            'password': password,
-            'role':'none',
-            'date':new Date(),
+        const newUser = {}
+        if(zone){
+            newUser = {
+                'userName': userName,
+                'name': name,
+                'lastName': lastName,
+                'email': email,
+                'password': userName,
+                'role':'worker',
+                'date':new Date(),
+            }
+        }else{
+            newUser = {
+                'userName': userName,
+                'name': name,
+                'lastName': lastName,
+                'email': email,
+                'password': password,
+                'role':'none',
+                'date':new Date(),
+            }
         }
         store.add(newUser)
             .then((NewUser)=>{

@@ -2,16 +2,14 @@ let userName = false;
 let name = false;
 let lastName = false;
 let email = false;
-let password = false;
-let confirmPassword = false;
+let zone = false;
 
-const form = document.getElementById('signUp-form');
 const userField = document.getElementById('user');
 const nameField = document.getElementById('name');
 const lastNameField = document.getElementById('lastName');
 const emailField = document.getElementById('email');
 const passwordField = document.getElementById('password');
-const confirmPasswordField = document.getElementById('confirmPassword');
+const zoneField = document.getElementById('zone');
 const sendBtn = document.getElementById('btnSend');
 
 const feedbackClient = (field, flag) => {
@@ -20,6 +18,26 @@ const feedbackClient = (field, flag) => {
     } else {
         field.className = 'form-control is-invalid';
     }
+}
+
+const verifyEmail = async() =>{
+    await fetch('/user/email', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: emailField.value }),
+    })
+    .then(response => response.json()).then((data) => {
+        email = !data.message;
+        if (!email) {
+            alert("Correo ya registrado")
+        }
+    })
+    .catch((error) => {
+        email = false;
+        console.error('Error:', error)
+    });
 }
 
 const isName = (field) => {
@@ -34,8 +52,14 @@ const isEmail = (field) => {
     return ((/^[\u00f1\u00d1\w\._\-]{3,25}@[\w\.\-]{3,30}\.\w{2,5}$/).test(field.value))
 }
 
-const isPass = (field) => { //^(?=[\wñÑ]*\d+)(?=[\wñÑ]*[A-ZÑ]+)(?=[\wñÑ]*[a-zñ]+)\S{8,20}$ sirve contraseñaA1
-    return ((/^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]$/).test(field.value))
+const fillUserName = () =>{
+    if(!userField.value){
+        const nameFirth = nameField.value;
+        const nameSecond = lastNameField.value;
+        console.log(nameFirth);
+        userField.value = `${nameFirth.replace(/\s/, '').toLocaleLowerCase()}${nameSecond.replace(/\s/, '').toLocaleLowerCase()}`
+
+    }
 }
 
 userField.addEventListener("blur", async(event) => {
@@ -64,6 +88,15 @@ userField.addEventListener("blur", async(event) => {
 
 })
 
+emailField.addEventListener("blur", async(event) => {
+    if (isEmail(emailField)) {
+        await verifyEmail();
+    } else {
+        email = false;
+    }
+    feedbackClient(emailField, email)
+})
+
 nameField.addEventListener("blur", async(event) => {
     name = isName(nameField);
     feedbackClient(nameField, name)
@@ -72,54 +105,22 @@ nameField.addEventListener("blur", async(event) => {
 lastNameField.addEventListener("blur", (event) => {
     lastName = isName(lastNameField);
     feedbackClient(lastNameField, lastName)
+    fillUserName();
 });
 
-emailField.addEventListener("blur", async(event) => {
-    if (isEmail(emailField)) {
-        await fetch('/user/email', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email: emailField.value }),
-            })
-            .then(response => response.json()).then((data) => {
-                email = !data.message;
-                if (!email) {
-                    alert("Correo ya registrado")
-                }
-            })
-            .catch((error) => {
-                email = false;
-                console.error('Error:', error)
-            });
-    } else {
-        email = false;
-    }
-    feedbackClient(emailField, email)
-
-})
-
-passwordField.addEventListener("blur", (event) => {
-    password = isPass(passwordField)
-    feedbackClient(passwordField, password)
-})
-
-confirmPasswordField.addEventListener("keyup", (event) => {
-    confirmPassword = (passwordField.value == confirmPasswordField.value);
-    feedbackClient(confirmPasswordField, confirmPassword)
-})
-
 sendBtn.addEventListener("click", async(event) => {
-    if (userName && name && lastName && email && password && confirmPassword) {
+
+    zone=!(!(zoneField.value));
+    if (userName && name && lastName && email && zone) {
 
         const dataForm = {
             userName: userField.value,
             name: nameField.value,
             lastName: lastNameField.value,
             email: emailField.value,
-            password: passwordField.value,
+            zone:zoneField.value
         }
+        console.log(dataForm);
         await fetch("/user", {
                 method: "POST",
                 headers: {

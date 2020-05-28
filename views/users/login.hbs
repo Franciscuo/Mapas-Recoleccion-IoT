@@ -1,33 +1,38 @@
-<div class="row" id="content-login">
-    <div class="col-md-4 mx-auto">
-        <div class="card mt-4 text-center">
-            <div class="card-header">
-                <h3>Ingresar</h3>
-            </div>
-            <img src="/static/images/Icon-Color-180.png" class="mx-auto d-block m-4 logo" style="width: 100px;" alt="logo">
-            <div class="card-body">
-                <form method="POST" action="/user/login">
-                <div class="form-group">
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Email" autocomplete="off">
-                    <div class="invalid-feedback">
-                        Correo Invalido
-                    </div>
+<div class="container  h-100">
+    <div class="row" id="content-login">
+        <div class="col-md-8 col-lg-5 mx-auto">
+            <div class="card mt-4 text-center">
+                <div class="card-header">
+                    <h3>Ingresar</h3>
                 </div>
-                <div class="form-group">
-                    <input type="password" id="password"name="password" class="form-control" placeholder="Password">
-                    <div class="invalid-feedback">
-                        La contraseña Ingresada no es Invalida
-                    </div>
+                <img src="/static/images/Icon-Color-180.png" class="mx-auto d-block m-4 logo" style="width: 100px;"
+                    alt="logo">
+                <div class="card-body">
+                    <form method="POST" action="/user/login">
+                        <div class="form-group">
+                            <input type="email" name="email" id="email" class="form-control" placeholder="Email"
+                                autocomplete="off">
+                            <div class="invalid-feedback">
+                                Correo Invalido
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="password" name="password" class="form-control"
+                                placeholder="Password">
+                            <div class="invalid-feedback">
+                                La contraseña Ingresada no es Invalida
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" id="btn-login-input" class="btn btn-primary btn-block">
+                                Entrar
+                            </button>
+                        </div>
+                    </form>
+                    <a href="/signup">No estas registrado? Registrarme</a>
+                    <br>
+                    <a href="/forgot">Olvidaste tu contarseña?</a>
                 </div>
-                <div class="form-group">
-                    <button  type="submit" id="btn-login-input" class="btn btn-primary btn-block">
-                        Entrar
-                    </button>
-                </div>
-                </form>
-                <a href="/signup">No estas registrado? Registrarme</a>
-                <br>
-                <a href="/forgot">Olvidaste tu contarseña?</a>
             </div>
         </div>
     </div>

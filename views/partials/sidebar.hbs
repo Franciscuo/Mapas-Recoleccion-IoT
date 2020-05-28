@@ -11,15 +11,24 @@
       <a class="list-group-item list-group-item-action" id="itemRoutes" data-toggle="collapse" href="#subRoutes">Rutas
         de Recolección </a>
       <ul id="subRoutes" class="collapse list-unstyled">
-        <li><a class="nav-link" href="/app/viewRoutes">Ver <span class="sr-only">(current)</span></a></li>
-        <li><a class="nav-link" href="/app/configRoutes">Configurar <span class="sr-only">(current)</span></a></li>
+        <li><a class="nav-link" href="/app/viewRoutes">Ver <span class="sr-only">(current)</span></a>
+        </li>
+        <li><a class="nav-link" href="/app/configRoutes">Configurar <span class="sr-only">(current)</span></a>
+        </li>
       </ul>
     </li>
     <li>
       <a class="list-group-item list-group-item-action" id="itemClients" href="/app/viewClients">Clientes </a>
     </li>
     <li>
-      <a class="list-group-item list-group-item-action" id="itemWorkers" href="/app/viewWorkers">Trabajadores </a>
+      <a class="list-group-item list-group-item-action" id="itemWorkers" data-toggle="collapse"
+        href="#subWorkers">Trabajadores </a>
+      <ul id="subWorkers" class="collapse list-unstyled">
+        <li><a class="nav-link" href="/app/viewWorkers">Ver<span class="sr-only">(current)</span></a>
+        </li>
+        <li><a class="nav-link" href="/app/newWorker">Registrar <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
     </li>
     {{/equal}}
     {{#equal role "client"}}

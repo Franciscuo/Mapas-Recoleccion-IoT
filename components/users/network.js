@@ -60,8 +60,8 @@ router.post('/email', (req, res) => {
     })
     //------ Nuevo usuario
 router.post('/', validationHandler(createUserSchema), (req, res) => {
-        const { userName, name, lastName, email, password } = req.body; //Destructuring 
-        controller.addUser(userName, name, lastName, email, password)
+        const { userName, name, lastName, email, password, zone } = req.body; //Destructuring 
+        controller.addUser(userName, name, lastName, email, password, zone)
             .then((info) => {
                 response.success(req, res, info, 201)
             })

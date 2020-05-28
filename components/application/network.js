@@ -104,8 +104,13 @@ router.get('/viewClients', Session.isAuthenticated, (req, res) => {
 
     // ---- Vista Workers
 router.get('/viewWorkers', Session.isAuthenticated, (req, res) => {
-    //const customersDB = await Customer.find();
     res.render('application/admin/viewWorkers.hbs'); //,{customersDB}
 })
+
+    // ---- Registro Trabajadores
+    router.get('/newWorker', Session.isAuthenticated, (req, res) => {
+        res.render('application/admin/viewAddWorker.hbs'); //,{customersDB}
+    })
+
 
 module.exports = router;
