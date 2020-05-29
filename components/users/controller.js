@@ -138,7 +138,7 @@ const syncNode = (user_id, eui, pass, address, zone, lat, lon)=>{
 
     let coords = [lat,lon];
     const idZone = await storeZone.listZone({number:zone});
-    Promise.all([storeNode.updateNode(node[0]._id,address,idZone[0]._id,coords),store.update(user_id,node[0]._id,'client',null,[])])
+    Promise.all([storeNode.updateNode(node[0]._id,address,idZone[0]._id,coords,user_id),store.update(user_id,node[0]._id,'client',null,[])])
         .then(()=>{
             console.log("Sincronizado Cliente");
             resolve("Success")

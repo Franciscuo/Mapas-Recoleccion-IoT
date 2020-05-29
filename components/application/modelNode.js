@@ -13,7 +13,11 @@ const nodeSchema = new Schema({
     zone: {
         type: Schema.ObjectId,
         ref: 'Zone',
-    }
+    },
+    owner:{
+        type: Schema.ObjectId,
+        ref: 'User',
+    },
 });
 
 const model = mongoose.model('Node', nodeSchema)

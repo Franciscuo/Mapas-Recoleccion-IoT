@@ -1,6 +1,7 @@
 const storeRoutes = require('./store');
-const storeNodes = require('../application/store')
-const storeZone = require('../zones/store')
+const storeNodes = require('../application/store');
+const storeZone = require('../zones/store');
+const storeUser = require('../users/store');
 const axios = require('axios')
 
 const objectServices = (id, latitude, longitude) => {
@@ -106,45 +107,50 @@ const addNodeToRoute = (EUI) => {
         }
         if (route.length === 0) {//because return array
             //create route
-            storeRoutes.addRoute({ zone: node[0].zone, status: 'new', date: new Date(), nodes: [node[0].id] })
-                .then(() => {
-                    resolve("Ok 1")
-                })
-                .catch(e => {
-                    reject(e)
-                })
+            try{
+                await storeRoutes.addRoute({ zone: node[0].zone, status: 'new', date: new Date(), nodes: [node[0].id] });
+                resolve("Ok 1");
+            }catch(e){
+                reject(e);
+            }
         } else {
             //add node to route
             let upRoute
             try {
                 upRoute = await storeRoutes.updateNodesOfRoute(route[0]._id, node[0]._id)
             } catch (e) {
+                console.log(e);
                 reject(e)
             }
-            let zone
+            let zone;
             try {
                 zone = await storeZone.listZone({ _id: node[0].zone })
             } catch (e) {
+                console.log(e);
                 reject(e)
             }
             if (upRoute.nodes.length >= zone[0].capacity) {
                 //update status of routes
                 let nodesReady = []
                 let nodeAux;
+                let nodeList;
                 for (let nodeReady of upRoute.nodes) {
-                    node = await storeNodes.listNode({ _id: nodeReady })
-                    nodeAux = objectServices(nodeReady, node[0].coords[0], node[0].coords[1])
+                    nodeList = await storeNodes.listNode({ _id: nodeReady })
+                    await storeUser.update(nodeList[0].owner,null,null,null,[upRoute._id]);//update routes of client
+                    nodeAux = objectServices(nodeReady, nodeList[0].coords[0], nodeList[0].coords[1])
                     nodesReady.push(nodeAux)
                 }
-
-                await calculateRoute(nodesReady, zone[0])
-                    .then(info => {
-                        storeRoutes.updateRouteCalculated(upRoute._id, info)
-                        resolve("Ok 3")
-                    })
-                    .catch(e => {
-                        reject(e)
-                    })
+                try{
+                    const infoRoute = await calculateRoute(nodesReady, zone[0]);//calculate route
+                    await storeRoutes.updateRouteCalculated(upRoute._id, infoRoute)//update state routes
+                    if(zone[0].worker){
+                        await storeUser.update(zone[0].worker,null,null,null,[upRoute._id]);//update routes of worker
+                    }
+                    resolve("Ok 3")
+                }catch(e){
+                    console.log(e);
+                    reject(e);
+                }
             }
             resolve("Ok 2")
         }

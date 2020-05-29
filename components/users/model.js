@@ -14,7 +14,7 @@ const userSchema = new Schema({
     password: { type: String, required: true },
     date: { type: Date, default: Date.now },
     role: { type: String, default: "none", required: false },
-    phone: {type: Number},
+    phone: {type: Number, default:1},
     nodes: [{
         type: Schema.ObjectId,
         ref: 'Node',

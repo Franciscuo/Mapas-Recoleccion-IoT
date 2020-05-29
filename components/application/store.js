@@ -11,13 +11,14 @@ const listNode = async(filter) => {
     return node
 }
 
-const updateNode = async (id,address,zone,coords)=>{
+const updateNode = async (id,address,zone,coords,owner)=>{
     const foundNode = await Node.findOne({
         _id:id
     });
     foundNode.address=address;
     foundNode.zone=zone;
     foundNode.coords=coords;
+    foundNode.owner=owner;
     await foundNode.save()
 }
 
