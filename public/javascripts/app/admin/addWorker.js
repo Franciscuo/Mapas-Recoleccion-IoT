@@ -40,52 +40,58 @@ const verifyEmail = async() =>{
     });
 }
 
+const verifyUser = async() =>{
+    await fetch('/user/username', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ user: userField.value }),
+    })
+    .then(response => response.json()).then((data) => {
+        userName = !data.message;
+        if (!userName) {
+            alert("User ya registrado")
+            userName = false;
+        }else{
+            userName = true;
+        }
+    })
+    .catch((error) => {
+        userName = false;
+        console.error('Error:', error)
+    });
+}
+
 const isName = (field) => {
     return ((/^([A-Z\u00d1]{1,1}[a-záéíóú\u00f1]{2,12})[\s]?([A-Z\u00d1]?[a-z\u00d1]{2,12})?$/).test(field.value))
 }
 
 const isUserName = (field) => {
-    return ((/^[a-z\u00f1\u00d1]+[^A-Z\s%$@\^]{2,16}$/).test(field.value))
+    return ((/^[a-z\u00f1\u00d1]+[^A-Z\s%$@\^]{2,25}$/).test(field.value))
 }
 
 const isEmail = (field) => {
     return ((/^[\u00f1\u00d1\w\._\-]{3,25}@[\w\.\-]{3,30}\.\w{2,5}$/).test(field.value))
 }
 
-const fillUserName = () =>{
+const fillUserName = async() =>{
     if(!userField.value){
         const nameFirth = nameField.value;
         const nameSecond = lastNameField.value;
-        console.log(nameFirth);
-        userField.value = `${nameFirth.replace(/\s/, '').toLocaleLowerCase()}${nameSecond.replace(/\s/, '').toLocaleLowerCase()}`
-
+        userField.value = `${nameFirth.replace(/\s/, '').toLocaleLowerCase()}${nameSecond.replace(/\s/, '').toLocaleLowerCase()}`;
+        await verifyUser();
+        feedbackClient(userField, userName)
     }
 }
 
 userField.addEventListener("blur", async(event) => {
     if (isUserName(userField)) {
-        await fetch('/user/username', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ user: userField.value }),
-            })
-            .then(response => response.json()).then((data) => {
-                userName = !data.message;
-                if (!userName) {
-                    alert("User ya registrado")
-                }
-            })
-            .catch((error) => {
-                userName = false;
-                console.error('Error:', error)
-            });
+        await verifyUser();
     } else {
         userName = false;
     }
     feedbackClient(userField, userName)
-
 })
 
 emailField.addEventListener("blur", async(event) => {
@@ -120,7 +126,6 @@ sendBtn.addEventListener("click", async(event) => {
             email: emailField.value,
             zone:zoneField.value
         }
-        console.log(dataForm);
         await fetch("/user", {
                 method: "POST",
                 headers: {
@@ -131,7 +136,6 @@ sendBtn.addEventListener("click", async(event) => {
             .then(response => response.json()).then((data) => {
                 if (!data.error) {
                     alert("Registro Exitoso")
-                    location.href = "/login";
                 } else {
                     alert(data.error)
                 }

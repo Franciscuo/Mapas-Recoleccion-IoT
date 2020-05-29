@@ -40,9 +40,9 @@ const isEmail = (email)=>{
     })
 }
 
-const addUser = (userName, name, lastName, email, password, zone)=>{
+const addUser = (userName, name, lastName, email, password, zone=undefined)=>{
     return new Promise(async(resolve, reject)=>{
-        const newUser = {}
+        let newUser = {}
         if(zone){
             newUser = {
                 'userName': userName,
@@ -64,7 +64,7 @@ const addUser = (userName, name, lastName, email, password, zone)=>{
                 'date':new Date(),
             }
         }
-        store.add(newUser)
+        await store.add(newUser)
             .then((NewUser)=>{
                 resolve(NewUser)
             })

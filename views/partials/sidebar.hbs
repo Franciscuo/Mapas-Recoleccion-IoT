@@ -18,7 +18,14 @@
       </ul>
     </li>
     <li>
-      <a class="list-group-item list-group-item-action" id="itemClients" href="/app/viewClients">Clientes </a>
+      <a class="list-group-item list-group-item-action" id="itemClients" data-toggle="collapse"
+        href="#subClients">Clientes</a>
+      <ul id="subClients" class="collapse list-unstyled">
+        <li><a class="nav-link" href="/app/viewClients">Detalles<span class="sr-only">(current)</span></a>
+        </li>
+        <li><a class="nav-link" href="/app/viewClients">Rutas<span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
     </li>
     <li>
       <a class="list-group-item list-group-item-action" id="itemWorkers" data-toggle="collapse"
