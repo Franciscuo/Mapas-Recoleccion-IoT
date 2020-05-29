@@ -12,16 +12,21 @@ const  getUsers= async (filter)=>{
     return user
 }
 
-const updateUser = async (id,id_node,role)=>{
+const updateUser = async (id,id_node=undefined,role=undefined,phone=undefined,route=[])=>{
     const foundUser = await Model.findOne({
         _id:id
     });
     if(id_node){
-        foundUser.role = role,
-        foundUser.nodes.push({_id:id_node})
+        foundUser.role = role;
+        foundUser.nodes.push({_id:id_node});
+    }
+    if(phone){
+        foundUser.phone = phone;
+    }
+    if(route.length!==0){
+        route.forEach(element => foundUser.routes.push(element));
     }
     await foundUser.save()
-
 }
 
 const deleteUser = (id)=>{

@@ -15,7 +15,6 @@ const routeSchema = new Schema({
         type: Schema.ObjectId,
         ref: 'Zone',
     }
-
 });
 
 const model = mongoose.model('Routes', routeSchema)

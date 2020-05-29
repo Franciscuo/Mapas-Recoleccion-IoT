@@ -60,8 +60,8 @@ router.post('/email', (req, res) => {
     })
     //------ Nuevo usuario
 router.post('/', validationHandler(createUserSchema), (req, res) => {
-        const { userName, name, lastName, email, password, zone } = req.body; //Destructuring 
-        controller.addUser(userName, name, lastName, email, password, zone)
+        const { userName, name, lastName, email, password, zone, phone } = req.body; //Destructuring
+        controller.addUser(userName, name, lastName, email, password, zone, phone)
             .then((info) => {
                 response.success(req, res, info, 201)
             })
@@ -99,8 +99,7 @@ router.delete('/:userId', validationHandler({ userId: userIdSchema }, 'params'),
     })
     //-----Actualizar los usuarios
 router.patch('/',validationHandler(getUserSchema), (req, res) => {
-    const { id, name} = req.body; //Destructuring
-    controller.updateUser(id,name)
+    controller.updateUser(req.body)
         .then((info) => {
             response.success(req, res, info, 201)
         })

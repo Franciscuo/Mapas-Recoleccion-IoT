@@ -6,6 +6,10 @@ const zoneSchema = new Schema({
     name: { type: String, required: true, unique: true },
     number: { type: Number, required: true, unique: true }, // new,resolved, collect
     capacity: { type: Number, required: true },
+    worker:{
+        type: Schema.ObjectId,
+        ref: 'User',
+    },
     center: [
         { type: Number, required: true },
     ],

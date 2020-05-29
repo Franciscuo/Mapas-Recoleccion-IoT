@@ -8,6 +8,7 @@ const userEmailSchema = joi.string().regex(/^[\u00f1\u00d1\w\._\-]{3,25}@[\w\.\-
 const userPassSchema = joi.string(); //.regex(/^(?=[\wñÑ]*\d+)(?=[\wñÑ]*[A-ZÑ]+)(?=[\wñÑ]*[a-zñ]+)\S{8,20}$/)//sirve contraseñaA1
 const userRoleSchema = joi.string().valid('client', 'admin', 'worker');
 const userZoneSchema = joi.number().min(1).max(20);
+const userPhone = joi.number();
 
 const createUserSchema = {
     userName: userSchema.required(),
@@ -16,6 +17,7 @@ const createUserSchema = {
     email: userEmailSchema.required(),
     password: userPassSchema,
     zone:userZoneSchema,
+    phone:userPhone
 };
 
 const getUserSchema = {

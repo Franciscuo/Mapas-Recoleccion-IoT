@@ -1,6 +1,7 @@
 const store = require('./store');
 const storeNode = require('../application/store')
 const storeZone = require('../zones/store');
+const storeRoutes = require('../iot/store');
 
 const isUserName = (userName)=>{
     return new Promise(async(resolve,reject)=>{
@@ -40,21 +41,22 @@ const isEmail = (email)=>{
     })
 }
 
-const addUser = (userName, name, lastName, email, password, zone=undefined)=>{
+const addUser = (userName, name, lastName, email, password, zone=undefined, phone=undefined)=>{
     return new Promise(async(resolve, reject)=>{
-        let newUser = {}
-        if(zone){
-            newUser = {
+        let addUser = {}
+        if(zone){//is user is worker. password equal user name
+            addUser = {
                 'userName': userName,
                 'name': name,
                 'lastName': lastName,
                 'email': email,
                 'password': userName,
                 'role':'worker',
+                'phone':phone,
                 'date':new Date(),
             }
         }else{
-            newUser = {
+            addUser = {
                 'userName': userName,
                 'name': name,
                 'lastName': lastName,
@@ -64,13 +66,20 @@ const addUser = (userName, name, lastName, email, password, zone=undefined)=>{
                 'date':new Date(),
             }
         }
-        await store.add(newUser)
-            .then((NewUser)=>{
-                resolve(NewUser)
-            })
-            .catch(e=>{
-                reject(e)
-            })
+        try{
+            let newUser= await store.add(addUser);
+            if(zone){
+                const zoneUp = await storeZone.updateZone(zone, null, null, null, newUser._id);
+                const routes = await storeRoutes.listRoutes({status:'resolved',zone:zoneUp._id});
+                if(routes.length!==0){
+                    const arrayRoutes = routes.map(route=>(route._id));
+                    newUser= await store.update(newUser._id,null,null,null,arrayRoutes);
+                }
+            }
+            resolve(newUser);
+        }catch(e){
+            reject(e);
+        }
     })
 }
 
@@ -86,9 +95,10 @@ const getUser=((filterUser)=>{
     })
 })
 
-const updateUser = ((id,name)=>{
+const updateUser = ((data)=>{
     return new Promise(async(resolve,reject)=>{
-        store.update(id,name)
+        const {id,phone,route} = data;
+        store.update(id,null,phone,route)
             .then(()=>{
                 resolve('Actualizo Usuario')
             })
@@ -128,8 +138,7 @@ const syncNode = (user_id, eui, pass, address, zone, lat, lon)=>{
 
     let coords = [lat,lon];
     const idZone = await storeZone.listZone({number:zone});
-    console.log(idZone)
-    Promise.all([storeNode.updateNode(node[0]._id,address,idZone[0]._id,coords),store.update(user_id,node[0]._id,'client')])
+    Promise.all([storeNode.updateNode(node[0]._id,address,idZone[0]._id,coords),store.update(user_id,node[0]._id,'client',null,[])])
         .then(()=>{
             console.log("Sincronizado Cliente");
             resolve("Success")

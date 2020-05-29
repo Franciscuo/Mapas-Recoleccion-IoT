@@ -6,7 +6,7 @@ const userSchema = new Schema({
     userName: { type: String, unique: true, required: true },
     name: { type: String, required: true },
     lastName: { type: String, required: true },
-    rutes: [{
+    routes: [{
         type: Schema.ObjectId,
         ref: 'Routes',
     }],
@@ -14,6 +14,7 @@ const userSchema = new Schema({
     password: { type: String, required: true },
     date: { type: Date, default: Date.now },
     role: { type: String, default: "none", required: false },
+    phone: {type: Number},
     nodes: [{
         type: Schema.ObjectId,
         ref: 'Node',
@@ -30,4 +31,4 @@ userSchema.methods.encryptPassword = async(password) => { //se define un metodo 
     return hash;
 };
 
-module.exports = model('user', userSchema);
+module.exports = model('User', userSchema);

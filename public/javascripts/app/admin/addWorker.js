@@ -2,14 +2,15 @@ let userName = false;
 let name = false;
 let lastName = false;
 let email = false;
+let phone = false;
 let zone = false;
 
 const userField = document.getElementById('user');
 const nameField = document.getElementById('name');
 const lastNameField = document.getElementById('lastName');
 const emailField = document.getElementById('email');
-const passwordField = document.getElementById('password');
 const zoneField = document.getElementById('zone');
+const phoneField = document.getElementById('phone');
 const sendBtn = document.getElementById('btnSend');
 
 const feedbackClient = (field, flag) => {
@@ -20,7 +21,7 @@ const feedbackClient = (field, flag) => {
     }
 }
 
-const verifyEmail = async() =>{
+const verifyEmail = async () => {
     await fetch('/user/email', {
         method: 'POST',
         headers: {
@@ -28,19 +29,19 @@ const verifyEmail = async() =>{
         },
         body: JSON.stringify({ email: emailField.value }),
     })
-    .then(response => response.json()).then((data) => {
-        email = !data.message;
-        if (!email) {
-            alert("Correo ya registrado")
-        }
-    })
-    .catch((error) => {
-        email = false;
-        console.error('Error:', error)
-    });
+        .then(response => response.json()).then((data) => {
+            email = !data.message;
+            if (!email) {
+                alert("Correo ya registrado")
+            }
+        })
+        .catch((error) => {
+            email = false;
+            console.error('Error:', error)
+        });
 }
 
-const verifyUser = async() =>{
+const verifyUser = async () => {
     await fetch('/user/username', {
         method: 'POST',
         headers: {
@@ -48,19 +49,19 @@ const verifyUser = async() =>{
         },
         body: JSON.stringify({ user: userField.value }),
     })
-    .then(response => response.json()).then((data) => {
-        userName = !data.message;
-        if (!userName) {
-            alert("User ya registrado")
+        .then(response => response.json()).then((data) => {
+            userName = !data.message;
+            if (!userName) {
+                alert("User ya registrado")
+                userName = false;
+            } else {
+                userName = true;
+            }
+        })
+        .catch((error) => {
             userName = false;
-        }else{
-            userName = true;
-        }
-    })
-    .catch((error) => {
-        userName = false;
-        console.error('Error:', error)
-    });
+            console.error('Error:', error)
+        });
 }
 
 const isName = (field) => {
@@ -75,8 +76,12 @@ const isEmail = (field) => {
     return ((/^[\u00f1\u00d1\w\._\-]{3,25}@[\w\.\-]{3,30}\.\w{2,5}$/).test(field.value))
 }
 
-const fillUserName = async() =>{
-    if(!userField.value){
+const isPhone = (field) => {
+    return ((/^[\d]{10,10}$/).test(field.value))
+}
+
+const fillUserName = async () => {
+    if (!userField.value) {
         const nameFirth = nameField.value;
         const nameSecond = lastNameField.value;
         userField.value = `${nameFirth.replace(/\s/, '').toLocaleLowerCase()}${nameSecond.replace(/\s/, '').toLocaleLowerCase()}`;
@@ -85,7 +90,7 @@ const fillUserName = async() =>{
     }
 }
 
-userField.addEventListener("blur", async(event) => {
+userField.addEventListener("blur", async (event) => {
     if (isUserName(userField)) {
         await verifyUser();
     } else {
@@ -94,7 +99,7 @@ userField.addEventListener("blur", async(event) => {
     feedbackClient(userField, userName)
 })
 
-emailField.addEventListener("blur", async(event) => {
+emailField.addEventListener("blur", async (event) => {
     if (isEmail(emailField)) {
         await verifyEmail();
     } else {
@@ -103,7 +108,7 @@ emailField.addEventListener("blur", async(event) => {
     feedbackClient(emailField, email)
 })
 
-nameField.addEventListener("blur", async(event) => {
+nameField.addEventListener("blur", async (event) => {
     name = isName(nameField);
     feedbackClient(nameField, name)
 })
@@ -114,28 +119,40 @@ lastNameField.addEventListener("blur", (event) => {
     fillUserName();
 });
 
-sendBtn.addEventListener("click", async(event) => {
+phoneField.addEventListener("blur", (event) => {
+    phone = isPhone(phoneField);
+    feedbackClient(phoneField, phone);
+});
 
-    zone=!(!(zoneField.value));
-    if (userName && name && lastName && email && zone) {
+sendBtn.addEventListener("click", async (event) => {
+
+    zone = !(!(zoneField.value));
+    if (userName && name && lastName && email && zone && phone) {
 
         const dataForm = {
             userName: userField.value,
             name: nameField.value,
             lastName: lastNameField.value,
             email: emailField.value,
-            zone:zoneField.value
+            zone: zoneField.value,
+            phone: phoneField.value,
         }
         await fetch("/user", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(dataForm),
-            })
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataForm),
+        })
             .then(response => response.json()).then((data) => {
                 if (!data.error) {
                     alert("Registro Exitoso")
+                    userField.value = '';
+                    nameField.value = '';
+                    lastNameField.value = '';
+                    emailField.value = '';
+                    zoneField.value = '';
+                    phoneField.value = undefined;
                 } else {
                     alert(data.error)
                 }
