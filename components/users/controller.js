@@ -53,6 +53,7 @@ const addUser = (userName, name, lastName, email, password, zone=undefined, phon
                 'password': userName,
                 'role':'worker',
                 'phone':phone,
+                'routes':[],
                 'date':new Date(),
             }
         }else{
@@ -63,6 +64,7 @@ const addUser = (userName, name, lastName, email, password, zone=undefined, phon
                 'email': email,
                 'password': password,
                 'role':'none',
+                'routes':[],
                 'date':new Date(),
             }
         }

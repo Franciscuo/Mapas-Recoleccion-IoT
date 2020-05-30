@@ -88,8 +88,9 @@ const addNodeToRoute = (EUI) => {
         let node
         try {
             node = await storeNodes.listNode({ eui: EUI })
-        } catch (error) {
-            reject(error)
+        } catch (e) {
+            reject(e)
+            return false
         }
         if (node.length === 0) {
             reject('Node is not registered')
@@ -103,7 +104,9 @@ const addNodeToRoute = (EUI) => {
         try {
             route = await storeRoutes.listRoutes({ zone: node[0].zone, status: 'new' })
         } catch (e) {
+            console.log(e);
             reject(e)
+            return false
         }
         if (route.length === 0) {//because return array
             //create route
@@ -111,7 +114,9 @@ const addNodeToRoute = (EUI) => {
                 await storeRoutes.addRoute({ zone: node[0].zone, status: 'new', date: new Date(), nodes: [node[0].id] });
                 resolve("Ok 1");
             }catch(e){
+                console.log(e);
                 reject(e);
+                return false
             }
         } else {
             //add node to route
@@ -121,6 +126,7 @@ const addNodeToRoute = (EUI) => {
             } catch (e) {
                 console.log(e);
                 reject(e)
+                return false
             }
             let zone;
             try {
@@ -128,6 +134,7 @@ const addNodeToRoute = (EUI) => {
             } catch (e) {
                 console.log(e);
                 reject(e)
+                return false
             }
             if (upRoute.nodes.length >= zone[0].capacity) {
                 //update status of routes
@@ -147,12 +154,15 @@ const addNodeToRoute = (EUI) => {
                         await storeUser.update(zone[0].worker,null,null,null,[upRoute._id]);//update routes of worker
                     }
                     resolve("Ok 3")
+                    return true
                 }catch(e){
                     console.log(e);
                     reject(e);
+                    return false
                 }
             }
             resolve("Ok 2")
+            return true
         }
     })
 }
