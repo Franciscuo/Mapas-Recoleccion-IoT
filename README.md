@@ -3,5 +3,5 @@ Pagina Web donde muestre a los camiones de recolección de basura de Bogotá y a
 [Sitio](https://ritaportal.udistrital.edu.co:10280/)
 
 <p align="center">
-  <img src="https://media.giphy.com/media/3oKIPco1eNxAA1rD4Q/giphy.gif">
+  <img src="https://raw.githubusercontent.com/nickdpz/Mapas-Recoleccion-IoT/master/public/images/LimpoRutas.gif">
 </p>
