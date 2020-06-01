@@ -110,10 +110,10 @@ const addNodeToRoute = (EUI) => {
         }
         if (route.length === 0) {//because return array
             //create route
-            try{
+            try {
                 await storeRoutes.addRoute({ zone: node[0].zone, status: 'new', date: new Date(), nodes: [node[0].id] });
                 resolve("Ok 1");
-            }catch(e){
+            } catch (e) {
                 console.log(e);
                 reject(e);
                 return false
@@ -143,19 +143,19 @@ const addNodeToRoute = (EUI) => {
                 let nodeList;
                 for (let nodeReady of upRoute.nodes) {
                     nodeList = await storeNodes.listNode({ _id: nodeReady })
-                    await storeUser.update(nodeList[0].owner,null,null,null,[upRoute._id]);//update routes of client
+                    await storeUser.update(nodeList[0].owner, null, null, null, [upRoute._id]);//update routes of client
                     nodeAux = objectServices(nodeReady, nodeList[0].coords[0], nodeList[0].coords[1])
                     nodesReady.push(nodeAux)
                 }
-                try{
+                try {
                     const infoRoute = await calculateRoute(nodesReady, zone[0]);//calculate route
                     await storeRoutes.updateRouteCalculated(upRoute._id, infoRoute)//update state routes
-                    if(zone[0].worker){
-                        await storeUser.update(zone[0].worker,null,null,null,[upRoute._id]);//update routes of worker
+                    if (zone[0].worker) {
+                        await storeUser.update(zone[0].worker, null, null, null, [upRoute._id]);//update routes of worker
                     }
                     resolve("Ok 3")
                     return true
-                }catch(e){
+                } catch (e) {
                     console.log(e);
                     reject(e);
                     return false

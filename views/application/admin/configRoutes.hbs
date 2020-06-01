@@ -1,51 +1,14 @@
-<div id="content">
-    <div class="container py-5">
-        <div class="row" id="spaceRefresh">
+<div class="container">
+    <div class="text-center">
+        <h3>Configura las Rutas</h3>
+    </div>
+    <div class="col-9 mx-auto">
+        </br>
+        <div class="row">
             <div class="col-12">
-                <h3>
-                    Ver Registro de las Últimas Rutas
-                </h3>
-                <p>
-                </p>
-            </div>
-            <div class="col-lg-4 offset-lg-4">
+                <b>Selecciona Rutas</b>
                 <div class="form-group">
-                    <button id="btnGetRoutes" class="btn btn-success btn-block">Obtener</button>
-                </div>
-            </div>
-            <div class="col-12">
-                <div id="spaceEntry"></div>
-            </div>
-        </div>
-        <div class="row" id="spaceUpdate">
-            <div class="col-12">
-                <h3>
-                    Editar Día de Calculo
-                </h3>
-                <p>
-                    En esta zona podras editar el dia en que se calculan las rutas y la cantidad de vehiculos que se
-                    usan.
-                </p>
-            </div>
-            <div class="col-md-2 col-lg-3">
-                Dia de la Semana
-                <div class="form-group">
-                    <select id="dayName" class="form-control" required="true">
-                        <option value="" disabled selected hidden>Dia de la Semana</option>
-                        <option value="1">Lunes</option>
-                        <option value="2">Martes</option>
-                        <option value="3">Miercoles</option>
-                        <option value="4">Jueves</option>
-                        <option value="5">Viernes</option>
-                        <option value="6">Sabado</option>
-                        <option value="7">Domingo</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-2 col-lg-3">
-                Localidad
-                <div class="form-group">
-                    <select id="zone" class="form-control" required="true">
+                    <select id="zone" name="zone" class="form-control">
                         <option value="" disabled selected hidden>Localidad</option>
                         <option value="1">Usaquen</option>
                         <option value="2">Chapinero</option>
@@ -66,31 +29,71 @@
                         <option value="17">La Candelaria</option>
                         <option value="18">Rafael Uribe Uribe</option>
                         <option value="19">Ciudad Bolivar</option>
-                        <option value="20">Sumapaz</option>
                     </select>
                 </div>
             </div>
-            <div class="col-md-2 col-lg-3">
-                Hora del dia Formato 24 Horas
+        </div>
+        <b>Capacidad</b>
+        <div class="row mt-2">
+            <div class="col-mg-12 col-lg-6">
                 <div class="form-group">
-                    <input type="number" step="1" min="0" max="23" id="hour" class="form-control" placeholder="12"
-                        autocomplete="off" required="true">
+                    <input type="number" min="0" max="20" class="form-control" id="capacity" value="" disabled>
                 </div>
             </div>
-            <div class="col-md-4 col-lg-3">
-                Cantidad de Vehiculos
+        </div>
+        <b>Ubicación Parqueadero</b>
+        <div class="row">
+            <div class="col-mg-12 col-lg-6">
                 <div class="form-group">
-                    <input type="number" step="1" min="1" max="3" id="cars" class="form-control" placeholder="1"
-                        autocomplete="off" required="true">
+                    <label class="col-form-label">Latitud</label>
+                    <input type="number" class="form-control" id="startLat" value="" disabled>
                 </div>
             </div>
-            <div class="col-lg-4 offset-lg-4">
+            <div class="col-mg-12 col-lg-6">
                 <div class="form-group">
-                    <button id="btnUpdateRoute" class="btn btn-success btn-block">Actualizar</button>
+                    <label class="col-form-label">Longitud</label>
+                    <input type="number" class="form-control" id="startLon" value="" disabled>
                 </div>
+            </div>
+        </div>
+        <b>Ubicación Empresa de Recolección</b>
+        <div class="row">
+            <div class="col-mg-12 col-lg-6">
+                <div class="form-group">
+                    <label class="col-form-label">Latitud</label>
+                    <input type="number" class="form-control" id="endLat" value="" disabled>
+                </div>
+            </div>
+            <div class="col-mg-12 col-lg-6">
+                <div class="form-group">
+                    <label class="col-form-label">Logitud</label>
+                    <input type="number" class="form-control" id="endLon" value="" disabled>
+                </div>
+            </div>
+        </div>
+        <b>Ubicación Central</b>
+        <div class="row">
+            <div class="col-mg-12 col-lg-6">
+                <div class="form-group">
+                    <label class="col-form-label">Latitud</label>
+                    <input type="number" class="form-control" id="centerLat" value="" disabled>
+                </div>
+            </div>
+            <div class="col-mg-12 col-lg-6">
+                <div class="form-group">
+                    <label class="col-form-label">Logitud</label>
+                    <input type="number" class="form-control" id="centerLon" value="" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-5 mx-auto">
+                <button type="submit" id="btnEdit" class="btn btn-primary btn-block" disabled>
+                    Entrar
+                </button>
             </div>
         </div>
     </div>
 </div>
 {{>scripts}}
-<script defer src="/static/javascripts/app/admin/configRoutes.js"></script>
+<script defer type="module" src="/static/javascripts/app/admin/configRoutes.js"></script>
