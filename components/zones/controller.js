@@ -35,7 +35,7 @@ const addZone = (number, name, start, end, capacity) => {
 }
 
 
-const updateZone = (numberZone, start, end, capacity) => {
+const updateZone = (numberZone=undefined, start=[], end=[], center=[], capacity=undefined, worker=undefined) => {
     return new Promise(async(resolve, reject) => {
 
         if (!numberZone) {
@@ -43,7 +43,7 @@ const updateZone = (numberZone, start, end, capacity) => {
             return false;
         }
 
-        await storeZone.updateZone(numberZone, start, end, capacity)
+        await storeZone.updateZone(numberZone, start, center, end, capacity, worker)
             .then((messages) => {
                 resolve(messages)
             })

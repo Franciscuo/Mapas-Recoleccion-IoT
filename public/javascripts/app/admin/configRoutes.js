@@ -11,13 +11,13 @@ const change = false;
 
 
 const changeInputs = async () => {
-    if(!change) {
+    if (!change) {
         btnEdit.disabled = false;
         change = true;
     }
 }
 
-const enabledInput = ()=>{
+const enabledInput = () => {
     startLonField.disabled = false;
     startLatField.disabled = false;
     endLonField.disabled = false;
@@ -25,44 +25,66 @@ const enabledInput = ()=>{
     centerLonField.disabled = false;
     centerLatField.disabled = false;
     capacityField.disabled = false;
-    startLatField.addEventListener("change",changeInputs);
-    startLonField.addEventListener("change",changeInputs);
-    centerLatField.addEventListener("change",changeInputs);
-    endLonField.addEventListener("change",changeInputs);
-    centerLatField.addEventListener("change",changeInputs);
-    centerLonField.addEventListener("change",changeInputs);
-    capacityField.addEventListener("change",changeInputs);
+    startLatField.addEventListener("change", changeInputs);
+    startLonField.addEventListener("change", changeInputs);
+    centerLatField.addEventListener("change", changeInputs);
+    endLonField.addEventListener("change", changeInputs);
+    centerLatField.addEventListener("change", changeInputs);
+    centerLonField.addEventListener("change", changeInputs);
+    capacityField.addEventListener("change", changeInputs);
 }
 
-const getZone = async() => {
+const getZone = async () => {
     await fetch(`/zones/?number=${zoneField.value}`, {
         method: 'GET',
     })
-    .then(response => response.json()).then((data) => {
-        if (data.error) {
-            console.log('Error:',data.error)
-            alert("A ocurrido un problema intente mas tarde")
-        }else{
-            startLatField.value = data.message[0].start[0];
-            startLonField.value = data.message[0].start[1];
-            endLatField.value = data.message[0].end[0];
-            endLonField.value = data.message[0].end[1];
-            centerLatField.value = data.message[0].center[0];
-            centerLonField.value = data.message[0].center[1];
-            capacityField.value = data.message[0].capacity;
-        }
-    })
-    .catch((error) => {
-        console.error('Error:', error)
-    });
+        .then(response => response.json()).then((data) => {
+            if (data.error) {
+                console.log('Error:', data.error)
+                alert("A ocurrido un problema intente mas tarde")
+            } else {
+                startLatField.value = data.message[0].start[0];
+                startLonField.value = data.message[0].start[1];
+                endLatField.value = data.message[0].end[0];
+                endLonField.value = data.message[0].end[1];
+                centerLatField.value = data.message[0].center[0];
+                centerLonField.value = data.message[0].center[1];
+                capacityField.value = data.message[0].capacity;
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error)
+        });
 }
 
-zoneField.addEventListener("change", async(event) => {
+zoneField.addEventListener("change", async (event) => {
     await getZone();
     enabledInput();
 })
 
-btnEdit.addEventListener("click", async(event) => {
-    alert("Hola");
+btnEdit.addEventListener("click", async (event) => {
+    await fetch('/zones', {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            numberZone: zoneField.value,
+            center: [centerLatField.value, centerLonField.value],
+            start: [startLatField.value, startLonField.value],
+            end: [endLatField.value, endLonField.value],
+            capacity: capacityField.value
+        }),
+    }).then(response => response.json()).then((data) => {
+            if (data.error) {
+                console.log('Error:', data.error)
+                alert("A ocurrido un problema intente mas tarde")
+            } else {
+                alert("Exito");
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error)
+        });
 })
 

@@ -14,8 +14,8 @@ router.get('/', (req, res) => {
 })
 
 router.patch('/', (req, res) => {
-    const { numberZone, start, end, capacity } = req.body;
-    controller.updateZone(numberZone, start, end, capacity)
+    const { numberZone, start, center, end, capacity, worker } = req.body;
+    controller.updateZone(numberZone, start, center, end, capacity, worker)
         .then((info) => {
             response.success(req, res, info, 200);
         })
